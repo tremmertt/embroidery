@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 
 export default function Footer() {
@@ -8,9 +7,7 @@ export default function Footer() {
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap md:text-left text-center order-first">
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-white tracking-widest text-sm mb-3">
-                CATEGORIES
-              </h2>
+              <h2 className="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
               <nav className="list-none mb-10">
                 <li>
                   <a className="text-white hover:font-bold">First Link</a>
@@ -27,9 +24,7 @@ export default function Footer() {
               </nav>
             </div>
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-white tracking-widest text-sm mb-3">
-                CATEGORIES
-              </h2>
+              <h2 className="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
               <nav className="list-none mb-10">
                 <li>
                   <a className="text-white hover:font-bold">First Link</a>
@@ -46,9 +41,7 @@ export default function Footer() {
               </nav>
             </div>
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-white tracking-widest text-sm mb-3">
-                CATEGORIES
-              </h2>
+              <h2 className="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
               <nav className="list-none mb-10">
                 <li>
                   <a className="text-white hover:font-bold">First Link</a>
@@ -65,15 +58,10 @@ export default function Footer() {
               </nav>
             </div>
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-white tracking-widest text-sm mb-3">
-                SUBSCRIBE
-              </h2>
+              <h2 className="title-font font-medium text-white tracking-widest text-sm mb-3">SUBSCRIBE</h2>
               <div className="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start">
                 <div className="relative w-40 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
-                  <label
-                    htmlFor="footer-field"
-                    className="leading-7 text-sm text-white"
-                  >
+                  <label htmlFor="footer-field" className="leading-7 text-sm text-white">
                     Placeholder
                   </label>
                   <input
