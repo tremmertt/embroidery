@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 
 export default function Product() {
@@ -16,15 +15,10 @@ export default function Product() {
                   alt="blog"
                 />
                 <div className="p-6">
-                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                    CATEGORY
-                  </h2>
-                  <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-                    The Catalyzer
-                  </h1>
+                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
+                  <h1 className="title-font text-lg font-medium text-gray-900 mb-3">The Catalyzer</h1>
                   <p className="leading-relaxed mb-3 text-left">
-                    Photo booth fam kinfolk cold-pressed sriracha leggings
-                    jianbing microdosing tousled waistcoat.
+                    Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.
                   </p>
                   <div className="flex items-center flex-wrap ">
                     <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
@@ -83,15 +77,10 @@ export default function Product() {
                   alt="blog"
                 />
                 <div className="p-6">
-                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                    CATEGORY
-                  </h2>
-                  <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-                    The 400 Blows
-                  </h1>
+                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
+                  <h1 className="title-font text-lg font-medium text-gray-900 mb-3">The 400 Blows</h1>
                   <p className="leading-relaxed mb-3 text-left">
-                    Photo booth fam kinfolk cold-pressed sriracha leggings
-                    jianbing microdosing tousled waistcoat.
+                    Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.
                   </p>
                   <div className="flex items-center flex-wrap">
                     <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
@@ -150,15 +139,10 @@ export default function Product() {
                   alt="blog"
                 />
                 <div className="p-6">
-                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                    CATEGORY
-                  </h2>
-                  <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-                    Shooting Stars
-                  </h1>
+                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
+                  <h1 className="title-font text-lg font-medium text-gray-900 mb-3">Shooting Stars</h1>
                   <p className="leading-relaxed mb-3 text-left">
-                    Photo booth fam kinfolk cold-pressed sriracha leggings
-                    jianbing microdosing tousled waistcoat.
+                    Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.
                   </p>
                   <div className="flex items-center flex-wrap ">
                     <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">

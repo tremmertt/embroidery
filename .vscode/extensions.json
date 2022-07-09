@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "editorconfig.editorconfig",
+        "octref.vetur",
+        "eamodio.gitlens",
+        "christian-kohler.path-intellisense",
+        "redhat.vscode-yaml"
+    ]
+}

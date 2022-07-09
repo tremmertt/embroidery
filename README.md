@@ -1,3 +1,8 @@
+# Tools
+
+## Add eslint to project
+Tutorial: https://morioh.com/p/5fd9a1794ed3
+    
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
