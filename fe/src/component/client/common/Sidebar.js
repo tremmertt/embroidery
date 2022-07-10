@@ -58,7 +58,7 @@ export default function Sidebar() {
       <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
         {/* Brand */}
         <Link
-          className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-thin p-4 px-0 text-lg"
+          className="md:block text-center md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-thin p-4 px-0 text-lg"
           to="/"
         >
           <span className="font-bold">Embroidery</span> Admin
