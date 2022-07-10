@@ -32,7 +32,6 @@
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "vetur.validation.script": false,
   "vetur.validation.template": false,
-  "eslint.autoFixOnSave": true,
   "css.customData": [
     ".vscode/css_custom_data.json"
   ],
@@ -40,4 +39,19 @@
   // "stylelint.enable": true, // Enable sytlelint
   "scss.validate": false,
   "files.eol": "\n", // Disable scss lint (optional if using scss)
+  "typescript.check.npmIsInstalled": false,
+  "window.zoomLevel": 0,
+  "editor.minimap.enabled": false,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "emmet.syntaxProfiles": {
+    "javascript": "jsx"
+  },
+  "eslint.alwaysShowStatus": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
+  "files.autoSave": "onFocusChange",
+  "prettier.semi": false,
+  "prettier.tabWidth": 4
 }

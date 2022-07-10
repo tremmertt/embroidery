@@ -1,55 +1,31 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
-import Home from "./pages/Home";
-import { incrementCountAction, decrementCountAction, resetCountAction } from "./redux/actions/TemplateAction";
+import { ClientTemplate } from "./templates/ClientTemplate";
+import { createBrowserHistory } from "history";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+
+import ScrollToTop from "./ScrollToTop.js";
+
+import HomePage from "./pages/HomePage";
+import ProductPage from "./pages/ProductPage";
+import CartPage from "./pages/CartPage";
+import HistoryPage from "./pages/HistoryPage";
+import ContactPage from "./pages/ContactPage";
+
+export const history = createBrowserHistory();
 
 function App() {
-  // const { count } = useSelector((state) => state.TemplateReducer);
-
-  // const dispatch = useDispatch();
-  // console.log("count", count);
-  // useEffect(() => {
-  //   console.log("count", count);
-  //   // dispatch(incrementCountAction());
-  // }, [count]);
-
-  // const increment = () => {
-  //   dispatch(incrementCountAction());
-  // };
-
-  // const decrement = () => {
-  //   dispatch(decrementCountAction());
-  // };
-
-  // const reset = () => {
-  //   dispatch(resetCountAction());
-  // };
-
   return (
-    <div className="App overflow-hidden">
-      {/* <p>count: {count}</p>
-      <button
-        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-        onClick={increment}
-      >
-        inc
-      </button>
-      <button
-        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-        onClick={decrement}
-      >
-        dec
-      </button>
-      <button
-        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-        onClick={reset}
-      >
-        reset
-      </button> */}
-
-      <Home />
-    </div>
+    <Router history={history}>
+      <ScrollToTop>
+        <Switch>
+          <ClientTemplate path="/" exact Component={HomePage} />
+          <ClientTemplate path="/product" exact Component={ProductPage} />
+          <ClientTemplate path="/cart" exact Component={CartPage} />
+          <ClientTemplate path="/history" exact Component={HistoryPage} />
+          <ClientTemplate path="/contact" exact Component={ContactPage} />
+        </Switch>
+      </ScrollToTop>
+    </Router>
   );
 }
 
