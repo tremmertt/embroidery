@@ -17,7 +17,7 @@ export const AdminTemplate = (props) => {
         return (
           <Fragment>
             <SideBar></SideBar>
-            <div className="relative md:ml-64 bg-blueGray-100">
+            <div className="relative md:ml-64 bg-blueGray-100 h-screen">
               <Component {...propsRoute} />
             </div>
           </Fragment>

@@ -5,10 +5,13 @@ import { Provider } from "react-redux";
 const themes = {
   dark: {
     backgroundColor: "black",
+    dropShadow: "drop-shadow-[0_35px_35px_rgba(250,250,250,0.5)]",
     color: "white",
   },
   light: {
     backgroundColor: "white",
+
+    dropShadow: "drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]",
     color: "black",
   },
 };
