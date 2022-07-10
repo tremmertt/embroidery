@@ -20,6 +20,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "editor.endOfLine": "lf",
   "editor.formatOnSave": false,
   "eslint.debug": true,
   "eslint.format.enable": true,
@@ -37,5 +38,6 @@
   ],
   "css.validate": false, // Disable css built-in lint
   // "stylelint.enable": true, // Enable sytlelint
-  "scss.validate": false, // Disable scss lint (optional if using scss)
+  "scss.validate": false,
+  "files.eol": "\n", // Disable scss lint (optional if using scss)
 }

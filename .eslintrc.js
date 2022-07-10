@@ -8,9 +8,7 @@ module.exports = {
   parser: "@babel/eslint-parser",
   parserOptions: {
     ecmaVersion: 2020,
-    babelOptions: {
-      presets: ["@babel/preset-react"],
-    },
+    babelOptions: {},
   },
   rules: {
     "jsx-a11y/anchor-is-valid": [
@@ -31,6 +29,7 @@ module.exports = {
         jsxSingleQuote: false,
         singleQuote: false,
         useTabs: false,
+        endOfLine: "auto",
       },
     ],
   },

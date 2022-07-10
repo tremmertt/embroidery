@@ -8,7 +8,7 @@ export const incrementCountAction = () => {
       console.log({
         type: SET_INCREMENT,
         count: count,
-      })
+      });
       dispatch({
         type: SET_INCREMENT,
         count: count,
@@ -17,7 +17,7 @@ export const incrementCountAction = () => {
       console.log("errors", errors);
     }
   };
-}
+};
 
 export const decrementCountAction = () => {
   return async (dispatch) => {
@@ -28,7 +28,7 @@ export const decrementCountAction = () => {
       console.log({
         type: SET_DECREMENT,
         count: count,
-      })
+      });
       dispatch({
         type: SET_DECREMENT,
         count: count,
@@ -37,15 +37,15 @@ export const decrementCountAction = () => {
       console.log("errors", errors);
     }
   };
-}
+};
 
 export const resetCountAction = () => {
   return async (dispatch) => {
     try {
-      // get api here 
+      // get api here
       console.log({
         type: SET_RESET,
-      })
+      });
       dispatch({
         type: SET_RESET,
       });
@@ -53,4 +53,4 @@ export const resetCountAction = () => {
       console.log("errors", errors);
     }
   };
-}
+};
