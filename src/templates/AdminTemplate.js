@@ -1,9 +1,8 @@
 import { Fragment, useEffect } from "react";
 import { Route } from "react-router";
-import Footer from "../component/common/Footer";
-import Header from "../component/common/Header";
+import SideBar from "../component/client/common/Sidebar";
 
-export const ClientTemplate = (props) => {
+export const AdminTemplate = (props) => {
   const { Component, ...restProps } = props;
 
   useEffect(() => {
@@ -17,11 +16,10 @@ export const ClientTemplate = (props) => {
       render={(propsRoute) => {
         return (
           <Fragment>
-            <Header {...propsRoute} />
-
-            <Component {...propsRoute} />
-            <hr className="mt-5" />
-            <Footer />
+            <SideBar></SideBar>
+            <div className="relative md:ml-64 bg-blueGray-100">
+              <Component {...propsRoute} />
+            </div>
           </Fragment>
         );
       }}

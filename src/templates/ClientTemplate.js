@@ -1,7 +1,7 @@
 import { Fragment, useEffect } from "react";
 import { Route } from "react-router-dom";
-import Footer from "../component/common/Footer";
-import Header from "../component/common/Header";
+import Footer from "../component/client/common/Footer";
+import Header from "../component/client/common/Header";
 
 export const ClientTemplate = (props) => {
   const { Component, ...restProps } = props;
