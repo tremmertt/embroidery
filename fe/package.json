@@ -13,6 +13,7 @@
     "@testing-library/user-event": "13.5.0",
     "@types/react-router-dom": "5.3.3",
     "autoprefixer": "10.2.5",
+    "axios": "^0.27.2",
     "bootstrap": "5.1.3",
     "chart.js": "2.9.4",
     "eslint-config-react-app": "7.0.1",
@@ -34,6 +35,9 @@
   "scripts": {
     "start": "npm i && react-scripts start",
     "build": "react-scripts build",
+    "build:dev": "env-cmd -f .env.dev npm run-script build",
+    "build:staging": "env-cmd -f .env.stg npm run-script build",
+    "build:prod": "env-cmd -f .env.prod npm run-script build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "eslint": "eslint --ext js,jsx"

@@ -25,11 +25,17 @@ export default function Sidebar() {
       for (const j in headers[i].child) {
         r.push(
           <li className="items-center">
-            <Link className={"text-xs uppercase py-3 font-bold block flex flex-row"} to={headers[i].child[j].path}>
+            <Link
+              className={
+                "text-xs uppercase py-3 font-bold block flex flex-row " +
+                (window.location.pathname === headers[i].child[j].path
+                  ? theme.textColorActiveWithHoverAdmin
+                  : theme.textColorInactiveWithHoverAdmin)
+              }
+              to={headers[i].child[j].path}
+            >
               <FontAwesomeIcon icon={headers[i].child[j].icon} className={"text-sm basis-1/6"}></FontAwesomeIcon>
-              <span className="mx-3 text-blueGray-700 hover:text-blueGray-400 basis-1/4">
-                {headers[i].child[j].title}
-              </span>
+              <span className="mx-3  basis-1/4">{headers[i].child[j].title}</span>
             </Link>
           </li>
         );
