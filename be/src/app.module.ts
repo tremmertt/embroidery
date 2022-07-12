@@ -1,14 +1,19 @@
+import { ConfigModule } from '@nestjs/config';
+ConfigModule.forRoot();
+
 import { Module } from '@nestjs/common';
-
-import { CatsController } from './cats/cats.controller';
-import { CatsService } from './cats/cats.service';
-
-import { ProductController } from './product/product.controller';
-import { ProductService } from './product/product.service';
-
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './users/roles.guard';
 @Module({
-  imports: [],
-  controllers: [ProductController, CatsController],
-  providers: [ProductService, CatsService],
+  imports: [AuthModule, UsersModule],
+  controllers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
 })
 export class AppModule {}
