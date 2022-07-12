@@ -7,12 +7,15 @@ const themes = {
     backgroundColor: "black",
     dropShadow: "drop-shadow-[0_35px_35px_rgba(250,250,250,0.5)]",
     color: "white",
+    textColorActiveWithHoverAdmin: "text-blue-500 hover:text-blue-600",
+    textColorInactiveWithoutHoverAdmin: "text-gray-700 hover:text-gray-500",
   },
   light: {
     backgroundColor: "white",
-
     dropShadow: "drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]",
     color: "black",
+    textColorActiveWithHoverAdmin: "text-blue-500 hover:text-blue-600",
+    textColorInactiveWithoutHoverAdmin: "text-gray-700 hover:text-gray-500",
   },
 };
 
