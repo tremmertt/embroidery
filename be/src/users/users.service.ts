@@ -5,36 +5,44 @@ import { UserDto } from './interfaces/user.dto';
 import { UpdateUserDto } from './interfaces/user.update.dto';
 import * as bcrypt from 'bcrypt';
 import { Role } from './entities/role.enum';
-
+import { InjectModel } from '@nestjs/mongoose';
+import { User, UserDocument } from './schemas/users.schemas';
+import { Model } from 'mongoose';
 // This should be a real class/interface representing a user entity
-export type User = any;
 
 @Injectable()
 export class UsersService {
+  constructor(
+    @InjectModel(User.name) private readonly model: Model<UserDocument>,
+  ) {}
+
   private readonly users: UserDto[] = [
     {
-      id: '1',
+      _id: '1',
       username: 'john',
       password: '123',
       email: 'changeme@gmail.com',
-      createdOn: new Date(),
+      createdAt: new Date(),
       role: Role.ADMIN,
     },
     {
-      id: '2',
+      _id: '2',
       username: 'maria',
       password: '123',
       email: 'changeme@gmail.com',
-      createdOn: new Date(),
+      createdAt: new Date(),
       role: Role.USER,
     },
   ];
 
-  async findByName({ username }: { username: string }): Promise<UserDto> {
-    return this.users.find((user) => user.username === username);
+  async findById({ id }: { id: string }): Promise<User> {
+    return await this.model.findById(id).exec();
+  }
+  async findByName({ username }: { username: string }): Promise<User> {
+    return await this.model.findOne({ username: username }).exec();
   }
 
-  async create({ userDto }: { userDto: CreateUserDto }): Promise<void> {
+  async create({ userDto }: { userDto: CreateUserDto }): Promise<User> {
     const newUser = this.fromDtoToUser({ userDto: userDto });
 
     // generate salt to hash password
@@ -42,48 +50,47 @@ export class UsersService {
     // now we set user password to hashed password
     newUser.password = await bcrypt.hash(newUser.password, salt);
 
-    this.users.push(newUser);
+    return await new this.model({
+      ...newUser,
+      createdAt: new Date(),
+    }).save();
   }
 
-  findAll(): User[] {
-    return this.users;
+  async findAll(): Promise<User[]> {
+    return await this.model.find().exec();
   }
 
-  findOne({ id }: { id: string }) {
-    return this.users.find((user) => user.id === id);
+  async findOne({ id }: { id: string }): Promise<User> {
+    return await this.model.findById(id).exec();
   }
 
-  update({ id, updateUserDto }: { id: string; updateUserDto: UpdateUserDto }) {
-    const index = this.users.findIndex((item) => item.id === id);
-    if (index != -1) {
+  async update({
+    id,
+    updateUserDto,
+  }: {
+    id: string;
+    updateUserDto: UpdateUserDto;
+  }): Promise<User> {
+    const user = this.model.findOne({ id: id });
+    if (user) {
       const user = this.fromDtoToUser({ userDto: updateUserDto });
-      const updatedUser = {
-        ...user,
-        id: this.users[index]['id'],
-      };
-      this.users[index] = updatedUser;
-      return this.users[index];
+      return await this.model.findByIdAndUpdate(id, user).exec();
     }
     return null;
   }
 
-  remove({ id }: { id: string }) {
-    const index = this.users.findIndex((item) => item.id === id);
-    if (index != -1) {
-      this.users.splice(index, 1);
-      return true;
-    }
-    return null;
+  async remove({ id }: { id: string }): Promise<User> {
+    return await this.model.findByIdAndDelete(id).exec();
   }
 
   fromDtoToUser({ userDto }: { userDto: CreateUserDto | UpdateUserDto }): User {
     return {
-      id: randomUUID(),
+      _id: Object.keys(userDto).includes('id') ? userDto['id'] : randomUUID(),
       username: userDto.username,
       password: userDto.password,
       email: userDto.email,
-      role: userDto.role,
-      createdOn: new Date(),
+      role: userDto.role === 'admin' ? Role.ADMIN : Role.USER,
+      createdAt: new Date(),
     };
   }
 }

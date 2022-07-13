@@ -8,12 +8,13 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { User, UsersService } from './users.service';
+import { UsersService } from './users.service';
 import { Role } from './entities/role.enum';
 import { hasRole } from './roles.decorator';
 import { CreateUserDto } from './interfaces/user.create.dto';
 import { UpdateUserDto } from './interfaces/user.update.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { User } from './schemas/users.schemas';
 
 @Controller('users')
 export class UsersController {
@@ -27,13 +28,13 @@ export class UsersController {
   }
 
   @Get()
-  public async findAll(): Promise<User> {
+  public async findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
 
   @Get(':id')
   public async findOne(@Param('id') id: string): Promise<User> {
-    return this.usersService.findOne({ id: id });
+    return this.usersService.findById({ id: id });
   }
 
   @Patch(':id')

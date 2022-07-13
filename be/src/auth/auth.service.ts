@@ -24,9 +24,10 @@ export class AuthService {
     };
 
     try {
-      this.usersService.create({
+      const res = await this.usersService.create({
         userDto: userDto,
       });
+      status.message = `user ${res.username} registered`;
     } catch (err) {
       status = {
         success: false,
@@ -44,7 +45,7 @@ export class AuthService {
     if (!user) {
       throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
     }
-    const { id, password, ...result } = user;
+    const { password, ...result } = user;
     return result;
   }
 
@@ -71,18 +72,26 @@ export class AuthService {
     const user = await this.findByLogin(loginUserDto);
 
     // generate and sign token
-    const token = await this._createToken({ username: user.username });
-
+    const token = await this._createToken({
+      username: user.username,
+      role: user.role,
+    });
     return {
       username: user.username,
       ...token,
     } as LoginStatus;
   }
 
-  private async _createToken({ username }: { username: string }): Promise<any> {
+  private async _createToken({
+    username,
+    role,
+  }: {
+    username: string;
+    role: string;
+  }): Promise<any> {
     const expiresIn = process.env.EXPIRESIN || '30s';
 
-    const user: JwtPayload = { username };
+    const user: JwtPayload = { username, role };
     const accessToken = await this.generateJWT(user);
     return {
       expiresIn,
