@@ -201,8 +201,8 @@ export default function BestSeller() {
     <div className=" container mx-auto h-auto py-1">
       <div>
         <section className="text-gray-600 body-font">
-          <div className="container px-5 py-20 mx-auto">
-            <h1 className="text-4xl font-semibold text-red-700"> BEST SELLER </h1>
+          <div className="container px-5 py-20 mx-auto text-center">
+            <h1 className="text-4xl font-semibold text-center text-red-700"> BEST SELLER </h1>
             <div className="inline-flex pt-4 tracking-widest">
               <p className="mr-2 underline underline-offset-2 text-blue-400"> All </p>|<p className="mx-2"> Dogs </p>|
               <p className="mx-2"> Cats </p>|<p className="mx-2"> Food and Drinks </p>

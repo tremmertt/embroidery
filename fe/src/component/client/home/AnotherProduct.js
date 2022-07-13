@@ -85,8 +85,8 @@ export default function AnotherProduct() {
 
   return (
     <div className=" container mx-auto h-auto py-20">
-      <h1 className="tracking-widest text-4xl font-semibold mb-7">ANOTHER PRODUCTS</h1>
-      <div className="grid grid-cols-3">{renderRows()}</div>
+      <h1 className="tracking-widest text-4xl font-semibold mb-20 text-center">ANOTHER PRODUCTS</h1>
+      <div className="grid lg:grid-cols-3 md:grid-cols-1">{renderRows()}</div>
     </div>
   );
 }

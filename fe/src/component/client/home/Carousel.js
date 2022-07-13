@@ -14,7 +14,7 @@ export default function CarouselBanner() {
   };
 
   return (
-    <div className=" container mx-auto h-auto py-1">
+    <div className="mx-auto h-auto py-1 overflow-hidden">
       <Slider {...settings}>
         <div>
           <img src="https://picsum.photos/500/250" alt="" />

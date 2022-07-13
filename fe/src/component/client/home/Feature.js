@@ -71,7 +71,7 @@ export default function Feature() {
     for (const i of contents) {
       // console.log("ITEM", i);
       rows.push(
-        <div className="text-yellow-500 my-2">
+        <div className="text-yellow-500 my-2 lg:text-center sm:text-left">
           <div className="text-3xl text-center inline-block align-middle">{i.imageURL}</div>
           <p className="text-black font-semibold text-2xl my-2">{i.title}</p>
           <p className="text-black text-lg pb-3">{i.content}</p>
@@ -106,8 +106,8 @@ export default function Feature() {
     return rows;
   }
   return (
-    <div className="container mx-auto h-auto py-1">
-      <div className="grid grid-cols-3 gap-4">{renderRows()}</div>
+    <div className="container mx-auto h-auto py-20">
+      <div className="grid lg:grid-cols-3 md:grid-cols-1 gap-4">{renderRows()}</div>
     </div>
   );
 }

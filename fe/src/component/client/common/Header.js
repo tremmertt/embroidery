@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 export default function Header() {
   return (
     <Fragment>
-      <div className="container mx-auto py-2">
-        <div className="flex flex-wrap justify-between">
+      <div className="mx-auto py-2 overflow-hidden">
+        <div className="flex flex-wrap justify-between container mx-auto">
           <div className="flex">
             <div className="flex pl-1">
               <h3> EN </h3>

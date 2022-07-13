@@ -5,6 +5,7 @@
 /fe/dist
 /be/node_modules
 /be/dist
+/node_modules
 /.pnp
 .pnp.js
 
