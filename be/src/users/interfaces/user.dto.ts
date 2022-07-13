@@ -3,7 +3,7 @@ import { Role } from '../entities/role.enum';
 
 export class UserDto {
   @IsNotEmpty()
-  id: string;
+  _id: string;
 
   @IsNotEmpty()
   username: string;
@@ -18,5 +18,5 @@ export class UserDto {
   @IsNotEmpty()
   role: Role;
 
-  createdOn?: Date;
+  createdAt?: Date;
 }
