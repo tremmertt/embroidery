@@ -5,14 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ThemeContext } from "../../../settings/theme-context";
 export default function Sidebar() {
   const { theme, toggle, dark } = useContext(ThemeContext);
-
   const headers = [
     {
       title: "ADMIN LAYOUT PAGES",
       child: [
         { title: "Dashboard", icon: "fa-tv", path: "/admin" },
         { title: "Profile", icon: "fa-user", path: "/admin/profile" },
-        { title: "Settings", icon: "fa-cog", path: "/admin/settings" },
+        { title: "Setting", icon: "fa-cog", path: "/admin/setting" },
         { title: "Authenticate", icon: "fa-key", path: "/signin" },
       ],
     },
@@ -27,10 +26,10 @@ export default function Sidebar() {
           <li className="items-center">
             <Link
               className={
-                "text-xs uppercase py-3 font-bold block flex flex-row " +
+                "text-xs uppercase py-3 block flex flex-row " +
                 (window.location.pathname === headers[i].child[j].path
                   ? theme.textColorActiveWithHoverAdmin
-                  : theme.textColorInactiveWithHoverAdmin)
+                  : theme.textColorInactiveWithoutHoverAdmin)
               }
               to={headers[i].child[j].path}
             >

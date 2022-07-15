@@ -148,7 +148,7 @@ export default function BestSeller() {
     for (const i of contents) {
       rows.push(
         <div className="p-4 md:w-1/3">
-          <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+          <div className="border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
             {i.imageURL}
             <div className="p-6">
               <h1 className="tracking-widest title-font text-lg font-medium text-gray-900 mb-3">{i.title}</h1>

@@ -9,13 +9,13 @@ export default function ProductPage() {
   const { listProduct } = useSelector((state) => state.ProductReducer)
   const dispatch = useDispatch()
 
-  const add = async () => {
-    await productService.addItem({
-      name: 'Áo hồng',
-      imageUrl: 'https://picsum.photos/seed/picsum/500/300',
-      category: 'Chỉ'
-    })
-  }
+  // const add = async () => {
+  //   await productService.addItem({
+  //     name: 'Áo hồng',
+  //     imageUrl: 'https://picsum.photos/seed/picsum/500/300',
+  //     category: 'Chỉ'
+  //   })
+  // }
 
   useEffect(() => {
     dispatch(getAllProduct())
@@ -29,9 +29,8 @@ export default function ProductPage() {
         <div>{i.category}</div>
       </>
     )) : null}
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={add} >
+    {/* <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={add} >
       Button
-    </button>
-
+    </button> */}
   </div>;
 }

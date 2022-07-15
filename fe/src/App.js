@@ -13,7 +13,7 @@ import HistoryPage from "./pages/client/HistoryPage";
 import ContactPage from "./pages/client/ContactPage";
 
 import DashBoardPage from "./pages/admin/DashBoardPage";
-import SettingsPage from "./pages/admin/SettingsPage";
+import SettingPage from "./pages/admin/SettingPage";
 import ProfilePage from "./pages/admin/ProfilePage";
 import SigninPage from "./pages/admin/SigninPage";
 // import Example from './Example'
@@ -32,7 +32,7 @@ function App() {
           <ClientTemplate path="/contact" exact Component={ContactPage} />
 
           <AdminTemplate path="/admin" exact Component={DashBoardPage} />
-          <AdminTemplate path="/admin/settings" exact Component={SettingsPage} />
+          <AdminTemplate path="/admin/setting" exact Component={SettingPage} />
           <AdminTemplate path="/admin/profile" exact Component={ProfilePage} />
           <AdminTemplate path="/signin" exact Component={SigninPage} />
         </Switch>

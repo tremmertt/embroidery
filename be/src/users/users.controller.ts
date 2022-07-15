@@ -28,11 +28,15 @@ export class UsersController {
   }
 
   @Get()
+  @hasRole(Role.ADMIN, Role.USER)
+  @UseGuards(AuthGuard())
   public async findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
 
   @Get(':id')
+  @hasRole(Role.ADMIN, Role.USER)
+  @UseGuards(AuthGuard())
   public async findOne(@Param('id') id: string): Promise<User> {
     return this.usersService.findById({ id: id });
   }
@@ -49,6 +53,7 @@ export class UsersController {
 
   @Delete(':id')
   @hasRole(Role.ADMIN)
+  @UseGuards(AuthGuard())
   public async remove(@Param('id') id: string): Promise<void> {
     this.usersService.remove({ id: id });
   }
