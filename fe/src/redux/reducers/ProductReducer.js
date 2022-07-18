@@ -5,7 +5,6 @@ const stateDefault = {
 };
 
 export const ProductReducer = (state = stateDefault, action) => {
-
   switch (action.type) {
     case GET_ALL_PRODUCT: {
       state.listProduct = action.listProduct;

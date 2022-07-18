@@ -11,10 +11,9 @@ import {
   faMoon,
   faR,
   faS,
-  faBars
-  , faEllipsis
+  faBars,
+  faEllipsis,
 } from "@fortawesome/free-solid-svg-icons";
-
 
 // import "@fortawesome/fontawesome-free/css/all.min.css";
 // https://fontawesome.com/v5/icons/tv?s=solid

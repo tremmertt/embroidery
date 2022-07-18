@@ -5,7 +5,7 @@ import { ThemeContext } from "../settings/theme-context";
 
 export const AdminTemplate = (props) => {
   const { Component, ...restProps } = props;
-  const { theme } = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     window.scrollTo(0, 0);

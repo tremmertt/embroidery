@@ -2,9 +2,7 @@ import React from "react";
 import { store } from "../redux/configStore";
 import { Provider } from "react-redux";
 
-const colors = [
-  '#7551ff',
-]
+const colors = ["#7551ff"];
 
 const themes = {
   dark: {
@@ -30,7 +28,7 @@ const themes = {
 const initialState = {
   dark: true,
   theme: themes.light,
-  toggle: () => { },
+  toggle: () => {},
 };
 const ThemeContext = React.createContext(initialState);
 

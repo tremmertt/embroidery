@@ -6,13 +6,13 @@ export default function ProfilePage() {
   const { theme } = useContext(ThemeContext);
   const breadcrumbItems = [
     {
-      name: 'Home',
-      path: '/admin',
+      name: "Home",
+      path: "/admin",
     },
     {
-      name: 'Profile',
-      path: '/admin/profile',
-    }
+      name: "Profile",
+      path: "/admin/profile",
+    },
   ];
 
   return (

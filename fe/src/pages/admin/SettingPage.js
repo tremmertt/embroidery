@@ -6,13 +6,13 @@ export default function SettingsPage() {
   const { theme } = useContext(ThemeContext);
   const breadcrumbItems = [
     {
-      name: 'Home',
-      path: '/admin',
+      name: "Home",
+      path: "/admin",
     },
     {
-      name: 'Setting',
-      path: '/admin/setting',
-    }
+      name: "Setting",
+      path: "/admin/setting",
+    },
   ];
 
   return (
