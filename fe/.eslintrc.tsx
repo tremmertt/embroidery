@@ -15,10 +15,11 @@ module.exports = {
       "off",
       {
         components: ["Link"],
-        specialLink: ["hrefLeft", "hrefRight"],
+        specialLink: ["hrefLeft", "hrefRight", "to"],
         aspects: ["noHref", "invalidHref", "preferButton"],
       },
     ],
+    "@typescript-eslint/no-unused-vars": "off",
     "prettier/prettier": [
       "error",
       {

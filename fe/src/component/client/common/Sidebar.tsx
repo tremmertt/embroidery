@@ -1,7 +1,14 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import BorderColorSharpIcon from "@mui/icons-material/BorderColorSharp";
+import ReduceCapacitySharpIcon from "@mui/icons-material/ReduceCapacitySharp";
+import PeopleSharpIcon from "@mui/icons-material/PeopleSharp";
+import PersonSharpIcon from "@mui/icons-material/PersonSharp";
+import SettingsSuggestSharpIcon from "@mui/icons-material/SettingsSuggestSharp";
+import KeySharpIcon from "@mui/icons-material/KeySharp";
+import NightsStaySharpIcon from "@mui/icons-material/NightsStaySharp";
+import Brightness7SharpIcon from "@mui/icons-material/Brightness7Sharp";
+import FitScreenSharpIcon from "@mui/icons-material/FitScreenSharp";
 import { ThemeContext } from "../../../settings/theme-context";
 export default function Sidebar() {
   const { theme, toggle, dark } = useContext(ThemeContext);
@@ -9,10 +16,13 @@ export default function Sidebar() {
     {
       title: "ADMIN LAYOUT PAGES",
       child: [
-        { title: "Dashboard", icon: "fa-tv", path: "/admin" },
-        { title: "Profile", icon: "fa-user", path: "/admin/profile" },
-        { title: "Setting", icon: "fa-cog", path: "/admin/setting" },
-        { title: "Authenticate", icon: "fa-key", path: "/signin" },
+        { title: "Dashboard", icon: <FitScreenSharpIcon />, path: "/admin" },
+        { title: "Order List", icon: <BorderColorSharpIcon />, path: "/admin/orders" },
+        { title: "Customer List", icon: <ReduceCapacitySharpIcon />, path: "/admin/customers" },
+        { title: "User List", icon: <PeopleSharpIcon />, path: "/admin/users" },
+        { title: "Profile", icon: <PersonSharpIcon />, path: "/admin/profile" },
+        { title: "Setting", icon: <SettingsSuggestSharpIcon />, path: "/admin/setting" },
+        { title: "Authenticate", icon: <KeySharpIcon />, path: "/signin" },
       ],
     },
   ];
@@ -23,7 +33,7 @@ export default function Sidebar() {
       const r = [];
       for (const j in headers[i].child) {
         r.push(
-          <li className="items-center">
+          <li className="items-center" key={"side-bar-item-" + j}>
             <Link
               className={
                 "text-xs uppercase py-3 block flex flex-row " +
@@ -33,20 +43,21 @@ export default function Sidebar() {
               }
               to={headers[i].child[j].path}
             >
-              <FontAwesomeIcon icon={headers[i].child[j].icon} className={"text-sm basis-1/6"}></FontAwesomeIcon>
-              <span className="mx-3  basis-1/4">{headers[i].child[j].title}</span>
+              {headers[i].child[j].icon}
+              {/* <FontAwesomeIcon icon={headers[i].child[j].icon} className={"text-sm basis-1/6"}></FontAwesomeIcon> */}
+              <span className="mx-3 basis-1/2">{headers[i].child[j].title}</span>
             </Link>
           </li>
         );
       }
       rows.push(
-        <>
+        <div key={"side-bar-" + i}>
           <hr className="my-4 md:min-w-full" />
           {/* <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
             {headers[i].title}
           </h6> */}
           <ul className="md:flex-col md:min-w-full flex flex-col list-none">{r}</ul>
-        </>
+        </div>
       );
     }
     return rows;
@@ -81,7 +92,7 @@ export default function Sidebar() {
             outline: "none",
           }}
         >
-          <FontAwesomeIcon icon={!dark ? "fas fa-moon" : "fas fa-moon"}></FontAwesomeIcon>
+          {!dark ? <Brightness7SharpIcon /> : <NightsStaySharpIcon />}
         </button>
       </div>
     </nav>

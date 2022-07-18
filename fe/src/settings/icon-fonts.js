@@ -13,6 +13,9 @@ import {
   faS,
   faBars,
   faEllipsis,
+  faUserGroup,
+  faCubesStacked,
+  faUsersViewfinder,
 } from "@fortawesome/free-solid-svg-icons";
 
 // import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -23,6 +26,9 @@ library.add(faS);
 library.add(fa0);
 library.add(fa1);
 library.add(fa2);
+library.add(faUserGroup);
+library.add(faCubesStacked);
+library.add(faUsersViewfinder);
 library.add(faTv);
 library.add(faBars);
 library.add(faUser);

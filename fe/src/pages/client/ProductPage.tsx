@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Product from "../../component/client/product/Product";
@@ -6,7 +6,7 @@ import { productService } from "../../service/ProductService";
 import { getAllProduct } from "../../redux/actions/ProductAction";
 
 export default function ProductPage() {
-  const { listProduct } = useSelector((state) => state.ProductReducer);
+  const { listProduct } = useSelector((state: any) => state.ProductReducer);
   const dispatch = useDispatch();
 
   // const add = async () => {
@@ -25,7 +25,7 @@ export default function ProductPage() {
     <div>
       Product
       {listProduct
-        ? listProduct.map((i) => (
+        ? listProduct.map((i: any) => (
             <>
               <div>{i.name}</div>
               <div>{i.imageUrl}</div>
@@ -33,7 +33,7 @@ export default function ProductPage() {
             </>
           ))
         : null}
-      {/* <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={add} >
+      {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={add} >
       Button
     </button> */}
     </div>
