@@ -1,4 +1,4 @@
-import "./App.css";
+import "./index.css";
 import { createBrowserHistory } from "history";
 import { BrowserRouter, Router, Routes, Route, Link, Outlet } from "react-router-dom";
 
@@ -19,9 +19,7 @@ import CustomerList from "./pages/admin/CustomerList";
 import UserList from "./pages/admin/UserList";
 import ClientTemplate from "./templates/ClientTemplate";
 import AdminTemplate from "./templates/AdminTemplate";
-import { Fragment, useLayoutEffect, useState } from "react";
-import Header from "./component/client/common/Header";
-import Footer from "./component/client/common/Footer";
+import { useLayoutEffect, useState } from "react";
 
 // https://mui.com/material-ui/material-icons/?theme=Sharp&query=user
 

@@ -7,6 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import { ThemeContext } from "../../../settings/theme-context";
 
 interface Column {
   id: "name" | "code" | "population" | "size" | "density";
@@ -73,7 +74,8 @@ const rows = [
   createData("Brazil", "BR", 210147125, 8515767),
 ];
 
-export default function StickyHeadTable() {
+export default function ETable() {
+  const { theme } = React.useContext(ThemeContext);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -87,26 +89,44 @@ export default function StickyHeadTable() {
   };
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+    <Paper
+      elevation={0}
+      style={{ backgroundColor: theme.backgroundColor, color: theme.color }}
+      sx={{ width: "100%", overflow: "hidden" }}
+    >
+      <TableContainer>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               {columns.map((column) => (
-                <TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth }}>
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  className="uppercase"
+                  style={{ backgroundColor: theme.backgroundColor, color: theme.colorMint, minWidth: column.minWidth }}
+                >
                   {column.label}
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className="h-full">
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                <TableRow className="h-full" hover role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
-                      <TableCell key={column.id} align={column.align}>
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{
+                          backgroundColor: theme.backgroundColor,
+                          color: theme.color,
+                          minWidth: column.minWidth,
+                          border: "0px",
+                        }}
+                      >
                         {column.format && typeof value === "number" ? column.format(value) : value}
                       </TableCell>
                     );
@@ -125,6 +145,7 @@ export default function StickyHeadTable() {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        style={{ backgroundColor: theme.backgroundColor, color: theme.color }}
       />
     </Paper>
   );

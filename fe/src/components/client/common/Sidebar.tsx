@@ -33,10 +33,10 @@ export default function Sidebar() {
       const r = [];
       for (const j in headers[i].child) {
         r.push(
-          <li className="items-center" key={"side-bar-item-" + j}>
+          <li className="items-center justify-center px-2" key={"side-bar-item-" + j}>
             <Link
               className={
-                "text-xs uppercase py-3 block flex flex-row " +
+                "text-md py-3 block flex flex-row justify-center" +
                 (window.location.pathname === headers[i].child[j].path
                   ? theme.textColorActiveWithHoverAdmin
                   : theme.textColorInactiveWithoutHoverAdmin)
@@ -44,8 +44,17 @@ export default function Sidebar() {
               to={headers[i].child[j].path}
             >
               {headers[i].child[j].icon}
-              {/* <FontAwesomeIcon icon={headers[i].child[j].icon} className={"text-sm basis-1/6"}></FontAwesomeIcon> */}
-              <span className="mx-3 basis-1/2">{headers[i].child[j].title}</span>
+              <span
+                className={
+                  "mx-3 " +
+                  (window.location.pathname === headers[i].child[j].path
+                    ? theme.textColorActiveWithHoverAdmin
+                    : theme.textColorInactiveWithoutHoverAdmin)
+                }
+                style={{ lineHeight: "24px" }}
+              >
+                {headers[i].child[j].title}
+              </span>
             </Link>
           </li>
         );

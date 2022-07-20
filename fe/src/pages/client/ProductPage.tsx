@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import Product from "../../component/client/product/Product";
+import Product from "../../components/client/product/Product";
 import { productService } from "../../service/ProductService";
 import { getAllProduct } from "../../redux/actions/ProductAction";
 
