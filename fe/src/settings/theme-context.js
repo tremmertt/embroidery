@@ -6,11 +6,12 @@ const colors = ["#7551ff"];
 
 const themes = {
   dark: {
-    backgroundColor: "#0b1437",
-    backgroundColorMint: "#111c44",
+    backgroundColor: "#111c44",
+    backgroundColorMint: "#0b1437",
     color: "white",
+    colorMint:"#6d6f75",
     dropShadow: "drop-shadow-[0_0px_0px_rgba(250,250,250,0.5)]",
-    textColorActiveWithHoverAdmin: "font-extrabold text-blue-600",
+    textColorActiveWithHoverAdmin: "font-extrabold text-white-600",
     textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-gray-500 hover:text-gray-300",
     backgroundColorWithHover: "bg-[#111c44] hover:bg-[#152254]",
   },
@@ -18,6 +19,7 @@ const themes = {
     backgroundColor: "white",
     backgroundColorMint: "#f4f7fe",
     color: "#1b254b",
+    colorMint:"#6d6f75",
     dropShadow: "drop-shadow-[0_0px_0px_rgba(0,0,0,0.25)]",
     textColorActiveWithHoverAdmin: "font-extrabold text-[#111c44]",
     textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-[#111c44] hover:text-blue-600",

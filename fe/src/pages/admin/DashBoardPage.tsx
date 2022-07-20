@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import EBreadcrumb from "../../component/admin/common/EBreadcrumb";
-import CheckTable from "../../component/admin/dashboard/CheckTable";
+import EBreadcrumb from "../../components/admin/common/EBreadcrumb";
+import CheckTable from "../../components/admin/dashboard/CheckTable";
 import { ThemeContext } from "../../settings/theme-context";
 import ShieldMoonSharpIcon from "@mui/icons-material/ShieldMoonSharp";
 export default function DashBoardPage() {
@@ -14,8 +14,10 @@ export default function DashBoardPage() {
   ];
 
   return (
-    <div className=" w-full" style={{ backgroundColor: "transparent", color: theme.color }}>
-      <EBreadcrumb breadcrumbItems={breadcrumbItems} title={"Dashboard"} />
+    <div className="relative w-full" style={{ backgroundColor: "transparent", color: theme.color }}>
+      <div className="sticky top-0 z-50">
+        <EBreadcrumb breadcrumbItems={breadcrumbItems} title={"Dashboard"}></EBreadcrumb>
+      </div>
       <div className="grid grid-cols-3 gap-4 m-6 p-2">
         {/* Table 1 */}
         <div

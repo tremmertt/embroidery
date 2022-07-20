@@ -1,10 +1,27 @@
-import React, { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../../settings/theme-context";
 
 export default function EBreadcrumb(props: any) {
   const { breadcrumbItems, title } = props;
   const { theme } = useContext(ThemeContext);
+
+  // // Sticky Menu Area
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const [isSticky, setIsSticky] = useState(false);
+  /* Method that will fix header after a specific scrollable */
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+    console.log("scrollTop", scrollTop);
+    if (scrollTop >= 10) setIsSticky(true);
+    else setIsSticky(false);
+  };
 
   const renderElement = () => {
     const rows = [];
@@ -34,15 +51,16 @@ export default function EBreadcrumb(props: any) {
         </li>
       );
     }
+
     return (
-      <>
-        <nav className="flex px-8 pt-6 pb-2" aria-label="Breadcrumb">
+      <div style={isSticky ? { backdropFilter: "blur(8px)" } : {}}>
+        <nav className={"flex px-8 pb-2 py-2 " + (isSticky ? " pt-2" : " pt-6")} aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">{rows}</ol>
         </nav>
-        <div className="px-8 font-bold text-2xl">{title}</div>
-      </>
+        <div className="px-8 font-bold text-2xl z-50">{title}</div>
+      </div>
     );
   };
 
-  return <>{renderElement()}</>;
+  return <div>{renderElement()}</div>;
 }

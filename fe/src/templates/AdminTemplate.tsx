@@ -1,5 +1,5 @@
 import { Fragment, useContext, useEffect } from "react";
-import SideBar from "../component/client/common/Sidebar";
+import SideBar from "../components/client/common/Sidebar";
 import { ThemeContext } from "../settings/theme-context";
 
 const AdminTemplate = (props: any) => {
@@ -13,7 +13,10 @@ const AdminTemplate = (props: any) => {
   return (
     <Fragment>
       <SideBar></SideBar>
-      <div className="relative md:ml-64 min-h-screen" style={{ backgroundColor: theme.backgroundColorMint }}>
+      <div
+        className="relative md:ml-64 max-h-content min-h-screen"
+        style={{ backgroundColor: theme.backgroundColorMint }}
+      >
         <Component />
       </div>
     </Fragment>
