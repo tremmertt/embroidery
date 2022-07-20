@@ -1,6 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
+import ReactDOM from "react-dom"; 
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -8,9 +7,6 @@ import { store } from "./redux/configStore";
 import "./settings/icon-fonts.js";
 
 import { ThemeProvider } from "./settings/theme-context";
-
-// import "@fortawesome/fontawesome-free/css/all.min.css";
-// https://fontawesome.com/v5/icons/tv?s=solid
 
 ReactDOM.render(
   <ThemeProvider store={store}>
