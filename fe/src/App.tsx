@@ -23,7 +23,6 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import Header from "./component/client/common/Header";
 import Footer from "./component/client/common/Footer";
 
-// https://mui.com/material-ui/react-table/'
 // https://mui.com/material-ui/material-icons/?theme=Sharp&query=user
 
 export const history = createBrowserHistory();
