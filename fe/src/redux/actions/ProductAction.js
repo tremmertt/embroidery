@@ -6,7 +6,7 @@ export const getAllProduct = () => {
     try {
       // get api here
       const result = await productService.listItems();
-      console.log('result.status', result.status)
+      console.log("result.status", result.status);
       if (result.status === 200) {
         dispatch({
           type: GET_ALL_PRODUCT,

@@ -15,22 +15,23 @@ module.exports = {
       "off",
       {
         components: ["Link"],
-        specialLink: ["hrefLeft", "hrefRight"],
+        specialLink: ["hrefLeft", "hrefRight", "to"],
         aspects: ["noHref", "invalidHref", "preferButton"],
       },
     ],
-    // "prettier/prettier": [
-    //   "error",
-    //   {
-    //     printWidth: 120,
-    //     trailingComma: "es5",
-    //     semi: true,
-    //     tabWidth: 2,
-    //     jsxSingleQuote: false,
-    //     singleQuote: false,
-    //     useTabs: false,
-    //     endOfLine: "auto",
-    //   },
-    // ],
+    "@typescript-eslint/no-unused-vars": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        printWidth: 120,
+        trailingComma: "es5",
+        semi: true,
+        tabWidth: 2,
+        jsxSingleQuote: false,
+        singleQuote: false,
+        useTabs: false,
+        endOfLine: "auto",
+      },
+    ],
   },
 };

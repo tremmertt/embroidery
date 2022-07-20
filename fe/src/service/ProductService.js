@@ -7,36 +7,24 @@ export class ProductService extends BaseService {
   }
 
   getItemById = async (id) => {
-    return await this.get(
-      `product/${id}`
-    );
+    return await this.get(`product/${id}`);
   };
 
   listItems = async () => {
-    return await this.get(
-      `product`
-    );
+    return await this.get(`product`);
   };
 
   addItem = async (item) => {
-    return await this.post(
-      `product`, item
-    );
+    return await this.post(`product`, item);
   };
 
   updateItem = async (item) => {
-    return await this.put(
-      `product`, item
-    );
+    return await this.put(`product`, item);
   };
 
   deleteItem = async (id) => {
-    return await this.delete(
-      `product/${id}`
-    );
+    return await this.delete(`product/${id}`);
   };
-
-
 }
 
 export const productService = new ProductService();

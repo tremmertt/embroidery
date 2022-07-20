@@ -2,20 +2,26 @@ import React from "react";
 import { store } from "../redux/configStore";
 import { Provider } from "react-redux";
 
+const colors = ["#7551ff"];
+
 const themes = {
   dark: {
-    backgroundColor: "black",
-    dropShadow: "drop-shadow-[0_35px_35px_rgba(250,250,250,0.5)]",
+    backgroundColor: "#0b1437",
+    backgroundColorMint: "#111c44",
     color: "white",
-    textColorActiveWithHoverAdmin: "text-blue-500 hover:text-blue-600",
-    textColorInactiveWithoutHoverAdmin: "text-gray-700 hover:text-gray-500",
+    dropShadow: "drop-shadow-[0_0px_0px_rgba(250,250,250,0.5)]",
+    textColorActiveWithHoverAdmin: "font-extrabold text-blue-600",
+    textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-gray-500 hover:text-gray-300",
+    backgroundColorWithHover: "bg-[#111c44] hover:bg-[#152254]",
   },
   light: {
     backgroundColor: "white",
-    dropShadow: "drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]",
-    color: "black",
-    textColorActiveWithHoverAdmin: "text-blue-500 hover:text-blue-600",
-    textColorInactiveWithoutHoverAdmin: "text-gray-700 hover:text-gray-500",
+    backgroundColorMint: "#f4f7fe",
+    color: "#1b254b",
+    dropShadow: "drop-shadow-[0_0px_0px_rgba(0,0,0,0.25)]",
+    textColorActiveWithHoverAdmin: "font-extrabold text-[#111c44]",
+    textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-[#111c44] hover:text-blue-600",
+    backgroundColorWithHover: "bg-[#f4f7fe] hover:bg-[#e3e6ef]",
   },
 };
 

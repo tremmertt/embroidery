@@ -1,8 +1,7 @@
-import React, { Fragment } from "react";
-
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
-export default function Header() {
+const Header = () => {
   return (
     <Fragment>
       <div className="container mx-auto py-2">
@@ -12,7 +11,7 @@ export default function Header() {
               <h3> EN </h3>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-auto w-4"
+                className="h-auto w-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -26,7 +25,7 @@ export default function Header() {
               <h3> USD </h3>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-auto w-4"
+                className="h-auto w-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -40,7 +39,7 @@ export default function Header() {
             <div className="flex mr-5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-auto w-4"
+                className="h-auto w-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -57,7 +56,7 @@ export default function Header() {
             <div className="flex mr-5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-auto w-4"
+                className="h-auto w-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -74,7 +73,7 @@ export default function Header() {
             <div className="flex mr-5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-auto w-4"
+                className="h-auto w-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -91,7 +90,7 @@ export default function Header() {
             {/* <div className="flex mr-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-auto w-4"
+              className="h-auto w-4"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -184,4 +183,5 @@ export default function Header() {
       </div>
     </Fragment>
   );
-}
+};
+export default Header;
