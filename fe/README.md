@@ -3,6 +3,16 @@
 ## Add eslint to project
 Tutorial: https://morioh.com/p/5fd9a1794ed3
     
+# 👇️ delete node_modules and package-lock.json
+rm -rf node_modules
+rm -f package-lock.json
+rm -f yarn.lock
+
+# 👇️ clean npm cache
+npm cache clean --force
+
+npm install
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
