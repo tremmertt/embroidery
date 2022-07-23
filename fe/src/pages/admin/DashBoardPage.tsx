@@ -1,11 +1,10 @@
 import { useContext } from "react";
 import EBreadcrumb from "../../components/admin/common/EBreadcrumb";
 import CheckTable from "../../components/admin/dashboard/CheckTable";
-import { ThemeContext } from "../../settings/theme-context";
+import { ThemeCustomContext } from "../../settings/theme-context";
 import ShieldMoonSharpIcon from "@mui/icons-material/ShieldMoonSharp";
 export default function DashBoardPage() {
-  const { theme } = useContext(ThemeContext);
-  const title = "CheckTable";
+  const { theme } = useContext(ThemeCustomContext);
   const breadcrumbItems = [
     {
       name: "Home",

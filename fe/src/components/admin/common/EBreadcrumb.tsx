@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ThemeContext } from "../../../settings/theme-context";
+import { ThemeCustomContext } from "../../../settings/theme-context";
 
 export default function EBreadcrumb(props: any) {
   const { breadcrumbItems, title } = props;
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeCustomContext);
 
   // // Sticky Menu Area
   useEffect(() => {
@@ -18,7 +18,6 @@ export default function EBreadcrumb(props: any) {
   /* Method that will fix header after a specific scrollable */
   const handleScroll = () => {
     const scrollTop = window.scrollY;
-    console.log("scrollTop", scrollTop);
     if (scrollTop >= 10) setIsSticky(true);
     else setIsSticky(false);
   };

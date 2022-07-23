@@ -2,7 +2,7 @@ import React from "react";
 import { store } from "../redux/configStore";
 import { Provider } from "react-redux";
 
-const colors = ["#7551ff"];
+// const colors = ["#7551ff"];
 
 const themes = {
   dark: {
@@ -32,7 +32,7 @@ const initialState = {
   theme: themes.light,
   toggle: () => {},
 };
-const ThemeContext = React.createContext(initialState);
+const ThemeCustomContext = React.createContext(initialState);
 
 function ThemeProvider({ children }) {
   const [dark, setDark] = React.useState(false); // Default theme is light
@@ -53,10 +53,10 @@ function ThemeProvider({ children }) {
   const theme = dark ? themes.dark : themes.light;
 
   return (
-    <ThemeContext.Provider value={{ theme, dark, toggle }}>
+    <ThemeCustomContext.Provider value={{ theme, dark, toggle }}>
       <Provider store={store}>{children}</Provider>
-    </ThemeContext.Provider>
+    </ThemeCustomContext.Provider>
   );
 }
 
-export { ThemeProvider, ThemeContext };
+export { ThemeProvider, ThemeCustomContext };

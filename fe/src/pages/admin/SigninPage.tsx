@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "../../settings/theme-context";
+import { ThemeCustomContext } from "../../settings/theme-context";
 
 export default function SigninPage() {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeCustomContext);
   return (
     <div className="h-full w-full" style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
       <div className="p-12 font-bold text-3xl">Signin</div>
