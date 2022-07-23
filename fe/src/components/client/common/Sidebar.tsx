@@ -1,25 +1,27 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { ThemeCustomContext } from "../../../settings/theme-context";
+
 import BorderColorSharpIcon from "@mui/icons-material/BorderColorSharp";
-import ReduceCapacitySharpIcon from "@mui/icons-material/ReduceCapacitySharp";
-import PeopleSharpIcon from "@mui/icons-material/PeopleSharp";
 import PersonSharpIcon from "@mui/icons-material/PersonSharp";
 import SettingsSuggestSharpIcon from "@mui/icons-material/SettingsSuggestSharp";
 import KeySharpIcon from "@mui/icons-material/KeySharp";
 import NightsStaySharpIcon from "@mui/icons-material/NightsStaySharp";
 import Brightness7SharpIcon from "@mui/icons-material/Brightness7Sharp";
 import FitScreenSharpIcon from "@mui/icons-material/FitScreenSharp";
-import { ThemeContext } from "../../../settings/theme-context";
+import SupervisorAccountSharpIcon from "@mui/icons-material/SupervisorAccountSharp";
+import PermIdentitySharpIcon from "@mui/icons-material/PermIdentitySharp";
+
 export default function Sidebar() {
-  const { theme, toggle, dark } = useContext(ThemeContext);
+  const { theme, toggle, dark } = useContext(ThemeCustomContext);
   const headers = [
     {
       title: "ADMIN LAYOUT PAGES",
       child: [
         { title: "Dashboard", icon: <FitScreenSharpIcon />, path: "/admin" },
         { title: "Order List", icon: <BorderColorSharpIcon />, path: "/admin/orders" },
-        { title: "Customer List", icon: <ReduceCapacitySharpIcon />, path: "/admin/customers" },
-        { title: "User List", icon: <PeopleSharpIcon />, path: "/admin/users" },
+        { title: "Customer List", icon: <PermIdentitySharpIcon />, path: "/admin/customers" },
+        { title: "User List", icon: <SupervisorAccountSharpIcon />, path: "/admin/users" },
         { title: "Profile", icon: <PersonSharpIcon />, path: "/admin/profile" },
         { title: "Setting", icon: <SettingsSuggestSharpIcon />, path: "/admin/setting" },
         { title: "Authenticate", icon: <KeySharpIcon />, path: "/signin" },

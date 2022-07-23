@@ -14,10 +14,10 @@ export default function Banner() {
     },
   };
   return (
-    <div className=" relative container mx-auto w-full h-auto py-3 mb-5">
+    <div className=" relative mx-auto w-full h-auto py-3 mb-5">
       <div className="bg-red-900 text-white">
         <div className="text-left" style={styles.bestOfCollection}>
-          <p className="tracking-widest font-sans font-light text-4xl">The Best of Collection</p>
+          <p className="tracking-widest font-sans font-light lg:text-4xl sm:text-5xl">The Best of Collection</p>
           <p style={{ marginTop: "60px", marginBottom: "20px" }}>Performance and Design. Take it right edge</p>
           <p className="hover:underline underline-offset-2 font-semibold text-md"> SHOP NOW</p>
         </div>

@@ -83,9 +83,9 @@ export default function LatestNews() {
     return rows;
   }
   return (
-    <div className="container mx-auto h-auto py-20">
-      <h1 className="tracking-widest text-4xl font-semibold mb-3">LASTEST NEWS</h1>
-      <div className="grid grid-cols-3">{renderRows()}</div>
+    <div className="container mx-auto h-auto py-28">
+      <h1 className="tracking-widest text-4xl font-semibold mb-20 text-center">LASTEST NEWS</h1>
+      <div className="grid lg:grid-cols-3 md:grid-cols-1">{renderRows()}</div>
     </div>
   );
 }

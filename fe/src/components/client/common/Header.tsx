@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <Fragment>
-      <div className="container mx-auto py-2">
-        <div className="flex flex-wrap justify-between">
+      <div className="mx-auto py-2 overflow-hidden">
+        <div className="flex flex-wrap justify-between container mx-auto">
           <div className="flex">
             <div className="flex pl-1">
               <h3> EN </h3>
@@ -107,7 +107,7 @@ const Header = () => {
         </div>
         <header className="text-black body-font border-b-2 shadow-lg">
           <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-            <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <Link className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" to="#">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -121,7 +121,7 @@ const Header = () => {
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
               </svg>
               <span className="ml-3 text-xl">Logo</span>
-            </a>
+            </Link>
             <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center font-semibold">
               <Link className="mr-5 hover:text-red-800" to="/">
                 Home
@@ -138,11 +138,11 @@ const Header = () => {
               <Link className="mr-5 hover:text-red-800" to="/contact">
                 Contact
               </Link>
-              {/* <a className="mr-5 hover:text-red-800">Home </a>
-            <a className="mr-5 hover:text-red-800"> Embroidery </a>
-            <a className="mr-5 hover:text-red-800">Vector </a>
-            <a className="mr-5 hover:text-red-800">Design </a>
-            <a className="mr-5 hover:text-red-800">Contact</a> */}
+              {/* <Link className="mr-5 hover:text-red-800">Home </Link>
+            <Link className="mr-5 hover:text-red-800"> Embroidery </Link>
+            <Link className="mr-5 hover:text-red-800">Vector </Link>
+            <Link className="mr-5 hover:text-red-800">Design </Link>
+            <Link className="mr-5 hover:text-red-800">Contact</Link> */}
             </nav>
             <div className="flex justify-center">
               <div className=" xl:w-96">
@@ -180,6 +180,61 @@ const Header = () => {
             </div>
           </div>
         </header>
+        <nav className="navbar w-full bg-white">
+          <div className="container-lg px-0">
+            <div className="flex w-full items-center">
+              <Link className="nav-brand mr-auto ml-0" to="#">
+                Material Tailwind Navbar
+              </Link>
+              <button
+                navbar-trigger
+                className="navbar-trigger ml-auto mr-0 mb-0 lg:hidden xl:hidden"
+                type="button"
+                aria-controls="navigation"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span className="navbar-trigger-icon">
+                  <span className="navbar-trigger-bar mt-1">
+                    <span className="hidden origin-[10%_10%] rotate-45" />
+                  </span>
+                  <span className="bar2 navbar-trigger-bar mt-2" />
+                  <span className="bar3 navbar-trigger-bar mt-2">
+                    <span className="mt-mt-[0.4375rem] hidden origin-[10%_90%] -rotate-45" />
+                  </span>
+                </span>
+              </button>
+            </div>
+            <div className="collapse navbar-collapse" navbar-menu>
+              <ul className="navbar-nav">
+                <li>
+                  <Link className="nav-link" aria-current="page" to="#">
+                    <i className="material-icons mr-2 text-base opacity-60">article</i>
+                    <span>Documentation</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link className="nav-link" to="#">
+                    <i className="material-icons mr-2 text-base opacity-60">apps</i>
+                    <span>Components</span>
+                  </Link>
+                </li>
+                <li className="flex">
+                  <Link className="nav-link" to="#">
+                    <i className="material-icons mr-2 text-base opacity-60">view_carousel</i>
+                    <span>Templates</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link className="nav-link" to="#">
+                    <i className="fab fa-github mr-2 text-base opacity-60" />
+                    <span>Github</span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
       </div>
     </Fragment>
   );

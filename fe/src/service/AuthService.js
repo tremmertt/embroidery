@@ -8,7 +8,7 @@ export class BaseService {
     return this.instance;
   }
 
-  put = (url, model) => {
+  static put = (url, model) => {
     return BaseService.getInstance().put(`${process.env.REACT_APP_API_URL}/${url}`, model, {
       headers: {
         Authorization: "Bearer " + process.env.TOKEN,
@@ -16,7 +16,7 @@ export class BaseService {
     });
   };
 
-  post = (url, model) => {
+  static post = (url, model) => {
     return BaseService.getInstance().post(`${process.env.REACT_APP_API_URL}/${url}`, model, {
       headers: {
         Authorization: "Bearer " + process.env.TOKEN,
@@ -24,7 +24,7 @@ export class BaseService {
     });
   };
 
-  get = async (url) => {
+  static get = async (url) => {
     console.log({
       url: `${process.env.REACT_APP_API_URL}/${url}`,
       method: "GET",
@@ -39,7 +39,7 @@ export class BaseService {
     });
   };
 
-  delete = (url) => {
+  static delete = (url) => {
     return BaseService.getInstance().delete(`${process.env.REACT_APP_API_URL}/${url}`, {
       headers: {
         Authorization: "Bearer " + process.env.TOKEN,

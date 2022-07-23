@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import EBreadcrumb from "../../components/admin/common/EBreadcrumb";
-import { ThemeContext } from "../../settings/theme-context";
+import { ThemeCustomContext } from "../../settings/theme-context";
 
 export default function OrderList() {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeCustomContext);
   const breadcrumbItems = [
     {
       name: "Home",
