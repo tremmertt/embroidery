@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import Product from "../../components/client/product/Product";
-import { productService } from "../../service/ProductService";
 import { getAllProduct } from "../../redux/actions/ProductAction";
 
 export default function ProductPage() {
@@ -19,7 +17,7 @@ export default function ProductPage() {
 
   useEffect(() => {
     dispatch(getAllProduct());
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div>

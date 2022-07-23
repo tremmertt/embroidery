@@ -193,18 +193,18 @@ const Header = () => {
                 aria-controls="navigation"
                 aria-expanded="false"
                 aria-label="Toggle navigation"
-                >
-                  <span className="navbar-trigger-icon">
-                    <span  className="navbar-trigger-bar mt-1">
-                      <span className="hidden origin-[10%_10%] rotate-45" />
-                    </span>
-                    <span  className="bar2 navbar-trigger-bar mt-2" />
-                    <span  className="bar3 navbar-trigger-bar mt-2">
-                      <span className="mt-mt-[0.4375rem] hidden origin-[10%_90%] -rotate-45" />
-                    </span>
+              >
+                <span className="navbar-trigger-icon">
+                  <span className="navbar-trigger-bar mt-1">
+                    <span className="hidden origin-[10%_10%] rotate-45" />
                   </span>
-                </button>
-              </div>
+                  <span className="bar2 navbar-trigger-bar mt-2" />
+                  <span className="bar3 navbar-trigger-bar mt-2">
+                    <span className="mt-mt-[0.4375rem] hidden origin-[10%_90%] -rotate-45" />
+                  </span>
+                </span>
+              </button>
+            </div>
             <div className="collapse navbar-collapse" navbar-menu>
               <ul className="navbar-nav">
                 <li>

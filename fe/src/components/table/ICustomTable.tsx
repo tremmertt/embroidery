@@ -19,6 +19,7 @@ export interface IColumn {
 }
 
 interface IData {
+  isPagination?: boolean;
   rows: any[];
   columns: IColumn[];
 }
@@ -26,6 +27,7 @@ interface IData {
 export default function ICustomTable({ data }: { data: IData }) {
   const { theme } = React.useContext(ThemeCustomContext);
   const { columns, rows } = data;
+  const isPagination = data.isPagination || !Object.keys(data).includes("isPagination") ? true : false;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -87,16 +89,20 @@ export default function ICustomTable({ data }: { data: IData }) {
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        style={{ backgroundColor: theme.backgroundColor, color: theme.color }}
-      />
+      {isPagination ? (
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          style={{ backgroundColor: theme.backgroundColor, color: theme.color }}
+        />
+      ) : (
+        <></>
+      )}
     </Paper>
   );
 }

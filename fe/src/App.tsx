@@ -1,6 +1,6 @@
 import "./index.css";
 import { createBrowserHistory } from "history";
-import { BrowserRouter, Router, Routes, Route, Link, Outlet } from "react-router-dom";
+import { Router, Routes, Route } from "react-router-dom";
 
 // import ScrollToTop from "./ScrollToTop";
 
@@ -20,7 +20,6 @@ import UserList from "./pages/admin/UserList";
 import ClientTemplate from "./templates/ClientTemplate";
 import AdminTemplate from "./templates/AdminTemplate";
 import { useLayoutEffect, useState } from "react";
-
 // https://mui.com/material-ui/material-icons/?theme=Sharp&query=user
 
 export const history = createBrowserHistory();

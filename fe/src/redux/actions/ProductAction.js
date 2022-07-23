@@ -1,5 +1,5 @@
 import { productService } from "../../service/ProductService";
-import { GET_ALL_PRODUCT, GET_PRODUCT, ADD_PRODUCT, UPDATE_PRODUCT, REMOVE_PRODUCT } from "./type/ProductType";
+import { GET_ALL_PRODUCT } from "./type/ProductType";
 
 export const getAllProduct = () => {
   return async (dispatch) => {
