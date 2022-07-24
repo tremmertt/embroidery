@@ -40,16 +40,16 @@ export default function LatestNews() {
   function renderRows() {
     const rows = [];
     // console.log("Day la for of");
-    for (const i of contents) {
+    for (const i in contents) {
       // console.log("ITEM", i);
       rows.push(
-        <div className="my-2">
+        <div className="my-2" key={"latest-news-" + i}>
           <div className="grid grid-cols-2 gap-1">
-            <div className="justify-center">{i.imageURL}</div>
+            <div className="justify-center">{contents[i].imageURL}</div>
             <div className="text-left">
               <p className="text-gray-400 font-light text-sm">01 Jan, 2022</p>
-              <p className="text-black font-bold text-2xl my-2">{i.title}</p>
-              <p className="text-black text-md pb-3">{i.content}</p>
+              <p className="text-black font-bold text-2xl my-2">{contents[i].title}</p>
+              <p className="text-black text-md pb-3">{contents[i].content}</p>
             </div>
           </div>
         </div>

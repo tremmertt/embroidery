@@ -5,6 +5,9 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./redux/configStore";
 import "./settings/icon-fonts.js";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+
 
 import { ThemeProvider } from "./settings/theme-context";
 

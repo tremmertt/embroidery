@@ -18,6 +18,7 @@ import OrderListPage from "./pages/admin/order/OrderListPage";
 import StaffListPage from "./pages/admin/staff/StaffListPage";
 import CreateStaffPage from "./pages/admin/staff/CreateStaffPage";
 import ProductListPage from "./pages/admin/product/ProductListPage";
+import AgencyListPage from "./pages/admin/agency/AgencyListPage";
 import CustomerListPage from "./pages/admin/customer/CustomerListPage";
 
 import ClientTemplate from "./templates/ClientTemplate";
@@ -59,6 +60,7 @@ function App() {
         <Route path="/admin/staffs" element={<AdminTemplate Component={StaffListPage} />} />
         <Route path="/admin/staffs/create" element={<AdminTemplate Component={CreateStaffPage} />} />
         <Route path="/admin/products" element={<AdminTemplate Component={ProductListPage} />} />
+        <Route path="/admin/agencies" element={<AdminTemplate Component={AgencyListPage} />} />
         <Route path="/admin/setting" element={<AdminTemplate Component={SettingPage} />} />
         <Route path="/admin/profile" element={<AdminTemplate Component={ProfilePage} />} />
         <Route path="/signin" element={<AdminTemplate Component={SigninPage} />} />

@@ -12,6 +12,7 @@ import FitScreenSharpIcon from "@mui/icons-material/FitScreenSharp";
 import SupervisorAccountSharpIcon from "@mui/icons-material/SupervisorAccountSharp";
 import PermIdentitySharpIcon from "@mui/icons-material/PermIdentitySharp";
 import InventorySharpIcon from "@mui/icons-material/InventorySharp";
+import AgencyImage from "../../../assets/icon/voucher.png";
 
 export default function Sidebar() {
   const { theme, toggle, dark } = useContext(ThemeCustomContext);
@@ -20,10 +21,15 @@ export default function Sidebar() {
       title: "ADMIN LAYOUT PAGES",
       child: [
         { title: "Dashboard", icon: <FitScreenSharpIcon />, path: "/admin" },
-        { title: "Order List", icon: <BorderColorSharpIcon />, path: "/admin/orders" },
-        { title: "Customer List", icon: <PermIdentitySharpIcon />, path: "/admin/customers" },
-        { title: "Staff List", icon: <SupervisorAccountSharpIcon />, path: "/admin/staffs" },
-        { title: "Product List", icon: <InventorySharpIcon />, path: "/admin/products" },
+        { title: "Order", icon: <BorderColorSharpIcon />, path: "/admin/orders" },
+        { title: "Customer", icon: <PermIdentitySharpIcon />, path: "/admin/customers" },
+        { title: "Staff", icon: <SupervisorAccountSharpIcon />, path: "/admin/staffs" },
+        { title: "Product", icon: <InventorySharpIcon />, path: "/admin/products" },
+        {
+          title: "Agency",
+          icon: <img width="24" src={AgencyImage} alt="agency icon" loading="lazy" />,
+          path: "/admin/agencies",
+        },
         { title: "Profile", icon: <PersonSharpIcon />, path: "/admin/profile" },
         { title: "Setting", icon: <SettingsSuggestSharpIcon />, path: "/admin/setting" },
         { title: "Authenticate", icon: <KeySharpIcon />, path: "/signin" },

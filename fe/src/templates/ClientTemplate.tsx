@@ -12,7 +12,6 @@ const ClientTemplate = (props: any) => {
   return (
     <Fragment>
       <Header />
-      ``
       <Component />
       <hr className="mt-5" />
       <Footer />
