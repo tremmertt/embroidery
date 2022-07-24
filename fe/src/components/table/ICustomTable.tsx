@@ -8,23 +8,31 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { ThemeCustomContext } from "../../settings/theme-context";
-import { IconButton, Stack, TableSortLabel } from "@mui/material";
+import { IconButton, Stack, TableSortLabel, TextField } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineSharpIcon from "@mui/icons-material/ModeEditOutlineSharp";
 import { Box } from "@mui/system";
 import { visuallyHidden } from "@mui/material/node_modules/@mui/utils";
 import { IStaff } from "../../service/StaffService";
 import { IProduct } from "../../service/ProductService";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
+export interface IActionTable {
+  path: string;
+  action: "edit" | "delete";
+}
 export interface IColumn {
   id: string;
   label: string;
-  minWidth?: number;
+  minWidth?: string | number;
+  width?: string | number;
   align?: "right" | "left" | "center";
   alignHeader?: "right" | "left" | "center";
   sortable?: boolean;
+  searchable?: boolean;
   format?: (value: string | number | undefined) => string;
-  actions?: string[];
+  actions?: IActionTable[];
 }
 
 export interface IData<T> {
@@ -73,14 +81,22 @@ interface EnhancedTableProps<T> {
   onRequestSort: (event: React.MouseEvent<unknown>, property: keyof T) => void;
   order: Order;
   orderBy: string;
+  isHasSearch: boolean;
   headCells: IColumn[];
+  onFilter: Function;
+  onRefreshFilter: Function;
 }
 
 function EnhancedTableHead<T>(props: EnhancedTableProps<T>) {
   const { theme } = React.useContext(ThemeCustomContext);
-  const { order, orderBy, onRequestSort, headCells } = props;
+  const { order, orderBy, onRequestSort, headCells, isHasSearch, onFilter, onRefreshFilter } = props;
   const createSortHandler = (property: keyof T) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property);
+  };
+
+  const handleFilter = (e: any, key: any) => {
+    if (e.target.value) onFilter(key, e.target.value);
+    else onRefreshFilter(key);
   };
 
   return (
@@ -110,6 +126,29 @@ function EnhancedTableHead<T>(props: EnhancedTableProps<T>) {
             ) : (
               headCell.label
             )}
+            {isHasSearch ? (
+              !["id", "no", "action"].includes(headCell.id) && headCell.searchable ? (
+                <TextField
+                  onKeyUp={(e) => handleFilter(e, headCell.id)}
+                  className="h-12 py-2"
+                  size="small"
+                  placeholder={headCell.id}
+                  variant="outlined"
+                  InputProps={{
+                    style: {
+                      color: theme.color,
+                      backgroundColor: theme.backgroundColor,
+                      borderColor: theme.color + " !important",
+                      borderWidth: "1px",
+                    },
+                  }}
+                ></TextField>
+              ) : (
+                <div className="h-12"></div>
+              )
+            ) : (
+              <></>
+            )}
           </TableCell>
         ))}
       </TableRow>
@@ -120,14 +159,51 @@ function EnhancedTableHead<T>(props: EnhancedTableProps<T>) {
 export default function ICustomTable({ data }: { data: IData<IProduct> | IData<IStaff> }) {
   const { theme } = React.useContext(ThemeCustomContext);
   const { columns, rows, defaultOrder } = data;
+  const [filterRows, setFilterRows] = React.useState<IProduct[] | IStaff[]>(rows);
   const isPagination = data.isPagination || !Object.keys(data).includes("isPagination") ? true : false;
   const isHasSort = columns.find((i) => i.sortable) ? true : false;
+  const isHasSearch = columns.find((i) => i.searchable) ? true : false;
 
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<keyof typeof rows[0]>(defaultOrder as keyof typeof rows[0]);
   const [defaultOrderPass, setDefaultOrderPass] = React.useState(defaultOrder);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [filter, setFilter] = useState({});
+
+  React.useEffect(() => {
+    setFilterRows(rows);
+  }, [rows]);
+
+  const toLower = (s: string) => {
+    return s.toString().toLowerCase();
+  };
+
+  const onFilter = (key: keyof typeof rows[0], value: string) => {
+    const filterNew = JSON.parse(JSON.stringify(filter));
+    filterNew[key] = value;
+    let result = rows as any;
+    for (const filterKey of Object.keys(filterNew)) {
+      result = result.filter((i: any) => i[filterKey] && toLower(i[filterKey]).includes(toLower(filterNew[filterKey])));
+    }
+    setFilterRows(result);
+    setFilter(filterNew);
+  };
+
+  const onRefreshFilter = (key: string) => {
+    const filterNew = JSON.parse(JSON.stringify(filter));
+    delete filterNew[key];
+    let result = rows as any;
+    for (const filterKey of Object.keys(filterNew)) {
+      result = result.filter((i: any) => i[filterKey] && toLower(i[filterKey]).includes(toLower(filterNew[filterKey])));
+    }
+    setFilter(filterNew);
+    if (Object.keys(filterNew).length === 0) {
+      setFilterRows(result);
+    } else {
+      setFilterRows(rows);
+    }
+  };
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -148,27 +224,34 @@ export default function ICustomTable({ data }: { data: IData<IProduct> | IData<I
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-  const renderButton = (column: IColumn) => {
+  const renderButton = (column: IColumn, row: any) => {
+    const editAction = column.actions?.find((i) => i.action === "edit");
+    const deleteAction = column.actions?.find((i) => i.action === "delete");
     return (
-      <Stack direction="row" spacing={1}>
-        {column.actions?.includes("edit") ? (
-          <IconButton aria-label="edit item" style={{ color: theme.color }}>
-            <ModeEditOutlineSharpIcon />
-          </IconButton>
+      <Stack direction="row" spacing={0}>
+        {editAction ? (
+          <Link to={editAction.path + `/${row.id}`}>
+            <IconButton aria-label="edit item" style={{ color: theme.color }}>
+              <ModeEditOutlineSharpIcon />
+            </IconButton>
+          </Link>
         ) : (
           <></>
         )}
 
-        {column.actions?.includes("delete") ? (
-          <IconButton aria-label="delete item" style={{ color: theme.color }}>
-            <DeleteIcon />
-          </IconButton>
+        {deleteAction ? (
+          <Link to={deleteAction.path}>
+            <IconButton aria-label="delete item" style={{ color: theme.color }}>
+              <DeleteIcon />
+            </IconButton>
+          </Link>
         ) : (
           <></>
         )}
       </Stack>
     );
   };
+  console.log("s", filterRows, rows);
 
   return (
     <Paper
@@ -178,10 +261,18 @@ export default function ICustomTable({ data }: { data: IData<IProduct> | IData<I
     >
       <TableContainer>
         <Table stickyHeader aria-label="sticky table">
-          <EnhancedTableHead order={order} orderBy={orderBy} onRequestSort={handleRequestSort} headCells={columns} />
+          <EnhancedTableHead
+            onFilter={onFilter}
+            onRefreshFilter={onRefreshFilter}
+            isHasSearch={isHasSearch}
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={handleRequestSort}
+            headCells={columns}
+          />
           <TableBody className="h-full">
             {isHasSort && defaultOrderPass
-              ? stableSort(rows as any, getComparator(order, orderBy))
+              ? stableSort(filterRows as any, getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
@@ -196,11 +287,13 @@ export default function ICustomTable({ data }: { data: IData<IProduct> | IData<I
                                 backgroundColor: theme.backgroundColor,
                                 color: theme.color,
                                 minWidth: column.minWidth,
+                                wordBreak: "break-all",
+                                width: column.minWidth,
                                 border: "0px",
                               }}
                             >
                               {column.id === "action"
-                                ? renderButton(column)
+                                ? renderButton(column, row)
                                 : column.format
                                 ? column.format(value)
                                 : value}
@@ -210,7 +303,7 @@ export default function ICustomTable({ data }: { data: IData<IProduct> | IData<I
                       </TableRow>
                     );
                   })
-              : rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+              : filterRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                   return (
                     <TableRow className="h-full" hover role="checkbox" tabIndex={-1} key={row.id}>
                       {columns.map((column) => {
@@ -223,11 +316,13 @@ export default function ICustomTable({ data }: { data: IData<IProduct> | IData<I
                               backgroundColor: theme.backgroundColor,
                               color: theme.color,
                               minWidth: column.minWidth,
+                              wordBreak: "break-all",
+                              width: column.minWidth,
                               border: "0px",
                             }}
                           >
                             {column.id === "action"
-                              ? renderButton(column)
+                              ? renderButton(column, row)
                               : column.format
                               ? column.format(value)
                               : value}
@@ -253,7 +348,7 @@ export default function ICustomTable({ data }: { data: IData<IProduct> | IData<I
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rows.length}
+          count={filterRows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

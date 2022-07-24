@@ -25,32 +25,34 @@ const getStaff = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       // get api here
-      const res = await StaffService.getItemById(id);
-      if (res.status === 200) {
-        // const listStaff = await StaffService.handleStaff(res);
-        const user = await StaffService.handleStaff(null);
-        dispatch({
-          type: SET_STAFF,
-          user: user,
-        });
-      }
+      const listStaff = StaffService.handleStaff(null);
+      const staff = listStaff.find((i) => i.id === id);
+      // const res = await StaffService.getItemById(id);
+      // if (res.status === 200) {
+      //   // const listStaff = await StaffService.handleStaff(res);
+      //   const staff = await StaffService.handleStaff(null);
+      dispatch({
+        type: SET_STAFF,
+        staff: staff,
+      });
+      // }
     } catch (errors) {
       console.log("errors", errors);
     }
   };
 };
 
-const updateStaff = (user: IStaff) => {
+const updateStaff = (staff: IStaff) => {
   return async (dispatch: Dispatch) => {
     try {
       // get api here
-      const res = await StaffService.updateItem(user);
+      const res = await StaffService.updateItem(staff);
       if (res.status === 200) {
         // const listStaff = await StaffService.handleStaff(res);
-        const user = await StaffService.handleStaff(null);
+        const staff = await StaffService.handleStaff(null);
         dispatch({
           type: UPDATE_STAFF,
-          user: user,
+          staff: staff,
         });
       }
     } catch (errors) {

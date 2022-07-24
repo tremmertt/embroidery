@@ -1,9 +1,25 @@
 /* eslint-disable no-useless-constructor */
 import { BaseService } from "./AuthService";
+import tempListProduct from "./data/product.json";
+export interface ITypeProduct {
+  type: string;
+  path: string;
+}
+export interface ISize {
+  width: number;
+  height: number;
+  length: number;
+}
 
 export interface IProduct {
-  id: string;
+  id: number;
   name: string;
+  category: string;
+  content: string;
+  size: ISize;
+  listTypeProduct: ITypeProduct[];
+  price: string;
+  listColor: string[];
 }
 
 export default class ProductService {
@@ -27,17 +43,23 @@ export default class ProductService {
     return await BaseService.delete(`products/${id}`);
   };
 
-  static createTempData = (id: string, name: string) => {
-    return { id, name };
-  };
-
   static handleProduct = (res: any): IProduct[] => {
     // if (res && res.data) {
     // return [];
     // }
-    return [
-      ProductService.createTempData("tramyeudi", "San pham 1"),
-      ProductService.createTempData("diyeutram", "San pham 2"),
-    ];
+    return tempListProduct.map((i: any) => ({
+      id: i.id,
+      name: i.name,
+      category: i.category,
+      content: i.content,
+      size: {
+        height: i.size.height,
+        width: i.size.width,
+        length: i.size.length,
+      },
+      listTypeProduct: i.listTypeProduct,
+      price: i.price,
+      listColor: i.listColor,
+    })) as IProduct[];
   };
 }

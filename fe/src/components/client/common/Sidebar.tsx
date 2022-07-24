@@ -12,27 +12,25 @@ import FitScreenSharpIcon from "@mui/icons-material/FitScreenSharp";
 import SupervisorAccountSharpIcon from "@mui/icons-material/SupervisorAccountSharp";
 import PermIdentitySharpIcon from "@mui/icons-material/PermIdentitySharp";
 import InventorySharpIcon from "@mui/icons-material/InventorySharp";
-import AgencyImage from "../../../assets/icon/voucher.png";
+import DiscountIcon from "@mui/icons-material/Discount";
+import { useTranslation } from "react-i18next";
 
 export default function Sidebar() {
   const { theme, toggle, dark } = useContext(ThemeCustomContext);
+  const { t } = useTranslation();
   const headers = [
     {
       title: "ADMIN LAYOUT PAGES",
       child: [
-        { title: "Dashboard", icon: <FitScreenSharpIcon />, path: "/admin" },
-        { title: "Order", icon: <BorderColorSharpIcon />, path: "/admin/orders" },
-        { title: "Customer", icon: <PermIdentitySharpIcon />, path: "/admin/customers" },
-        { title: "Staff", icon: <SupervisorAccountSharpIcon />, path: "/admin/staffs" },
-        { title: "Product", icon: <InventorySharpIcon />, path: "/admin/products" },
-        {
-          title: "Agency",
-          icon: <img width="24" src={AgencyImage} alt="agency icon" loading="lazy" />,
-          path: "/admin/agencies",
-        },
-        { title: "Profile", icon: <PersonSharpIcon />, path: "/admin/profile" },
-        { title: "Setting", icon: <SettingsSuggestSharpIcon />, path: "/admin/setting" },
-        { title: "Authenticate", icon: <KeySharpIcon />, path: "/signin" },
+        { title: t("dashboard.Dashboard"), icon: <FitScreenSharpIcon />, path: "/admin" },
+        { title: t("order.Order"), icon: <BorderColorSharpIcon />, path: "/admin/orders" },
+        { title: t("customer.Customer"), icon: <PermIdentitySharpIcon />, path: "/admin/customers" },
+        { title: t("staff.Staff"), icon: <SupervisorAccountSharpIcon />, path: "/admin/staffs" },
+        { title: t("product.Product"), icon: <InventorySharpIcon />, path: "/admin/products" },
+        { title: t("agency.Voucher"), icon: <DiscountIcon />, path: "/admin/agencies" },
+        { title: t("profile.Profile"), icon: <PersonSharpIcon />, path: "/admin/profile" },
+        { title: t("setting.Setting"), icon: <SettingsSuggestSharpIcon />, path: "/admin/setting" },
+        { title: t("auth.Authenticate"), icon: <KeySharpIcon />, path: "/signin" },
       ],
     },
   ];
