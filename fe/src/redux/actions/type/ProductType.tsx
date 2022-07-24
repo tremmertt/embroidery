@@ -1,0 +1,4 @@
+export const SET_LIST_PRODUCT = "SET_LIST_PRODUCT";
+export const SET_PRODUCT = "SET_PRODUCT";
+export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
+export const DELETE_PRODUCT = "DELETE_PRODUCT";

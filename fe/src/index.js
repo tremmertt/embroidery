@@ -10,7 +10,7 @@ import { ThemeProvider } from "./settings/theme-context";
 
 ReactDOM.render(
   <ThemeProvider store={store}>
-    <App />
+    <App  />
   </ThemeProvider>,
   document.getElementById("root")
 );

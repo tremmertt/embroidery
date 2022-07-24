@@ -11,12 +11,14 @@ const AdminTemplate = (props: any) => {
   });
 
   return (
-    <Fragment>
-      <SideBar></SideBar>
-      <div className="relative md:ml-64 h-content pb-4" style={{ backgroundColor: theme.backgroundColorMint }}>
-        <Component />
-      </div>
-    </Fragment>
+    <div className="h-full">
+      <Fragment>
+        <SideBar></SideBar>
+        <div className="relative md:ml-64 h-content" style={{ backgroundColor: theme.backgroundColorMint }}>
+          <Component />
+        </div>
+      </Fragment>
+    </div>
   );
 };
 

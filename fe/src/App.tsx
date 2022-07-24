@@ -10,16 +10,20 @@ import CartPage from "./pages/client/CartPage";
 import HistoryPage from "./pages/client/HistoryPage";
 import ContactPage from "./pages/client/ContactPage";
 
-import DashBoardPage from "./pages/admin/DashBoardPage";
-import SettingPage from "./pages/admin/SettingPage";
-import ProfilePage from "./pages/admin/ProfilePage";
-import SigninPage from "./pages/admin/SigninPage";
-import OrderList from "./pages/admin/OrderList";
-import CustomerList from "./pages/admin/CustomerList";
-import UserList from "./pages/admin/UserList";
+import DashBoardPage from "./pages/admin/dashboard/DashBoardPage";
+import SettingPage from "./pages/admin/setting/SettingPage";
+import ProfilePage from "./pages/admin/profile/ProfilePage";
+import SigninPage from "./pages/admin/auth/SigninPage";
+import OrderListPage from "./pages/admin/order/OrderListPage";
+import StaffListPage from "./pages/admin/staff/StaffListPage";
+import CreateStaffPage from "./pages/admin/staff/CreateStaffPage";
+import ProductListPage from "./pages/admin/product/ProductListPage";
+import CustomerListPage from "./pages/admin/customer/CustomerListPage";
+
 import ClientTemplate from "./templates/ClientTemplate";
 import AdminTemplate from "./templates/AdminTemplate";
 import { useLayoutEffect, useState } from "react";
+
 // https://mui.com/material-ui/material-icons/?theme=Sharp&query=user
 
 export const history = createBrowserHistory();
@@ -41,16 +45,20 @@ function App() {
       {/* <ScrollToTop> */}
 
       <Routes>
+        {/* client */}
         <Route path="/" element={<ClientTemplate Component={HomePage} />} />
         <Route path="/product" element={<ClientTemplate Component={ProductPage} />} />
         <Route path="/cart" element={<ClientTemplate Component={CartPage} />} />
         <Route path="/history" element={<ClientTemplate Component={HistoryPage} />} />
         <Route path="/contact" element={<ClientTemplate Component={ContactPage} />} />
 
+        {/* admin */}
         <Route path="/admin" element={<AdminTemplate Component={DashBoardPage} />} />
-        <Route path="/admin/orders" element={<AdminTemplate Component={OrderList} />} />
-        <Route path="/admin/customers" element={<AdminTemplate Component={CustomerList} />} />
-        <Route path="/admin/users" element={<AdminTemplate Component={UserList} />} />
+        <Route path="/admin/orders" element={<AdminTemplate Component={OrderListPage} />} />
+        <Route path="/admin/customers" element={<AdminTemplate Component={CustomerListPage} />} />
+        <Route path="/admin/staffs" element={<AdminTemplate Component={StaffListPage} />} />
+        <Route path="/admin/staffs/create" element={<AdminTemplate Component={CreateStaffPage} />} />
+        <Route path="/admin/products" element={<AdminTemplate Component={ProductListPage} />} />
         <Route path="/admin/setting" element={<AdminTemplate Component={SettingPage} />} />
         <Route path="/admin/profile" element={<AdminTemplate Component={ProfilePage} />} />
         <Route path="/signin" element={<AdminTemplate Component={SigninPage} />} />
