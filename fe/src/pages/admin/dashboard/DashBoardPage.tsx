@@ -1,15 +1,16 @@
 import { useContext, useEffect } from "react";
-import EBreadcrumb from "../../components/admin/common/EBreadcrumb";
-import { ThemeCustomContext } from "../../settings/theme-context";
+import EBreadcrumb from "../../../components/admin/common/EBreadcrumb";
+import { ThemeCustomContext } from "../../../settings/theme-context";
 import ShieldMoonSharpIcon from "@mui/icons-material/ShieldMoonSharp";
-import ICustomTable, { IColumn } from "../../components/table/ICustomTable";
+import ICustomTable, { IColumn, IData } from "../../../components/table/ICustomTable";
 import moment from "moment-timezone";
 import { useDispatch, useSelector } from "react-redux";
-import { IRootState } from "../../redux/configStore";
-import UserAction from "../../redux/actions/UserAction";
+import { IRootState } from "../../../redux/configStore";
+import StaffAction from "../../../redux/actions/StaffAction";
+import { IStaff } from "../../../service/StaffService";
 
-export default function DashBoardPage() {
-  const { listUser } = useSelector((state: IRootState) => state.UserReducer);
+const DashBoardPage = () => {
+  const { listStaff } = useSelector((state: IRootState) => state.StaffReducer);
   const { theme } = useContext(ThemeCustomContext);
   const dispatch = useDispatch();
   const breadcrumbItems = [
@@ -19,7 +20,8 @@ export default function DashBoardPage() {
     },
   ];
 
-  const data = {
+  const data: IData<IStaff> = {
+    defaultOrder: "id",
     columns: [
       {
         id: "id",
@@ -62,15 +64,15 @@ export default function DashBoardPage() {
         format: (value: string) => moment(value).format("HH:mm YYYY-MM-DD"),
       },
     ] as IColumn[],
-    rows: listUser.slice(0, 2),
+    rows: listStaff.slice(0, 2),
   };
 
-  useEffect((listUser = UserAction.listUser()) => {
-    dispatch(listUser);
+  useEffect((listStaff = StaffAction.listStaff()) => {
+    dispatch(listStaff);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="relative w-full" style={{ backgroundColor: "transparent", color: theme.color }}>
+    <div className="relative w-full h-full" style={{ backgroundColor: "transparent", color: theme.color }}>
       <div className="sticky top-0 z-50">
         <EBreadcrumb breadcrumbItems={breadcrumbItems} title={"Dashboard"}></EBreadcrumb>
       </div>
@@ -177,4 +179,6 @@ export default function DashBoardPage() {
       </div>
     </div>
   );
-}
+};
+
+export default DashBoardPage;

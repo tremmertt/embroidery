@@ -31,7 +31,7 @@ export default function EBreadcrumb(props: any) {
             to={breadcrumbItems[index].path}
             className={"inline-flex items-center text-sm " + theme.textColorInactiveWithoutHoverAdmin}
           >
-            <span className={parseInt(index) === breadcrumbItems.length - 1 ? "font-medium" : "font-thin"}>
+            <span className={parseInt(index) === breadcrumbItems.length - 1 ? "font-bold" : "font-thin"}>
               {breadcrumbItems[index].name}
             </span>
             {parseInt(index) === breadcrumbItems.length - 1 ? (
@@ -53,10 +53,10 @@ export default function EBreadcrumb(props: any) {
 
     return (
       <div style={isSticky ? { backdropFilter: "blur(8px)" } : {}}>
-        <nav className={"flex px-8 pb-2 py-2 " + (isSticky ? " pt-2" : " pt-6")} aria-label="Breadcrumb">
+        <nav className={"flex px-8 pb-2 py-4 " + (isSticky ? " pt-4" : " pt-6")} aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">{rows}</ol>
         </nav>
-        <div className="px-8 font-bold text-2xl z-50">{title}</div>
+        <div className="px-8 font-bold text-3xl z-50">{title}</div>
       </div>
     );
   };

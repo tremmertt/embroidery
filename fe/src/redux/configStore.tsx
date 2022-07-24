@@ -3,13 +3,13 @@ import thunk from "redux-thunk";
 import { LoadingReducer } from "./reducers/LoadingReducer";
 import { TemplateReducer } from "./reducers/TemplateReducer";
 import { ProductReducer } from "./reducers/ProductReducer";
-import { UserReducer } from "./reducers/UserReducer";
+import { StaffReducer } from "./reducers/StaffReducer";
 
 const rootReducer = combineReducers({
   TemplateReducer,
   LoadingReducer,
   ProductReducer,
-  UserReducer,
+  StaffReducer,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));

@@ -3,7 +3,7 @@ import React from "react";
 export default function FooterSearch() {
   return (
     <div className=" container mx-auto h-auto py-10">
-      <div className="flex justify-center max-w-full">
+      <div className="flex justify-center w-full">
         <form>
           <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">
             Search
@@ -28,8 +28,7 @@ export default function FooterSearch() {
             <input
               type="search"
               id="default-search"
-              style={{ width: "500px" }}
-              className="block p-4 pl-10 text-sm outline-yellow-400 text-white bg-white rounded-lg border border-yellow-300 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-white dark:border-yellow-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+              className="xs:w-50 md:w-80 block p-4 pl-10 text-sm outline-yellow-400 text-white bg-white rounded-lg border border-yellow-300 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-white dark:border-yellow-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
               placeholder="Search"
               required
             />
