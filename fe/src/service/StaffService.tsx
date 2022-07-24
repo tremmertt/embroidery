@@ -7,7 +7,7 @@ export interface IStaff {
   name: string;
   email: string;
   phone: string;
-  role: "admin" | "staff";
+  role: "admin" | "user";
   ipAddress: string;
   lastTimeUsing?: string;
 }
@@ -38,7 +38,7 @@ export default class StaffService {
     name: string,
     email: string,
     phone: string,
-    role: "admin" | "staff",
+    role: "admin" | "user",
     ipAddress: string,
     lastTimeUsing: string
   ) => {
@@ -64,7 +64,7 @@ export default class StaffService {
         "Be Tram cute cua Di",
         "tram.nh2503@gmail.com",
         "0793335049",
-        "staff",
+        "user",
         "12.34.25.2",
         new Date().toISOString()
       ),
@@ -75,7 +75,7 @@ export default class StaffService {
             name: i.name,
             email: i.email,
             phone: i.phone.toString(),
-            role: i.role === "admin" ? "admin" : "staff",
+            role: i.role === "admin" ? "admin" : "user",
             ipAddress: i.ipAddress,
             lastTimeUsing: i.lastTimeUsing,
           } as IStaff;

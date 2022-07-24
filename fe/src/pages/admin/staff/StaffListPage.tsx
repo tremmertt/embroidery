@@ -9,19 +9,21 @@ import moment from "moment-timezone";
 import { IRootState } from "../../../redux/configStore";
 import { IStaff } from "../../../service/StaffService";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const StaffListPage = () => {
   const dispatch = useDispatch();
   const { theme } = useContext(ThemeCustomContext);
   const { listStaff } = useSelector((state: IRootState) => state.StaffReducer);
+  const { t } = useTranslation();
 
   const breadcrumbItems = [
     {
-      name: "Home",
+      name: t("Home"),
       path: "/admin",
     },
     {
-      name: "Staff List",
+      name: t("staff.StaffList"),
       path: "/admin/staffs",
     },
   ];
@@ -40,17 +42,17 @@ const StaffListPage = () => {
       {
         id: "name",
         label: "Name",
-        minWidth: "20%",
+        minWidth: 120,
         align: "left",
         alignHeader: "center",
         sortable: true,
       },
-      { id: "email", label: "Email", minWidth: 170, align: "center", alignHeader: "center", sortable: false },
+      { id: "email", label: "Email", minWidth: 200, align: "center", alignHeader: "center", sortable: false },
       { id: "phone", label: "Phone", minWidth: 170, align: "center", alignHeader: "center", sortable: false },
       {
         id: "role",
         label: "Role",
-        minWidth: "10%",
+        minWidth: 100,
         align: "center",
         alignHeader: "center",
         format: (value: string) => value.toUpperCase(),
@@ -59,7 +61,7 @@ const StaffListPage = () => {
       {
         id: "ipAddress",
         label: "IP Address",
-        minWidth: "10%",
+        minWidth: 140,
         align: "center",
         format: (value: string) => value,
         alignHeader: "center",
@@ -68,7 +70,7 @@ const StaffListPage = () => {
       {
         id: "lastTimeUsing",
         label: "Last Time Login",
-        minWidth: "15%",
+        minWidth: 200,
         align: "center",
         alignHeader: "center",
         format: (value: string) => moment(new Date(value)).format("HH:mm YYYY-MM-DD"),
@@ -77,10 +79,13 @@ const StaffListPage = () => {
       {
         id: "action",
         label: "",
-        minWidth: "15%",
+        minWidth: 50,
         align: "center",
         alignHeader: "center",
-        actions: ["edit", "delete"],
+        actions: [
+          { action: "edit", path: "/admin/staffs/edit" },
+          { action: "delete", path: "#" },
+        ],
       },
     ] as IColumn[],
     rows: listStaff.map((i: IStaff, index: number) => ({ ...i, no: index + 1 })) as IStaff[],
@@ -94,13 +99,13 @@ const StaffListPage = () => {
     <div className="relative w-full pb-4" style={{ backgroundColor: "transparent", color: theme.color }}>
       <div className="sticky top-0 z-50">
         {" "}
-        <EBreadcrumb breadcrumbItems={breadcrumbItems} title={"Staff List"} />
+        <EBreadcrumb breadcrumbItems={breadcrumbItems} title={t("staff.StaffList")} />
       </div>
       <div className="grid grid-cols-1 gap-4 m-6 mt-2 p-2">
         <div className="flex flex-row justify-start items-center w-content">
           <Link to="/admin/staffs/create">
             <Button className="mr-4 elevation-1" variant="contained" disableRipple>
-              Create
+              {t("action.CreateNew")}
             </Button>
           </Link>
           {/* <Button variant="contained" href="#contained-buttons">

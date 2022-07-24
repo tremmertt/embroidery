@@ -3,6 +3,7 @@ import { IStaff } from "../../service/StaffService";
 
 export interface IStateStaff {
   listStaff: IStaff[];
+  selectedStaff?: IStaff;
 }
 
 const stateDefault: IStateStaff = {
@@ -20,6 +21,7 @@ export const StaffReducer = (state = stateDefault, action: any) => {
       if (!state.listStaff.find((i) => i.id === staff.id)) {
         state.listStaff.push(staff);
       }
+      state.selectedStaff = JSON.parse(JSON.stringify(staff));
       return { ...state };
     }
     case UPDATE_STAFF: {
@@ -28,6 +30,7 @@ export const StaffReducer = (state = stateDefault, action: any) => {
       if (stateStaff) {
         stateStaff = { ...staff };
       }
+      state.selectedStaff = staff;
       return { ...state };
     }
     case DELETE_STAFF: {
@@ -35,6 +38,7 @@ export const StaffReducer = (state = stateDefault, action: any) => {
       if (index !== -1) {
         state.listStaff.splice(index, 1);
       }
+      state.selectedStaff = undefined;
       return { ...state };
     }
     default:

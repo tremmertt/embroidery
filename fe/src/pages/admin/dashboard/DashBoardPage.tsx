@@ -8,14 +8,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../../redux/configStore";
 import StaffAction from "../../../redux/actions/StaffAction";
 import { IStaff } from "../../../service/StaffService";
+import { useTranslation } from "react-i18next";
 
 const DashBoardPage = () => {
+  const { t } = useTranslation();
   const { listStaff } = useSelector((state: IRootState) => state.StaffReducer);
   const { theme } = useContext(ThemeCustomContext);
   const dispatch = useDispatch();
   const breadcrumbItems = [
     {
-      name: "Home",
+      name: t("Home"),
       path: "/admin",
     },
   ];
@@ -74,7 +76,7 @@ const DashBoardPage = () => {
   return (
     <div className="relative w-full h-full" style={{ backgroundColor: "transparent", color: theme.color }}>
       <div className="sticky top-0 z-50">
-        <EBreadcrumb breadcrumbItems={breadcrumbItems} title={"Dashboard"}></EBreadcrumb>
+        <EBreadcrumb breadcrumbItems={breadcrumbItems} title={t("dashboard.Dashboard")}></EBreadcrumb>
       </div>
       <div className="grid grid-cols-3 gap-4 m-6 p-2">
         {/* Table 1 */}

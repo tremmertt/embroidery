@@ -1,0 +1,45 @@
+{
+    "action": {
+        "Create": "Tạo",
+        "CreateNew": "Tạo mới",
+        "Edit": "Cập nhật"
+    },
+    "Home": "Trang chủ",
+    "order": {
+        "Order": "Đơn hàng",
+        "OrderList": "Danh sách đơn hàng"
+    },
+    "customer": {
+        "Customer": "Khách hàng",
+        "CustomerList": "Danh sách khách hàng"
+    },
+    "staff": {
+        "Staff": "Nhân viên",
+        "StaffList": "Danh sách nhân viên",
+        "CreateStaff": "Tạo nhân viên",
+        "EditStaff": "Cập nhật nhân viên"
+    },
+    "agency": {
+        "Voucher": "Voucher",
+        "Agency": "Đại lý",
+        "AgencyList": "Danh sách đại lý"
+    },
+    "product": {
+        "Product": "Sản phẩm",
+        "ProductList": "Danh sách sản phẩm"
+    },
+    "dashboard": {
+        "Dashboard": "Tổng quát"
+    },
+    "profile": {
+        "Profile": "Thông tin cá nhân"
+    },
+    "setting": {
+        "Setting": "Cài đặt"
+    },
+    "auth": {
+        "Authenticate": "Ủy quyền",
+        "SignIn": "Đăng nhập",
+        "SignUp": "Đăng kí"
+    }
+}

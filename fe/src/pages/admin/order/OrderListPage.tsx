@@ -1,16 +1,18 @@
 import React, { useContext } from "react";
 import EBreadcrumb from "../../../components/admin/common/EBreadcrumb";
 import { ThemeCustomContext } from "../../../settings/theme-context";
+import { useTranslation } from "react-i18next";
 
 export default function OrderListPage() {
   const { theme } = useContext(ThemeCustomContext);
+  const { t } = useTranslation();
   const breadcrumbItems = [
     {
-      name: "Home",
+      name: t("Home"),
       path: "/admin",
     },
     {
-      name: "Order List",
+      name: t("order.OrderList"),
       path: "/admin/orders",
     },
   ];
@@ -18,7 +20,7 @@ export default function OrderListPage() {
   return (
     <div className="w-full" style={{ backgroundColor: "transparent", color: theme.color }}>
       <div className="sticky top-0 z-50">
-        <EBreadcrumb breadcrumbItems={breadcrumbItems} title={"Order List"} />
+        <EBreadcrumb breadcrumbItems={breadcrumbItems} title={t("order.OrderList")} />
       </div>
       <div className="flex flex-row justify-center items-center">
         <div className="p-12 bg-blue-500">01</div>

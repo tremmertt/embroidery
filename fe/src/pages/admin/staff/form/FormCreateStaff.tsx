@@ -2,7 +2,7 @@ import { useForm, Controller } from "react-hook-form";
 import { Box, Button, Grid, TextField, MenuItem } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { ThemeCustomContext } from "../../../settings/theme-context";
+import { ThemeCustomContext } from "../../../../settings/theme-context";
 
 const myHelper = {
   email: {
@@ -33,7 +33,7 @@ export default function FormCreateUser() {
 
   const fixColum = (field: any, title: string, form: any) => {
     return (
-      <Grid container xs={12}>
+      <Grid container>
         <Grid item md={3}></Grid>
         <Grid item md={1} className="flex items-center justify-start font-bold" style={{ color: theme.color }}>
           {title}
