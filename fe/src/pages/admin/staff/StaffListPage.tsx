@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import EBreadcrumb from "../../../components/admin/common/EBreadcrumb";
 import ICustomTable, { IColumn, IData } from "../../../components/table/ICustomTable";
@@ -10,6 +10,7 @@ import { IRootState } from "../../../redux/configStore";
 import { IStaff } from "../../../service/StaffService";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import DialogRemoveStaff from "./dialog/DialogRemoveStaff";
 
 const StaffListPage = () => {
   const dispatch = useDispatch();
@@ -101,6 +102,7 @@ const StaffListPage = () => {
         {" "}
         <EBreadcrumb breadcrumbItems={breadcrumbItems} title={t("staff.StaffList")} />
       </div>
+
       <div className="grid grid-cols-1 gap-4 m-6 mt-2 p-2">
         <div className="flex flex-row justify-start items-center w-content">
           <Link to="/admin/staffs/create">

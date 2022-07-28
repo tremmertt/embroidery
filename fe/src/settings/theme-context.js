@@ -11,8 +11,8 @@ const themes = {
     color: "white",
     colorMint: "#6d6f75",
     dropShadow: "drop-shadow-[0_0px_0px_rgba(250,250,250,0.5)]",
-    textColorActiveWithHoverAdmin: "font-extrabold text-white-600",
-    textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-gray-500 hover:text-gray-300",
+    textColorActiveWithHoverAdmin: "font-extrabold text-[#fff]",
+    textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-gray-500 hover:text-gray-300 ",
     backgroundColorWithHover: "bg-[#111c44] hover:bg-[#152254]",
   },
   light: {
@@ -21,8 +21,8 @@ const themes = {
     color: "#1b254b",
     colorMint: "#6d6f75",
     dropShadow: "drop-shadow-[0_0px_0px_rgba(0,0,0,0.25)]",
-    textColorActiveWithHoverAdmin: "font-extrabold text-[#111c44]",
-    textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-[#111c44] hover:text-blue-600",
+    textColorActiveWithHoverAdmin: "font-extrabold text-[#1b254b]",
+    textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-[#6d6f75] hover:text-[#1b254b] ",
     backgroundColorWithHover: "bg-[#f4f7fe] hover:bg-[#e3e6ef]",
   },
 };
@@ -30,6 +30,7 @@ const themes = {
 const initialState = {
   dark: true,
   theme: themes.light,
+  direction: "rtl",
   toggle: () => {},
 };
 const ThemeCustomContext = React.createContext(initialState);

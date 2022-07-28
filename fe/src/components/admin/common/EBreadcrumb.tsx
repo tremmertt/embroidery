@@ -7,7 +7,7 @@ import { ThemeCustomContext } from "../../../settings/theme-context";
 import { i18n } from "../../../translations/i18n";
 import LanguageAction from "../../../redux/actions/LanguageAction";
 import ModeEditOutlineSharpIcon from "@mui/icons-material/ModeEditOutlineSharp";
-import Person from "@material-ui/icons/Person";
+import AccountMenu from "./AccountMenu";
 
 export default function EBreadcrumb(props: any) {
   const { breadcrumbItems, title } = props;
@@ -72,38 +72,14 @@ export default function EBreadcrumb(props: any) {
 
     return (
       <div style={isSticky ? { backdropFilter: "blur(8px)" } : {}}>
-        <nav className={"flex px-8 pb-2 py-4 " + (isSticky ? " pt-4" : " pt-6")} aria-label="Breadcrumb">
+        <nav className={"flex flex-row justify-between items-center px-8  pb-0 pt-2"} aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">{rows}</ol>
+          <div className="px-8 font-bold text-3xl z-50 pt-2 ">
+            <AccountMenu />
+          </div>
         </nav>
         <div className="flex flex-row justify-between items-center">
           <div className="px-8 font-bold text-3xl z-50">{title}</div>
-          <div className="px-8 font-bold text-3xl z-50">
-            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-              <Select
-                labelId="demo-select-small"
-                id="demo-select-small"
-                value={lang}
-                variant="standard"
-                onChange={handleOnChangeLanguage}
-              >
-                <MenuItem value={"vn"}>
-                  <IconButton aria-label="edit item" style={{ color: theme.color }}>
-                    <ModeEditOutlineSharpIcon />
-                  </IconButton>
-                  VietNam
-                </MenuItem>
-                <MenuItem value={"en"}>
-                  <IconButton aria-label="edit item" style={{ color: theme.color }}>
-                    <ModeEditOutlineSharpIcon />
-                  </IconButton>
-                  English
-                </MenuItem>
-              </Select>
-            </FormControl>
-            {/* <Button variant="contained" onClick={handleOnclick}>
-              Change Language
-            </Button> */}
-          </div>
         </div>
       </div>
     );

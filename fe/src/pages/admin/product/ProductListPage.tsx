@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import EBreadcrumb from "../../../components/admin/common/EBreadcrumb";
@@ -9,6 +9,7 @@ import { IProduct, ISize, ITypeProduct } from "../../../service/ProductService";
 import ProductAction from "../../../redux/actions/ProductAction";
 import { ThemeCustomContext } from "../../../settings/theme-context";
 import { useTranslation } from "react-i18next";
+import DialogRemoveProduct from "./dialog/DialogRemoveProduct";
 
 export default function ProductListPage() {
   const { theme } = useContext(ThemeCustomContext);
@@ -31,7 +32,7 @@ export default function ProductListPage() {
       {
         id: "no",
         label: "No",
-        minWidth: 60,
+        width: 60,
         align: "center",
         alignHeader: "center",
         sortable: false,
@@ -39,37 +40,41 @@ export default function ProductListPage() {
       {
         id: "name",
         label: "Name",
-        minWidth: 120,
+        width: 150,
+        minWidth: 150,
         align: "left",
         alignHeader: "center",
-        sortable: true,
+        placeholder: "ex: Tram...",
+        sortable: false,
         searchable: true,
       },
       {
         id: "category",
         label: "Category",
-        minWidth: 70,
+        width: 70,
         align: "left",
         alignHeader: "center",
-        sortable: true,
+        placeholder: "ex: Inter...",
+        sortable: false,
         searchable: true,
       },
       {
         id: "price",
         label: "Price",
-        minWidth: 50,
+        width: 50,
         align: "center",
         alignHeader: "center",
-        sortable: true,
+        placeholder: "ex: 80...",
+        sortable: false,
         searchable: true,
       },
       {
         id: "size",
         label: "Size",
-        minWidth: 100,
         width: 70,
         align: "center",
         alignHeader: "center",
+        placeholder: "ex: 70em,...",
         sortable: false,
         searchable: true,
         format: (value: ISize) => `[${value.length},${value.width},${value.height}]`,
@@ -78,37 +83,39 @@ export default function ProductListPage() {
         id: "listColor",
         label: "Color",
         width: 90,
-        minWidth: 90,
         align: "left",
         alignHeader: "center",
         sortable: false,
+        placeholder: "ex: red,...",
         searchable: true,
         format: (value: string[]) => value.join(","),
       },
       {
         id: "listTypeProduct",
         label: "Type",
-        minWidth: "10%",
+        width: 70,
         align: "left",
         alignHeader: "center",
         sortable: false,
+        placeholder: "ex: pdf, ttx,...",
         searchable: true,
         format: (value: ITypeProduct[]) => value.map((i) => `${i.type.split(".")[1]}`).join(","),
       },
       {
         id: "content",
         label: "Content",
-        minWidth: "10%",
+        width: 30,
         align: "left",
         alignHeader: "center",
         sortable: false,
-        searchable: true,
+        searchable: false,
+        placeholder: "",
       },
 
       {
         id: "action",
         label: "",
-        minWidth: 70,
+        width: 70,
         align: "center",
         alignHeader: "center",
         actions: [
@@ -124,11 +131,19 @@ export default function ProductListPage() {
     dispatch(listProduct);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false);
+  const removeComponent = {
+    DeleteComponent: <DialogRemoveProduct isOpen={isOpenDeleteDialog} setOpen={setIsOpenDeleteDialog} />,
+    isOpenDeleteDialog: isOpenDeleteDialog,
+    setIsOpenDeleteDialog: setIsOpenDeleteDialog,
+  };
+
   return (
     <div className="w-full py-4" style={{ backgroundColor: "transparent", color: theme.color }}>
       <div className="sticky top-0 z-50">
         <EBreadcrumb breadcrumbItems={breadcrumbItems} title={t("product.ProductList")} />
       </div>
+
       <div className="grid grid-cols-1 gap-4 m-6 mt-2 p-2">
         <div className="flex flex-row justify-start items-center w-content">
           <Link to="/admin/products/create">
@@ -145,7 +160,7 @@ export default function ProductListPage() {
           style={{ backgroundColor: theme.backgroundColor }}
         >
           <div className="w-full rounded-0">
-            <ICustomTable data={data}></ICustomTable>
+            <ICustomTable data={data} removeComponent={removeComponent}></ICustomTable>
           </div>
         </div>
       </div>
