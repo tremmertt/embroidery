@@ -40,6 +40,7 @@
     "auth": {
         "Authenticate": "Ủy quyền",
         "SignIn": "Đăng nhập",
-        "SignUp": "Đăng kí"
+        "SignUp": "Đăng kí",
+        "Logout": "Đăng xuất"
     }
 }

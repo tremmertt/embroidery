@@ -31,6 +31,7 @@ export interface IColumn {
   alignHeader?: "right" | "left" | "center";
   sortable?: boolean;
   searchable?: boolean;
+  placeholder?: string;
   format?: (value: string | number | undefined) => string;
   actions?: IActionTable[];
 }
@@ -132,7 +133,7 @@ function EnhancedTableHead<T>(props: EnhancedTableProps<T>) {
                   onKeyUp={(e) => handleFilter(e, headCell.id)}
                   className="h-12 py-2"
                   size="small"
-                  placeholder={headCell.id}
+                  placeholder={headCell.placeholder || headCell.id}
                   variant="outlined"
                   InputProps={{
                     style: {
@@ -156,7 +157,17 @@ function EnhancedTableHead<T>(props: EnhancedTableProps<T>) {
   );
 }
 
-export default function ICustomTable({ data }: { data: IData<IProduct> | IData<IStaff> }) {
+export default function ICustomTable({
+  data,
+  removeComponent,
+}: {
+  data: IData<IProduct> | IData<IStaff>;
+  removeComponent?: {
+    DeleteComponent: any;
+    isOpenDeleteDialog: boolean;
+    setIsOpenDeleteDialog: Function;
+  };
+}) {
   const { theme } = React.useContext(ThemeCustomContext);
   const { columns, rows, defaultOrder } = data;
   const [filterRows, setFilterRows] = React.useState<IProduct[] | IStaff[]>(rows);
@@ -224,9 +235,10 @@ export default function ICustomTable({ data }: { data: IData<IProduct> | IData<I
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-  const renderButton = (column: IColumn, row: any) => {
+  const renderButton = (column: IColumn, row: any, setIsOpenDeleteDialog?: Function) => {
     const editAction = column.actions?.find((i) => i.action === "edit");
     const deleteAction = column.actions?.find((i) => i.action === "delete");
+
     return (
       <Stack direction="row" spacing={0}>
         {editAction ? (
@@ -240,11 +252,11 @@ export default function ICustomTable({ data }: { data: IData<IProduct> | IData<I
         )}
 
         {deleteAction ? (
-          <Link to={deleteAction.path}>
+          <div onClick={() => (setIsOpenDeleteDialog ? setIsOpenDeleteDialog(true) : "")}>
             <IconButton aria-label="delete item" style={{ color: theme.color }}>
               <DeleteIcon />
             </IconButton>
-          </Link>
+          </div>
         ) : (
           <></>
         )}
@@ -252,13 +264,13 @@ export default function ICustomTable({ data }: { data: IData<IProduct> | IData<I
     );
   };
   console.log("s", filterRows, rows);
-
   return (
     <Paper
       elevation={0}
       style={{ backgroundColor: theme.backgroundColor, color: theme.color }}
       sx={{ width: "100%", overflow: "hidden" }}
     >
+      {removeComponent ? removeComponent.DeleteComponent : <></>}
       <TableContainer>
         <Table stickyHeader aria-label="sticky table">
           <EnhancedTableHead
@@ -293,7 +305,11 @@ export default function ICustomTable({ data }: { data: IData<IProduct> | IData<I
                               }}
                             >
                               {column.id === "action"
-                                ? renderButton(column, row)
+                                ? renderButton(
+                                    column,
+                                    row,
+                                    removeComponent ? removeComponent.setIsOpenDeleteDialog : () => {}
+                                  )
                                 : column.format
                                 ? column.format(value)
                                 : value}
@@ -322,7 +338,11 @@ export default function ICustomTable({ data }: { data: IData<IProduct> | IData<I
                             }}
                           >
                             {column.id === "action"
-                              ? renderButton(column, row)
+                              ? renderButton(
+                                  column,
+                                  row,
+                                  removeComponent ? removeComponent.setIsOpenDeleteDialog : () => {}
+                                )
                               : column.format
                               ? column.format(value)
                               : value}
