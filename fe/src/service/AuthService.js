@@ -25,13 +25,6 @@ export class BaseService {
   };
 
   static get = async (url) => {
-    console.log({
-      url: `${process.env.REACT_APP_API_URL}/${url}`,
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + process.env.TOKEN,
-      },
-    });
     return await BaseService.getInstance().get(`${process.env.REACT_APP_API_URL}/${url}`, {
       headers: {
         Authorization: "Bearer " + process.env.TOKEN,

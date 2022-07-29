@@ -1,7 +1,6 @@
 import { Fragment, useContext, useEffect, useState } from "react";
-import SideBar from "../components/client/common/Sidebar";
-import Drawer from "../components/client/common/Drawer";
 import { ThemeCustomContext } from "../settings/theme-context";
+import Drawer from "../components/client/common/Drawer";
 
 const AdminTemplate = (props: any) => {
   const { Component } = props;

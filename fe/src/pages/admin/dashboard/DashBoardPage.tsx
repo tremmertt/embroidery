@@ -9,7 +9,7 @@ import { IRootState } from "../../../redux/configStore";
 import StaffAction from "../../../redux/actions/StaffAction";
 import { IStaff } from "../../../service/StaffService";
 import { useTranslation } from "react-i18next";
-
+import useTitle from "../../../components/general/useTitle";
 const DashBoardPage = () => {
   const { t } = useTranslation();
   const { listStaff } = useSelector((state: IRootState) => state.StaffReducer);
@@ -69,6 +69,7 @@ const DashBoardPage = () => {
     rows: listStaff.slice(0, 2),
   };
 
+  useTitle(t("dashboard.Dashboard"));
   useEffect((listStaff = StaffAction.listStaff()) => {
     dispatch(listStaff);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

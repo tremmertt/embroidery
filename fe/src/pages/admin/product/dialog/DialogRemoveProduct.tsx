@@ -51,17 +51,14 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 export default function DialogRemoveProduct(props: { isOpen: boolean; setOpen: Function }) {
   const { isOpen, setOpen } = props;
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
+  const toggleOpen = () => {
+    setOpen(!isOpen);
   };
 
   return (
     <div>
-      <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={isOpen}>
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+      <BootstrapDialog onClose={toggleOpen} aria-labelledby="customized-dialog-title" open={isOpen}>
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={toggleOpen}>
           Remove Product
         </BootstrapDialogTitle>
         <DialogContent dividers>
@@ -79,7 +76,7 @@ export default function DialogRemoveProduct(props: { isOpen: boolean; setOpen: F
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={toggleOpen}>
             Save changes
           </Button>
         </DialogActions>

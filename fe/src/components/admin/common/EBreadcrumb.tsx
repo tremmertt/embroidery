@@ -1,29 +1,12 @@
-import { Button, FormControl, IconButton, InputLabel, MenuItem, Select } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { IRootState } from "../../../redux/configStore";
 import { ThemeCustomContext } from "../../../settings/theme-context";
-import { i18n } from "../../../translations/i18n";
-import LanguageAction from "../../../redux/actions/LanguageAction";
-import ModeEditOutlineSharpIcon from "@mui/icons-material/ModeEditOutlineSharp";
-import AccountMenu from "./AccountMenu";
+import AccountMenu from "./menu/AccountMenu";
+import LanguageMenu from "./menu/LanguageMenu";
 
 export default function EBreadcrumb(props: any) {
   const { breadcrumbItems, title } = props;
   const { theme } = useContext(ThemeCustomContext);
-  const dispatch = useDispatch();
-  const { lang } = useSelector((state: IRootState) => state.LanguageReducer);
-
-  const handleOnChangeLanguage = (e: any) => {
-    if (e.target.value) {
-      i18n.changeLanguage(e.target.value);
-      dispatch(LanguageAction.setLanguage(e.target.value));
-    }
-    e.preventDefault();
-  };
-
-  console.log("language", lang);
 
   // // Sticky Menu Area
   useEffect(() => {
@@ -74,8 +57,9 @@ export default function EBreadcrumb(props: any) {
       <div style={isSticky ? { backdropFilter: "blur(8px)" } : {}}>
         <nav className={"flex flex-row justify-between items-center px-8  pb-0 pt-2"} aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">{rows}</ol>
-          <div className="px-8 font-bold text-3xl z-50 pt-2 ">
+          <div className="px-8 font-bold text-3xl z-50 pt-2 flex flex-row">
             <AccountMenu />
+            <LanguageMenu />
           </div>
         </nav>
         <div className="flex flex-row justify-between items-center">

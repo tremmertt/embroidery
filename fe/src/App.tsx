@@ -15,18 +15,22 @@ import SettingPage from "./pages/admin/setting/SettingPage";
 import ProfilePage from "./pages/admin/profile/ProfilePage";
 import SigninPage from "./pages/admin/auth/SigninPage";
 import OrderListPage from "./pages/admin/order/OrderListPage";
+
 import StaffListPage from "./pages/admin/staff/StaffListPage";
 import CreateStaffPage from "./pages/admin/staff/CreateStaffPage";
 import EditStaffPage from "./pages/admin/staff/EditStaffPage";
+
 import ProductListPage from "./pages/admin/product/ProductListPage";
+import CreateProductPage from "./pages/admin/product/CreateProductPage";
+import EditProductPage from "./pages/admin/product/EditProductPage";
+
 import AgencyListPage from "./pages/admin/agency/AgencyListPage";
 import CustomerListPage from "./pages/admin/customer/CustomerListPage";
 
 import ClientTemplate from "./templates/ClientTemplate";
 import AdminTemplate from "./templates/AdminTemplate";
-import { useContext, useEffect, useLayoutEffect, useState } from "react";
+import { useContext, useLayoutEffect, useState } from "react";
 import { ThemeCustomContext } from "./settings/theme-context";
-import { i18n } from "./translations/i18n";
 // https://mui.com/material-ui/material-icons/?theme=Sharp&query=user
 
 export const history = createBrowserHistory();
@@ -44,9 +48,6 @@ const CustomRouter: any = ({ history, ...props }: { history: any }) => {
 
 function App() {
   const { theme } = useContext(ThemeCustomContext);
-  useEffect(() => {
-    i18n.changeLanguage("en");
-  });
 
   return (
     <div
@@ -72,6 +73,8 @@ function App() {
           <Route path="/admin/staffs/create" element={<AdminTemplate Component={CreateStaffPage} />} />
           <Route path="/admin/staffs/edit/:id" element={<AdminTemplate Component={EditStaffPage} />} />
           <Route path="/admin/products" element={<AdminTemplate Component={ProductListPage} />} />
+          <Route path="/admin/products/create" element={<AdminTemplate Component={CreateProductPage} />} />
+          <Route path="/admin/products/edit/:id" element={<AdminTemplate Component={EditProductPage} />} />
           <Route path="/admin/agencies" element={<AdminTemplate Component={AgencyListPage} />} />
           <Route path="/admin/setting" element={<AdminTemplate Component={SettingPage} />} />
           <Route path="/admin/profile" element={<AdminTemplate Component={ProfilePage} />} />

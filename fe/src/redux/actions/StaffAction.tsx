@@ -16,7 +16,7 @@ const listStaff = () => {
       });
       // }
     } catch (errors) {
-      console.log("errors", errors);
+      console.error("errors", errors);
     }
   };
 };
@@ -37,7 +37,7 @@ const getStaff = (id: string) => {
       });
       // }
     } catch (errors) {
-      console.log("errors", errors);
+      console.error("errors", errors);
     }
   };
 };
@@ -56,7 +56,7 @@ const updateStaff = (staff: IStaff) => {
         });
       }
     } catch (errors) {
-      console.log("errors", errors);
+      console.error("errors", errors);
     }
   };
 };
@@ -74,7 +74,7 @@ const deleteStaff = (id: string) => {
         });
       }
     } catch (errors) {
-      console.log("errors", errors);
+      console.error("errors", errors);
     }
   };
 };

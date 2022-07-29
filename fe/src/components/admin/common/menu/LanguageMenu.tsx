@@ -3,23 +3,17 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
-import Logout from "@mui/icons-material/Logout";
-import { ThemeCustomContext } from "../../../settings/theme-context";
+import { ThemeCustomContext } from "../../../../settings/theme-context";
 import { useTranslation } from "react-i18next";
-import PersonSharpIcon from "@mui/icons-material/PersonSharp";
-import SettingsSuggestSharpIcon from "@mui/icons-material/SettingsSuggestSharp";
-import FitScreenSharpIcon from "@mui/icons-material/FitScreenSharp";
-import BorderColorSharpIcon from "@mui/icons-material/SupervisorAccountSharp";
-import { Link } from "react-router-dom";
-import { createStyles, makeStyles } from "@material-ui/core";
-import img from "../../../assets/avatar/20220606-201051.jpeg";
+import { makeStyles } from "@material-ui/core";
+import en from "../../../../assets/flag/en.png";
+import vn from "../../../../assets/flag/vn.png";
+import { useDispatch, useSelector } from "react-redux";
+import { i18n } from "../../../../translations/i18n";
+import { IRootState } from "../../../../redux/configStore";
+import LanguageAction from "../../../../redux/actions/LanguageAction";
 
 const useStyles = makeStyles((theme) => ({
   padding: {
@@ -28,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AccountMenu() {
+export default function LanguageMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { theme } = React.useContext(ThemeCustomContext);
   const { t } = useTranslation();
@@ -36,18 +30,16 @@ export default function AccountMenu() {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
+  const dispatch = useDispatch();
+  const handleOnChangeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+    dispatch(LanguageAction.setLanguage(lang));
+  };
+  const { lang } = useSelector((state: IRootState) => state.LanguageReducer);
   const selections = [
-    { title: t("profile.Profile"), icon: <PersonSharpIcon />, path: "/admin/profile" },
-    { title: t("setting.Setting"), icon: <SettingsSuggestSharpIcon />, path: "/admin/setting" },
-    { title: t("auth.Logout"), icon: <Logout />, path: "/logout" },
-  ];
-  const importantSelections = [
-    { title: t("dashboard.Dashboard"), icon: <FitScreenSharpIcon />, path: "/admin" },
-    { title: t("order.Order"), icon: <BorderColorSharpIcon />, path: "/admin/orders" },
+    { title: t("lang.English"), code: "en" },
+    { title: t("lang.Vietnamese"), code: "vn" },
   ];
   const classes = useStyles();
 
@@ -68,7 +60,7 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar alt="Remy Sharp" src={img} sx={{ width: 32, height: 32 }}></Avatar>
+            <Avatar alt="Remy Sharp" src={lang === "en" ? en : vn} sx={{ width: 32, height: 32 }}></Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -76,8 +68,8 @@ export default function AccountMenu() {
         anchorEl={anchorEl}
         id="account-menu"
         open={open}
-        onClose={handleClose}
-        onClick={handleClose}
+        onClose={() => setAnchorEl(null)}
+        onClick={() => setAnchorEl(null)}
         MenuListProps={{
           classes: { padding: classes.padding },
         }}
@@ -112,34 +104,17 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {importantSelections.map((i) => (
-          <Link to={i.path}>
-            <MenuItem
-              sx={{
-                padding: 1.2,
-                paddingLeft: 2.2,
-              }}
-            >
-              <ListItemIcon>{i.icon}</ListItemIcon>
-              <Typography classes={classes} className="p-5">
-                {i.title}
-              </Typography>
-            </MenuItem>
-          </Link>
-        ))}
-        <Divider />
         {selections.map((i) => (
-          <Link to={i.path}>
-            <MenuItem
-              sx={{
-                padding: 1.2,
-                paddingLeft: 2.2,
-              }}
-            >
-              <ListItemIcon>{i.icon}</ListItemIcon>
-              {i.title}
-            </MenuItem>
-          </Link>
+          <MenuItem
+            key={i.title}
+            sx={{
+              padding: 1.2,
+              paddingLeft: 2.2,
+            }}
+            onClick={() => handleOnChangeLanguage(i.code)}
+          >
+            {i.title}
+          </MenuItem>
         ))}{" "}
       </Menu>
     </React.Fragment>
