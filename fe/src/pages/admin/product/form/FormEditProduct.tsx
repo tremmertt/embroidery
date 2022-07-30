@@ -16,7 +16,7 @@ const myHelper = {
   },
 };
 
-export default function FormEditStaff(props: { staffItem: IStaff }) {
+export default function FormEditProduct(props: { staffItem: IStaff }) {
   const { theme } = useContext(ThemeCustomContext);
   const { control, reset, handleSubmit } = useForm({
     reValidateMode: "onBlur",
@@ -27,7 +27,7 @@ export default function FormEditStaff(props: { staffItem: IStaff }) {
 
   useEffect(() => {
     reset(props.staffItem);
-  }, [props.staffItem]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [props.staffItem]);
 
   const handleOnSubmit = (evt: any) => {
     console.log(evt);
@@ -178,7 +178,7 @@ export default function FormEditStaff(props: { staffItem: IStaff }) {
             </Grid>
             <Grid item xs={12}>
               <div className="flex flex-row justify-center items-center">
-                <Link to="/admin/staffs">
+                <Link to="/admin/products">
                   <Button
                     className="mr-4"
                     style={{

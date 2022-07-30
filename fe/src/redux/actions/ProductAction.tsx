@@ -16,7 +16,7 @@ const listProduct = () => {
       });
       // }
     } catch (errors) {
-      console.log("errors", errors);
+      console.error("errors", errors);
     }
   };
 };
@@ -35,7 +35,7 @@ const getProduct = (id: string) => {
         });
       }
     } catch (errors) {
-      console.log("errors", errors);
+      console.error("errors", errors);
     }
   };
 };
@@ -54,7 +54,7 @@ const updateProduct = (user: IProduct) => {
         });
       }
     } catch (errors) {
-      console.log("errors", errors);
+      console.error("errors", errors);
     }
   };
 };
@@ -72,7 +72,7 @@ const deleteProduct = (id: string) => {
         });
       }
     } catch (errors) {
-      console.log("errors", errors);
+      console.error("errors", errors);
     }
   };
 };

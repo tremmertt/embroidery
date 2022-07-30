@@ -2,10 +2,12 @@ import { useContext } from "react";
 import EBreadcrumb from "../../../components/admin/common/EBreadcrumb";
 import { ThemeCustomContext } from "../../../settings/theme-context";
 import { useTranslation } from "react-i18next";
+import useTitle from "../../../components/general/useTitle";
 
 export default function AgencyListPage() {
   const { theme } = useContext(ThemeCustomContext);
   const { t } = useTranslation();
+  useTitle(t("agency.AgencyList"));
   const breadcrumbItems = [
     {
       name: "Home",

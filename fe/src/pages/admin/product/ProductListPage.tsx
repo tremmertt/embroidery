@@ -119,7 +119,7 @@ export default function ProductListPage() {
         align: "center",
         alignHeader: "center",
         actions: [
-          { action: "edit", path: "/admin/product/edit" },
+          { action: "edit", path: "/admin/products/edit" },
           { action: "delete", path: "#" },
         ],
       },

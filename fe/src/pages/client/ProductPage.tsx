@@ -1,10 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-
 export default function ProductPage() {
   const { listProduct } = useSelector((state: any) => state.ProductReducer);
-  const dispatch = useDispatch();
 
   // const add = async () => {
   //   await productService.addItem({

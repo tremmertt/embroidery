@@ -1,22 +1,27 @@
 import { Button } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import EBreadcrumb from "../../../components/admin/common/EBreadcrumb";
-import ICustomTable, { IColumn, IData } from "../../../components/table/ICustomTable";
 import { ThemeCustomContext } from "../../../settings/theme-context";
-import StaffAction from "../../../redux/actions/StaffAction";
-import moment from "moment-timezone";
 import { IRootState } from "../../../redux/configStore";
 import { IStaff } from "../../../service/StaffService";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import DialogRemoveStaff from "./dialog/DialogRemoveStaff";
+import StaffAction from "../../../redux/actions/StaffAction";
+import moment from "moment-timezone";
+import useTitle from "../../../components/general/useTitle";
+import EBreadcrumb from "../../../components/admin/common/EBreadcrumb";
+import ICustomTable, { IColumn, IData } from "../../../components/table/ICustomTable";
 
 const StaffListPage = () => {
   const dispatch = useDispatch();
   const { theme } = useContext(ThemeCustomContext);
   const { listStaff } = useSelector((state: IRootState) => state.StaffReducer);
   const { t } = useTranslation();
+
+  useTitle(t("staff.StaffList"));
+  useEffect((listStaff = StaffAction.listStaff()) => {
+    dispatch(listStaff);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const breadcrumbItems = [
     {
@@ -91,10 +96,6 @@ const StaffListPage = () => {
     ] as IColumn[],
     rows: listStaff.map((i: IStaff, index: number) => ({ ...i, no: index + 1 })) as IStaff[],
   };
-
-  useEffect((listStaff = StaffAction.listStaff()) => {
-    dispatch(listStaff);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="relative w-full pb-4" style={{ backgroundColor: "transparent", color: theme.color }}>

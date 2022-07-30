@@ -131,7 +131,7 @@ function EnhancedTableHead<T>(props: EnhancedTableProps<T>) {
               !["id", "no", "action"].includes(headCell.id) && headCell.searchable ? (
                 <TextField
                   onKeyUp={(e) => handleFilter(e, headCell.id)}
-                  className="h-12 py-2"
+                  className="h-12 py-2 shadow-sm"
                   size="small"
                   placeholder={headCell.placeholder || headCell.id}
                   variant="outlined"
@@ -263,7 +263,6 @@ export default function ICustomTable({
       </Stack>
     );
   };
-  console.log("s", filterRows, rows);
   return (
     <Paper
       elevation={0}
