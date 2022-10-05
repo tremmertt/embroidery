@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-
-# app_name = "Emb"
+ 
 urlpatterns = [
     path("api/", include("modules.emboridery.urls")),
+    path("email/", include("modules.contact.urls")),
+    path("mailbox/", include("modules.django_mailbox.urls")),
     path("", admin.site.urls),
 ]

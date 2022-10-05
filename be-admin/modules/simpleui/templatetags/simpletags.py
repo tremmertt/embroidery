@@ -316,6 +316,9 @@ def get_icon(obj, name=None):
         "customer": "fas fa-user-group",
         "Customer": "fas fa-user-group",
         "Order": "fas fa-list",
+        "contact": "fas fa-message",  
+        "Email": "fas fa-inbox",
+        "Mailer": "fas fa-paper-plane",
     }
 
     temp = _dict.get(obj)

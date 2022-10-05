@@ -40,7 +40,6 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "modules.simpleui.apps.SimpleApp",
     "django.contrib.admin",
-    "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
@@ -49,7 +48,18 @@ INSTALLED_APPS = [
     "rest_framework",
     "import_export",
     "django_filters",
+    # emboridery service
     "modules.emboridery.apps.EmborideryConfig",
+    # auth service
+    # "django.contrib.auth",
+    "modules.auth_config.apps.CustomAuthConfig",
+    # email service
+    # "crispy_forms",
+    "modules.contact.apps.ContactConfig",
+    
+    # "modules.django_mailbox.apps.MailBoxConfig",
+    # 'social_django',
+    # 'social.apps.django_app.default'
 ]
 
 MIDDLEWARE = [
@@ -175,3 +185,13 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_USE_TLS = bool(os.getenv("EMAIL_USE_TLS"))
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=os.getenv("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=os.getenv("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
+
+DJANGO_MAILBOX_MAX_MESSAGE_SIZE=10
