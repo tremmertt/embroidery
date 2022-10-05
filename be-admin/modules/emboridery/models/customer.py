@@ -7,6 +7,7 @@ from django.db.models import JSONField
 
 
 class AccountLogin(models.Model):
+    
     id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False, unique=True
     )
@@ -27,6 +28,10 @@ class AccountLogin(models.Model):
 
 
 class Customer(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Customer'
+        
     id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False, unique=True
     )

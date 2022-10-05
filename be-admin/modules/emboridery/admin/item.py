@@ -4,27 +4,48 @@ from modules.emboridery.tabulars.item import ItemTabularInline
 
 from django.contrib import admin, messages
 from import_export.admin import ImportExportModelAdmin
-from modules.emboridery.models.order import Order
+from modules.emboridery.models.item import Item
 from django.utils.html import mark_safe
 from django import forms
 
-@admin.register(Order)
-class OrderAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = [
-        # "id",
-        "name",
-        "customer",
-        "assignee",
-        "total_item",
-        "time",
-        "state",
-    ]
-    inlines = (ItemTabularInline,)
-    # search_fields = ("name", "status")
-    list_filter = (FilterByStatus,)
 
-    def total_item(self, obj):
-        return len(obj.item_set.all())
+@admin.register(Item)
+class ItemAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    search_fields = ['order__name', ]
+    fields = (
+        "name",
+        "image",
+        "output_format",
+        "height",
+        "width",
+        "length",
+        "status",
+        "image_preview",
+    )
+
+    list_display = [
+        "name",
+        "image_preview", 
+        "order", 
+        "height",
+        "width",
+        "length",
+        "image",
+    ]
+
+    readonly_fields = ("image_preview", "time")
+
+    def image_preview(self, obj):
+        if obj.image:
+            return mark_safe(
+                '<img src="/{}" style="width:80px; height:80px;margin: auto !important;padding: auto;" />'.format(
+                    obj.image
+                )
+            )
+        return ""
+
+    image_preview.short_description = "Preview"
+    image_preview.allow_tags = True
 
     def time(self, obj):
         if obj.start_time.date() == obj.start_time.date():
@@ -49,9 +70,3 @@ class OrderAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
     state.short_description = "Status"
     state.allow_tags = True
-
-    class Media:
-        css = {"all": ("css/order-list.css",)}
-
-    # def h_w_l(self, obj):
-    #     return '{} - {} - {}'.format(str(obj.height), str(obj.width), str(obj.length))

@@ -5,6 +5,7 @@ from modules.emboridery.models.customer import Customer
 
 @admin.register(Customer)
 class CustomerAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+
     list_display = [
         # "id",
         "name",

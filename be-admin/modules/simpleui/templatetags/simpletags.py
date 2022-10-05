@@ -295,7 +295,7 @@ def handler_eid(data, eid):
     return eid
 
 
-def get_icon(obj, name=None):
+def get_icon(obj, name=None): 
     temp = get_config_icon(name)
     if temp != "":
         return temp
@@ -315,6 +315,8 @@ def get_icon(obj, name=None):
         "emboridery": "fas fa-desktop",
         "customer": "fas fa-user-group",
         "Customer": "fas fa-user-group",
+        "Sample": "fas fa-file",
+        "Item": "fas fa-table-list",
         "Order": "fas fa-list",
         "contact": "fas fa-message",  
         "Email": "fas fa-inbox",
@@ -522,8 +524,7 @@ def get_model_url(context):
         preserved_filters = preserved_filters["_changelist_filters"]
         url = add_preserved_filters(
             {"preserved_filters": preserved_filters, "opts": opts}, url
-        )
-    print("[URL] =>", url)
+        ) 
     return url
 
 

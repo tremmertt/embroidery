@@ -41,7 +41,9 @@ function Segment() {
 var segment = new Segment();
 
 function getIcon(name, icon) {
-    if(!name){
+    if (name == "Import") return 'fas fa-upload';
+    if (name == "Export") return 'fas fa-download';
+    if (!name) {
         return;
     }
     var value = 'far fa-circle';

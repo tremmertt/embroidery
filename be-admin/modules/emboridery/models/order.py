@@ -18,6 +18,10 @@ class OrderStatus(models.TextChoices):
 
 
 class Order(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Order'
+
     id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False, unique=True
     )

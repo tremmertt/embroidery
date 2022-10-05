@@ -327,6 +327,7 @@
                     item.icon = getIcon(item.name, item.icon);
 
                     if (item.models) {
+                        console.log('item.model')
                         item.models.forEach(mItem => {
                             mItem.icon = getIcon(mItem.name, mItem.icon);
                             self.menuData.push(mItem)
@@ -600,8 +601,8 @@
                     var isFullscreen = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
                     if (!isFullscreen) {//进入全屏,多重短路表达式
                         (el.requestFullscreen && el.requestFullscreen()) ||
-                        (el.mozRequestFullScreen && el.mozRequestFullScreen()) ||
-                        (el.webkitRequestFullscreen && el.webkitRequestFullscreen()) || (el.msRequestFullscreen && el.msRequestFullscreen());
+                            (el.mozRequestFullScreen && el.mozRequestFullScreen()) ||
+                            (el.webkitRequestFullscreen && el.webkitRequestFullscreen()) || (el.msRequestFullscreen && el.msRequestFullscreen());
                     }
                     this.zoom = true;
                 } else {
