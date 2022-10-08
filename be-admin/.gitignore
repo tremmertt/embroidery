@@ -3,6 +3,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+static/mailbox_attachments
+static/orders/*
+static/receipt/*
+static/item/*
+
 # C extensions
 *.so
 
