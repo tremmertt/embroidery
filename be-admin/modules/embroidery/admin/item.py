@@ -37,7 +37,7 @@ class ItemAdmin(ImportExportModelAdmin, admin.ModelAdmin):
         "quantity",
         "unit_price",
         "sub_total",
-        "image",
+        # "image",
     ]
 
     readonly_fields = ("image_preview", "time", "sub_total")

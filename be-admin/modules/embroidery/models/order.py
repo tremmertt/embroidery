@@ -41,7 +41,7 @@ class Order(models.Model):
     status = models.CharField(
         max_length=50, choices=OrderStatus.choices, default=OrderStatus.OPEN
     )
-    start_time = models.DateTimeField("Start", default=datetime.now, blank=True, null=True)
+    start_time = models.DateTimeField("Start", blank=True, null=True)
     end_time = models.DateTimeField("End", blank=True, null=True)
     customer = models.ForeignKey(
         Customer, blank=True, null=True, on_delete=models.CASCADE
@@ -53,7 +53,8 @@ class Order(models.Model):
     payment_method = models.CharField(
         max_length=50, choices=PaymentMethod.choices, default=PaymentMethod.CARD
     )
-    meta_data = JSONField("Note",default=dict, blank=True) 
+    receipt_pdf = models.FileField(null=True,blank=True,upload_to="static/receipt/pdf/")
+    meta_data = models.TextField("Note",default="", blank=True) 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

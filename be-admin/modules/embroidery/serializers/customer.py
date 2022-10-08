@@ -9,6 +9,7 @@ class CustomerSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "email",
-            "agency",
+            "phone_number",
+            "company",
             "address",
         ]

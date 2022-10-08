@@ -9,8 +9,7 @@ from django import forms
 class SampleAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     fields = (
         "name",
-        "image",
-        "output_format",
+        "image", 
         "height",
         "width",
         "length", 
@@ -19,11 +18,11 @@ class SampleAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
     list_display = [
         "name", 
+        "image_preview",
+        "image",
         "height",
         "width",
-        "length", 
-        "output_format",
-        "image_preview",
+        "length",  
     ]
 
     readonly_fields = ("image_preview", )
