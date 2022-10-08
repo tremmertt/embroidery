@@ -9,6 +9,12 @@
 /.pnp
 .pnp.js
 
+
+be-admin/static/mailbox_attachments
+be-admin/static/orders/*
+be-admin/static/receipt/*
+be-admin/static/item/*
+
 # testing
 /coverage
 
