@@ -19,6 +19,9 @@ class ItemAdmin(ImportExportModelAdmin, admin.ModelAdmin):
         "height",
         "width",
         "length",
+        "quantity",
+        "unit_price",
+        "sub_total",
         "status",
         "image_preview",
     )
@@ -30,10 +33,13 @@ class ItemAdmin(ImportExportModelAdmin, admin.ModelAdmin):
         "height",
         "width",
         "length",
+        "quantity",
+        "unit_price",
+        "sub_total",
         "image",
     ]
 
-    readonly_fields = ("image_preview", "time")
+    readonly_fields = ("image_preview", "time", "sub_total")
 
     def image_preview(self, obj):
         if obj.image:

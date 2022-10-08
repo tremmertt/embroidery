@@ -34,7 +34,6 @@
                     </el-select>
                     <el-button size="small" icon="fas fa-download" data-name="{{ field.0 }}">{{ field.1 }}</el-button>
                 {% else %}
-
                     <el-button v-if="customButton.{{ field.0 }}.layer" size="small"
                                :eid="customButton.{{ field.0 }}.eid"
                                :icon="customButton.{{ field.0 }}.icon" :style="customButton.{{ field.0 }}.style"

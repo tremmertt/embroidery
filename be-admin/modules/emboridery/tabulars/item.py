@@ -3,8 +3,8 @@ from django.utils.html import mark_safe
 
 from modules.emboridery.models.item import Item
 from modules.emboridery.forms.item import ItemInlineForm
-
-
+from modules.emboridery.forms.order import InvoiceItemInlineForm
+    
 class ItemTabularInline(admin.TabularInline):
     model = Item
     form = ItemInlineForm
@@ -17,6 +17,8 @@ class ItemTabularInline(admin.TabularInline):
         "width",
         "length",
         "status",
+        "quantity",
+        "unit_price",
         "image_preview",
     )
 

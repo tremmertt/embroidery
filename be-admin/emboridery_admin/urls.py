@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
  
 urlpatterns = [
-    path("api/", include("modules.emboridery.urls")),
+    path("emboridery/", include("modules.emboridery.urls")),
     path("email/", include("modules.contact.urls")),
     path("mailbox/", include("modules.django_mailbox.urls")),
     path("", admin.site.urls),

@@ -26,7 +26,6 @@ class OutputFormat(models.TextChoices):
     HUS = "HUS", _("HUS")
     ART = "ART", _("ART")
 
-
 class Item(models.Model):
 
     class Meta:
@@ -46,9 +45,15 @@ class Item(models.Model):
     status = models.CharField(
         max_length=50, choices=ItemStatus.choices, default=ItemStatus.OPEN
     )
-    start_time = models.DateTimeField("Start", default=datetime.now, blank=True)
-    end_time = models.DateTimeField("End", default=datetime.now, blank=True)
+    quantity = models.IntegerField(default=1)
+    unit_price = models.DecimalField(max_digits=6, decimal_places=2)  
     order = models.ForeignKey(Order, blank=True, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return "{}".format(self.name)
+
+    @property
+    def sub_total(self):
+        if self.quantity and self.unit_price:
+            return self.quantity * self.unit_price
+        return 0

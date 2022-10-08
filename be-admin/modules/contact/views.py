@@ -3,8 +3,6 @@ from .forms import ContactForm
 from django.urls import reverse_lazy
 
 # Create your views here.
-
-
 class ContactView(FormView):
     template_name = "contact/contact.html"
     form_class = ContactForm
