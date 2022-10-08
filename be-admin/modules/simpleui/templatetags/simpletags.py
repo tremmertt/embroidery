@@ -312,7 +312,7 @@ def get_icon(obj, name=None):
         "Spider": "fas fa-spider",
         "Brand": "fas fa-cloud",
         "Shop": "fas fa-shop",
-        "emboridery": "fas fa-desktop",
+        "embroidery": "fas fa-desktop",
         "customer": "fas fa-user-group",
         "Customer": "fas fa-user-group",
         "Sample": "fas fa-file",
