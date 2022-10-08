@@ -13,7 +13,7 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "..")
 )
 sys.path.append(os.path.dirname(os.path.abspath("")))
-os.environ["DJANGO_SETTINGS_MODULE"] = "emboridery_admin.settings"
+os.environ["DJANGO_SETTINGS_MODULE"] = "embroidery_admin.settings"
 
 django.setup()
 
