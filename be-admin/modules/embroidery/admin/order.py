@@ -40,6 +40,7 @@ class OrderAdmin(ImportExportModelAdmin, admin.ModelAdmin):
         "customer",
         "assignee",
         "total_item",
+        "created_at",
         "start_time",
         "end_time",
         "total_price",

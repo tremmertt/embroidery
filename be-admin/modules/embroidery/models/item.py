@@ -35,7 +35,7 @@ class Item(models.Model):
         primary_key=True, default=uuid.uuid4, editable=False, unique=True
     )
     name = models.CharField(max_length=256, blank=True)
-    image = models.ImageField(upload_to="static/item/")
+    image = models.ImageField(upload_to="static/item/", blank=True,null=True)
     height = models.FloatField("Height", default=0, blank=True)
     width = models.FloatField("Width", default=0, blank=True)
     length = models.FloatField("Length", default=0, blank=True)

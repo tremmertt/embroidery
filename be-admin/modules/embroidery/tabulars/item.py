@@ -2,8 +2,7 @@ from django.contrib import admin, messages
 from django.utils.html import mark_safe
 
 from modules.embroidery.models.item import Item
-from modules.embroidery.forms.item import ItemInlineForm
-from modules.embroidery.forms.order import InvoiceItemInlineForm
+from modules.embroidery.forms.item import ItemInlineForm 
     
 class ItemTabularInline(admin.TabularInline):
     model = Item
