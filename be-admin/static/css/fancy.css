@@ -1,0 +1,56 @@
+.column-crawl_url {
+  min-width: 20px !important;
+  max-width: 100px !important;
+  word-break: break-all;
+}
+
+th[class^="column"] {
+  text-align: center !important;
+}
+td[class^="field-is"] {
+  text-align: center !important;
+}
+.column-id{
+  max-width: 80px;
+} 
+
+.field-image{
+  min-width: 80px;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} 
+
+/* .field-height{
+  min-width: 90px;
+  max-width: 100px;
+}
+.field-width{
+  min-width: 90px;
+  max-width: 100px;
+}
+.field-length{
+  min-width: 90px;
+  max-width: 100px;
+} */
+
+.field-id {
+  max-width: 80px;
+}
+
+.field-state {
+  text-align: center !important;
+}
+
+.field-name {
+    /* min-width: 20px !important;
+    max-width: 250px !important;  */
+    /* overflow: hidden;
+    text-overflow: ellipsis; */
+}
+.field-crawl_url {
+  min-width: 20px !important;
+  max-width: 100px !important; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
