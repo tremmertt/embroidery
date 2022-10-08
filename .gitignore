@@ -1,5 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+/be-admin
+
 # dependencies
 /fe/node_modules
 /fe/dist
@@ -9,11 +11,6 @@
 /.pnp
 .pnp.js
 
-
-be-admin/static/mailbox_attachments
-be-admin/static/orders/*
-be-admin/static/receipt/*
-be-admin/static/item/*
 
 # testing
 /coverage

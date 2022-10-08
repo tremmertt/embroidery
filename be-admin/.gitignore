@@ -4,9 +4,9 @@ __pycache__/
 *$py.class
 
 static/mailbox_attachments
-static/orders/*
-static/receipt/*
-static/item/*
+static/orders
+static/receipt
+static/item
 
 # C extensions
 *.so
