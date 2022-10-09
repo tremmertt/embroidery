@@ -10,13 +10,13 @@ import FooterSearch from "../../components/client/home/FooterSearch";
 export default function HomePage() {
   return (
     <div>
-      <CarouselBanner />
-      <BestSeller />
+      {/* <CarouselBanner />
+      <BestSeller /> */}
       <Banner />
-      <Feature />
+      {/* <Feature />
       <LatestNews />
       <AnotherProduct />
-      <FooterSearch />
+      <FooterSearch /> */}
     </div>
   );
 }

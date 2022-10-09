@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
@@ -5,8 +6,8 @@ const Header = () => {
   return (
     <Fragment>
       <div className="mx-auto py-2 overflow-hidden">
-        <div className="flex flex-wrap justify-between container mx-auto">
-          <div className="flex">
+        {/* <div className="flex flex-wrap justify-between container mx-auto"> */}
+          {/* <div className="flex">
             <div className="flex pl-1">
               <h3> EN </h3>
               <svg
@@ -34,9 +35,9 @@ const Header = () => {
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </div>
-          </div>
-          <div className="flex justify-between">
-            <div className="flex mr-5">
+          </div> */}
+          {/* <div className="flex justify-between">
+            {/* <div className="flex mr-5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-auto w-4"
@@ -86,7 +87,7 @@ const Header = () => {
                 />
               </svg>
               <p> 0.00 </p>
-            </div>
+            </div> */}
             {/* <div className="flex mr-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -103,9 +104,9 @@ const Header = () => {
               />
             </svg>
           </div> */}
-          </div>
-        </div>
-        <header className="text-black body-font border-b-2 shadow-lg">
+          {/* </div> */}
+        {/* </div>  */}
+        {/* <header className="text-black body-font border-b-2 shadow-lg">
           <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
             <Link className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" to="#">
               <svg
@@ -122,29 +123,29 @@ const Header = () => {
               </svg>
               <span className="ml-3 text-xl">Logo</span>
             </Link>
-            <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center font-semibold">
+            <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-end font-semibold">
               <Link className="mr-5 hover:text-red-800" to="/">
                 Home
               </Link>
               <Link className="mr-5 hover:text-red-800" to="/product">
-                Embroidery
+                Our Purpose
               </Link>
               <Link className="mr-5 hover:text-red-800" to="/product">
-                Vector
+                Contact
               </Link>
               <Link className="mr-5 hover:text-red-800" to="/product">
                 Design
               </Link>
               <Link className="mr-5 hover:text-red-800" to="/contact">
-                Contact
+                Login
               </Link>
               {/* <Link className="mr-5 hover:text-red-800">Home </Link>
             <Link className="mr-5 hover:text-red-800"> Embroidery </Link>
             <Link className="mr-5 hover:text-red-800">Vector </Link>
             <Link className="mr-5 hover:text-red-800">Design </Link>
             <Link className="mr-5 hover:text-red-800">Contact</Link> */}
-            </nav>
-            <div className="flex justify-center">
+            {/* </nav> */}
+            {/* <div className="flex justify-center">
               <div className=" xl:w-96">
                 <div className="input-group relative flex  items-stretch w-full">
                   <input
@@ -177,65 +178,60 @@ const Header = () => {
                   </button>
                 </div>
               </div>
-            </div>
-          </div>
-        </header>
-        <nav className="navbar w-full bg-white">
-          <div className="container-lg px-0">
-            <div className="flex w-full items-center">
-              <Link className="nav-brand mr-auto ml-0" to="#">
-                Material Tailwind Navbar
-              </Link>
-              <button
-                navbar-trigger
-                className="navbar-trigger ml-auto mr-0 mb-0 lg:hidden xl:hidden"
-                type="button"
-                aria-controls="navigation"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
+            </div> */}
+          {/* </div> */}
+        {/* </header> */}
+        
+      
+
+    
+<nav className="bg-white border-white px-2 sm:px-4 py-2.5 rounded">
+  <div className="container flex flex-wrap justify-between items-center mx-auto">
+    <a href="https://flowbite.com/" className="flex items-center">
+    <Link className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" to="#">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                className="w-10 h-10 text-white p-2 bg-red-600 rounded-full"
+                viewBox="0 0 24 24"
               >
-                <span className="navbar-trigger-icon">
-                  <span className="navbar-trigger-bar mt-1">
-                    <span className="hidden origin-[10%_10%] rotate-45" />
-                  </span>
-                  <span className="bar2 navbar-trigger-bar mt-2" />
-                  <span className="bar3 navbar-trigger-bar mt-2">
-                    <span className="mt-mt-[0.4375rem] hidden origin-[10%_90%] -rotate-45" />
-                  </span>
-                </span>
-              </button>
-            </div>
-            <div className="collapse navbar-collapse" navbar-menu>
-              <ul className="navbar-nav">
-                <li>
-                  <Link className="nav-link" aria-current="page" to="#">
-                    <i className="material-icons mr-2 text-base opacity-60">article</i>
-                    <span>Documentation</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link className="nav-link" to="#">
-                    <i className="material-icons mr-2 text-base opacity-60">apps</i>
-                    <span>Components</span>
-                  </Link>
-                </li>
-                <li className="flex">
-                  <Link className="nav-link" to="#">
-                    <i className="material-icons mr-2 text-base opacity-60">view_carousel</i>
-                    <span>Templates</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link className="nav-link" to="#">
-                    <i className="fab fa-github mr-2 text-base opacity-60" />
-                    <span>Github</span>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+              <span className="ml-3 text-xl">Logo</span>
+            </Link>
+    </a>
+    <button data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-200 dark:text-red-400 dark:hover:bg-red-700 dark:focus:ring-red-600" aria-controls="navbar-default" aria-expanded="false">
+      <span className="sr-only">Open main menu</span>
+      <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" /></svg>
+    </button>
+    <div className="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul className="flex flex-col p-4 mt-4 border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white lg:text-lg">
+        <li>
+          <a href="#" className="block py-2 pr-4 pl-3 hover:font-semibold text-gray-700 hover:text-red-800" aria-current="page">HOME</a>
+        </li>
+        <li>
+          <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 hover:text-red-800">OUR PURPOSE</a>
+        </li>
+        <li>
+          <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 hover:text-red-800">CONTACT</a>
+        </li>
+        <li>
+          <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 hover:text-red-800">DESIGN</a>
+        </li>
+        <li>
+          <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 hover:text-red-800">LOGIN</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+</div>
+
     </Fragment>
   );
 };
