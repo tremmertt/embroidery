@@ -1,4 +1,6 @@
 import React from "react";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Box } from "@mui/material";
 
 export default function Banner() {
   const styles = {
@@ -14,8 +16,8 @@ export default function Banner() {
     },
   };
   return (
-    <div className="mx-auto w-full h-auto py-3 mb-5">
-      <div className="bg-red-900 text-white grid grid-cols-2">
+    <div className="relative mx-auto w-full h-auto py-3 mb-5">
+      <div className="bg-red-900 text-white grid grid-cols-2 pb-5">
         <div className="col-span-1 text-left" style={styles.bestOfCollection}>
           <img className="flex justify-center rounded-md" src="https://i.pinimg.com/736x/11/cc/a2/11cca289bed9ac0dac9f9e88ccc8e952.jpg" alt="" />
           
@@ -32,6 +34,16 @@ export default function Banner() {
           </ol>
           </div>
         </div>
+        <Box sx={{ display: 'flex',  flexDirection: 'column',flexWrap: 'wrap',justifyContent: 'center',alignItems: 'center',borderRadius: '200px'  }} className="bg-red-900 text-white">
+      
+          <p className="text-center text-white text-sm"> * We digitize your logo/images/artwork for cap ,hat ,t-shirt ,jacket-back, left chest, bag, towel or in any other size you want for embroidery
+          <br /> * Any size digitizing: Highly complex designs may incur an extra charges - message me first if you are unsure.</p>
+          <div className="border-2 border-white rounded-full h-7 w-7 m-1 " > <ExpandMoreIcon className="text-black text-2xl" /> </div>
+          <div>
+
+          </div>
+        
+        </Box>
       </div>
     </div>
   );
