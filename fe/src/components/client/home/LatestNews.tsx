@@ -38,7 +38,7 @@ export default function LatestNews() {
   ];
 
   function renderRows() {
-    const rows = [];
+    const rows = [] as any[];
     // console.log("Day la for of");
     for (const i in contents) {
       // console.log("ITEM", i);

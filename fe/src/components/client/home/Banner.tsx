@@ -42,7 +42,7 @@ export default function Banner() {
           <div>
 
           </div>
-        
+          
         </Box>
       </div>
     </div>
