@@ -81,7 +81,7 @@ class Email(models.Model):
         primary_key=True, default=uuid.uuid4, editable=False, unique=True
     )
     sender = models.ForeignKey(Mailer, editable=True, on_delete=models.CASCADE)
-    title = models.CharField(max_length=256)
+    title = models.CharField(max_length=512, default="Successful Transaction")
 
 
     host = 'http://127.0.0.1:8000'
@@ -114,7 +114,7 @@ class Email(models.Model):
                 self.content = str(self.content).format(
                     self.order.customer.name,
                     name_project,
-                    self.order.created_at,
+                    self.order.created_at.strftime('%H:%M:%S %d-%m-%Y'),
                     self.host + self.order.receipt_pdf.url,
                 )  
         except Exception as err:

@@ -60,9 +60,12 @@ class EmailAdmin(admin.ModelAdmin):
         MailerEmailTabularInline,
     )
     list_display = ['title', 'sender', 'receiver', 'has_attach_receipt' ,'is_sent', 'sent_at']
-    fields = ['sender', 'title', 'content', 'footer', 'order','has_attach_receipt' ,'is_sent', 'content_preview','footer_preview']
-    readonly_fields = ['is_sent', 'content_preview','footer_preview',]
+    fields = ['sender', 'title', 'content', 'footer', 'order','has_attach_receipt' ,'is_sent', 'title_preview','content_preview','footer_preview']
+    readonly_fields = ['is_sent', 'title_preview','content_preview','footer_preview',]
     actions = ['send_email']
+
+    def title_preview(self, obj):
+        return mark_safe(obj.title)
 
     def content_email(self, obj):
         return mark_safe(obj.content)
