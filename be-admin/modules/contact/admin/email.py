@@ -3,7 +3,8 @@ from django import forms
 from django.contrib import admin, messages
 from modules.contact.models.email import Mailer, MailerEmail, Email
 from modules.embroidery.models.customer import Customer
- 
+from django.utils.html import mark_safe    
+
 class MailerEmailForm(forms.ModelForm):
     class Meta:
         widgets = {
@@ -58,9 +59,31 @@ class EmailAdmin(admin.ModelAdmin):
     inlines = (
         MailerEmailTabularInline,
     )
-    list_display = ['title', 'content', 'sender', 'receiver', 'is_sent', 'updated_at']
-    readonly_fields = ['is_sent']
+    list_display = ['title', 'sender', 'receiver', 'has_attach_receipt' ,'is_sent', 'sent_at']
+    fields = ['sender', 'title', 'content', 'footer', 'order','has_attach_receipt' ,'is_sent', 'title_preview','content_preview','footer_preview']
+    readonly_fields = ['is_sent', 'title_preview','content_preview','footer_preview',]
     actions = ['send_email']
+
+    def title_preview(self, obj):
+        return mark_safe(obj.title)
+
+    def content_email(self, obj):
+        return mark_safe(obj.content)
+
+    def content_preview(self, obj):
+        if obj.content:
+            obj.update_mapping_template_content()
+            return mark_safe(obj.content)
+        return ""
+
+    def footer_preview(self, obj):
+        if obj.footer:
+            obj.update_mapping_template_footer()
+            return mark_safe(obj.footer)
+        return ""
+
+    footer_preview.short_description = "Footer Preview"
+    footer_preview.allow_tags = True
 
     def receiver(self, obj):
         emails = MailerEmail.objects.filter(mail__id__exact=obj.id)
