@@ -50,10 +50,7 @@ function App() {
   const { theme } = useContext(ThemeCustomContext);
 
   return (
-    <div
-      className="h-screen"
-      style={{ height: "100vh", color: theme.color, backgroundColor: theme.backgroundColorMint }}
-    >
+    <div style={{ height: "100vh !important", color: theme.color, backgroundColor: theme.backgroundColorMint }}>
       <CustomRouter history={history}>
         {/* <ScrollToTop> */}
 
