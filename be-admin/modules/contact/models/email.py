@@ -2,8 +2,7 @@ import uuid
 import django
 
 from django.conf import settings
-from datetime import datetime
-from django.conf import settings
+from datetime import datetime 
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.db import models
@@ -160,76 +159,87 @@ class Email(models.Model):
         print({
             "subject": self.title,
             "content": self.content,
-            "list_receiver": list_receiver
+            "list_receiver": list_receiver,
+            "sender email": self.sender.mail,
+            "self.sender.token": self.sender.token
         })
         
-        try:
-            if self.sender.mail and self.sender.token != "":
-                if self.order:
-                    receipt_pdf_service = ReceiptPDF()
-                    buffer = receipt_pdf_service.create_report(self.order)
-                    receipt_pdf = ContentFile(buffer.read(), name='Receipt-{}_{}.pdf'.format(datetime.today().strftime('%Y-%m-%d'), self.order.id)) 
-                    self.order.receipt_pdf = receipt_pdf
-                    self.order.save()
+        # try:
+        if self.sender.mail and self.sender.token != "":
+            if self.order:
+                receipt_pdf_service = ReceiptPDF()
+                buffer = receipt_pdf_service.create_report(self.order)
+                receipt_pdf = ContentFile(buffer.read(), name='Receipt-{}_{}.pdf'.format(datetime.today().strftime('%Y-%m-%d'), self.order.id)) 
+                self.order.receipt_pdf = receipt_pdf
+                self.order.save()
 
-                # send_mail(
-                #     subject=self.title,
-                #     message=self.content.replace('\n', '<br>'),
-                #     from_email=self.sender.mail,
-                #     recipient_list=list_receiver,
-                #     auth_user=self.sender.mail, 
-                #     auth_password=self.sender.token,  
-                #     html_message=self.content.replace('\n', '<br>')
-                # )
-                if self.sender.mail and self.sender.token:
-                    email = Email.objects.get(id=self.id)
+            # send_mail(
+            #     subject=self.title,
+            #     message=self.content.replace('\n', '<br>'),
+            #     from_email=self.sender.mail,
+            #     recipient_list=list_receiver,
+            #     auth_user=self.sender.mail, 
+            #     auth_password=self.sender.token,  
+            #     html_message=self.content.replace('\n', '<br>')
+            # )
+            if self.sender.mail and self.sender.token:
+                email = Email.objects.get(id=self.id)
 
-                    settings.EMAIL_HOST_USER=self.sender.mail
-                    settings.EMAIL_HOST_PASSWORD=self.sender.token
-                    
-                    self.content = "<div>" + self.content + "</div>" 
-                    if self.has_attach_receipt and self.order and self.order.receipt_pdf:
-                        email.has_attach_receipt = True
-                    else:
-                        email.has_attach_receipt = False
+                settings.EMAIL_HOST_USER=self.sender.mail 
+                settings.EMAIL_HOST_PASSWORD=self.sender.token
+                
+                self.content = "<div>" + self.content + "</div>" 
+                if self.has_attach_receipt and self.order and self.order.receipt_pdf:
+                    email.has_attach_receipt = True
+                else:
+                    email.has_attach_receipt = False
+                print('1')
+                self.update_mapping_template_content()
+                self.update_mapping_template_footer()
+                self.content += "<br><br><div>" + self.footer + "</div><br><br>"
+                # print('2, ', self.content)
+                # print('self.sender.mail', self.sender.mail)
+                # print('list_receiver', list_receiver)
+                # print('self.title', self.title)
+    
+                email_message = EmailMessage(
+                    subject=self.title,
+                    body=self.content,
+                    from_email=self.sender.mail,
+                    to=list_receiver,
+                    # html_message=None
+                    # bcc=['marketing@coffeehouse.com'], cc=['ceo@coffeehouse.com']
+                    # headers = {'Reply-To': 'support@coffeehouse.com'}
+                )
+                print('3')
 
-                    self.update_mapping_template_content()
-                    self.update_mapping_template_footer()
-                    self.content += "<br><br><div>" + self.footer + "</div><br><br>"
-        
-                    email_message = EmailMessage(
-                        subject=self.title,
-                        body=self.content,
-                        from_email=self.sender.mail,
-                        to=list_receiver,
-                        # html_message=None
-                        # bcc=['marketing@coffeehouse.com'], cc=['ceo@coffeehouse.com']
-                        # headers = {'Reply-To': 'support@coffeehouse.com'}
-                    )
-                    if self.has_attach_receipt and self.order and self.order.receipt_pdf:
-                        pdf_f = self.order.receipt_pdf.open(mode='rb') 
-                        data = pdf_f.read()
-                        pdf_f.seek(0)
-                        pdf_f.seekable() 
-                        email_message.attach('receipt.pdf', data) 
-                    
-                    email_message.content_subtype = "html"  
-                    email_message.send(fail_silently=False)
-                    
-                    email.is_sent = True
-                    email.sent_at = datetime.now
-                    email.save()
-            else:
-                raise Exception('Not have token')
+                if self.has_attach_receipt and self.order and self.order.receipt_pdf:
+                    pdf_f = self.order.receipt_pdf.open(mode='rb') 
+                    data = pdf_f.read()
+                    pdf_f.seek(0)
+                    pdf_f.seekable() 
+                    # email_message.attach('receipt.pdf', data) 
+                print('3.1')
+                
 
-        except Exception as e:
-            print(e)
-            email = Email.objects.get(id=self.id)
-            email.is_sent = False
-            email.save()
-            if str(e) == 'Not have token':
-                messages.add_message(request, messages.ERROR, 'Not have token, so email cannot send')
-            raise Exception('Sent email failed')
+                email_message.content_subtype = "html"  
+                email_message.send(fail_silently=False)
+                print('4')
+                
+                email.is_sent = True
+                email.sent_at = datetime.now
+                email.save()
+        else:
+            raise Exception('Not have token')
+
+        # except Exception as e:
+        #     print(e)
+        #     email = Email.objects.get(id=self.id)
+        #     email.is_sent = False
+        #     email.save()
+        #     if str(e) == 'Not have token':
+        #         messages.add_message(request, messages.ERROR, 'Not have token, so email cannot send')
+        #     raise Exception('Sent email failed')
 
 class MailerEmail(models.Model):
     mail = models.ForeignKey(Email, blank=True, on_delete=models.CASCADE) 

@@ -20,3 +20,21 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# APP_NAME=Django
+# APP_ENV=development
+# APP_SECRET_KEY=TremertIuDuy
+# APP_DEBUG=true
+# APP_URL=http://localhost
+
+# DATABASE_DRIVER=postgresql
+# DATABASE_HOST=localhost
+# DATABASE_PORT=5433
+# DATABASE_NAME=stg_emboridery
+# DATABASE_USER=postgres
+# DATABASE_PASSWORD=qwer1234
+
+# EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST='smtp.gmail.com'
+# EMAIL_PORT=587
+# EMAIL_USE_TLS=True
