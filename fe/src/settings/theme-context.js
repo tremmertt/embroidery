@@ -25,11 +25,22 @@ const themes = {
     textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-[#6d6f75] hover:text-[#1b254b] ",
     backgroundColorWithHover: "bg-[#f4f7fe] hover:bg-[#e3e6ef]",
   },
+  red: {
+    backgroundColor: "white",
+    backgroundColorMint: "#9A0007",
+    color: "#fff",
+    colorMint: "#6d6f75",
+    dropShadow: "drop-shadow-[0_0px_0px_rgba(0,0,0,0.25)]",
+    textColorActiveWithHoverAdmin: "font-extrabold text-[#1b254b]",
+    textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-[#6d6f75] hover:text-[#1b254b] ",
+    backgroundColorWithHover: "bg-[#f4f7fe] hover:bg-[#e3e6ef]",
+    borderColor: "#000",
+  },
 };
 
 const initialState = {
   dark: true,
-  theme: themes.light,
+  theme: themes.red,
   direction: "rtl",
   toggle: () => {},
 };

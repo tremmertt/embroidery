@@ -5,7 +5,9 @@ import { Router, Routes, Route } from "react-router-dom";
 // import ScrollToTop from "./ScrollToTop";
 
 import HomePage from "./pages/client/HomePage";
-import ProductPage from "./pages/client/ProductPage";
+import Login from "./pages/client/Login";
+import ErrorPage from "./pages/client/ErrorPage";
+import Signup from "./pages/client/Signup";
 import CartPage from "./pages/client/CartPage";
 import HistoryPage from "./pages/client/HistoryPage";
 import ContactPage from "./pages/client/ContactPage";
@@ -60,6 +62,9 @@ function App() {
         <Routes>
           {/* client */}
           <Route path="/" element={<ClientTemplate Component={HomePage} />} />
+          <Route path="/login" element={<ClientTemplate Component={Login} />} />
+          <Route path="/signup" element={<ClientTemplate Component={Signup} />} />
+          <Route path="/123" element={<ClientTemplate Component={ErrorPage} />} />
           {/* <Route path="/product" element={<ClientTemplate Component={ProductPage} />} />
           <Route path="/cart" element={<ClientTemplate Component={CartPage} />} />
           <Route path="/history" element={<ClientTemplate Component={HistoryPage} />} />

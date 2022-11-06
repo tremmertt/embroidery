@@ -223,7 +223,7 @@ const Header = () => {
           <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 hover:text-red-800">DESIGN</a>
         </li>
         <li>
-          <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 hover:text-red-800">LOGIN</a>
+          <a href="/login" className="block py-2 pr-4 pl-3 text-gray-700 hover:text-red-800">LOGIN</a>
         </li>
       </ul>
     </div>
