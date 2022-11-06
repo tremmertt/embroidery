@@ -5,15 +5,26 @@ import { ThemeCustomContext } from "../../../settings/theme-context";
 
 const Header = () => {
   const { theme } = useContext(ThemeCustomContext);
+  const handleTransitionToPurposeComponent = (id: string) => {
+    if (id === "home-component") window.scrollTo({ left: 0, top: -20, behavior: "smooth" });
+    else {
+      try {
+        const ele = document.getElementById(id);
+        if (ele) window.scroll({ left: ele.offsetLeft, top: ele.offsetTop, behavior: "smooth" });
+      } catch (err) {
+        console.log("err", err);
+      }
+    }
+  };
 
-  function navigationItemsMap() {
+  const navigationItemsMap = () => {
     const items = [];
     const navigationItems = [
-      { name: "Home", link: "/" },
-      { name: "Our Purpose", link: "/" },
-      { name: "Contact", link: "/" },
-      { name: "Design", link: "/" },
-      { name: "Login", link: "/" },
+      { name: "Home", link: "/", id: "home-component" },
+      { name: "Our Purpose", link: "/", id: "our-purpose-component" },
+      { name: "Contact", link: "/", id: "contact-component" },
+      { name: "Design", link: "/", id: "design-component" },
+      { name: "Login", link: "/", id: "login-component" },
     ];
     for (const item of navigationItems) {
       items.push(
@@ -22,6 +33,7 @@ const Header = () => {
             to="#"
             className="block py-2 pr-4 pl-3 hover:font-semibold text-gray-700 hover:text-red-800"
             aria-current="page"
+            onClick={() => handleTransitionToPurposeComponent(item.id)}
           >
             {item.name}
           </Link>
@@ -37,7 +49,7 @@ const Header = () => {
         {items}
       </ul>
     );
-  }
+  };
 
   return (
     <div

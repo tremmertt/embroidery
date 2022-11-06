@@ -13,7 +13,7 @@ const ClientTemplate = (props: any) => {
     <Fragment>
       <Header />
       <Component />
-      <hr className="mt-5" />
+      {/* <hr className="mt-5" /> */}
       <Footer />
     </Fragment>
   );

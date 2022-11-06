@@ -17,8 +17,8 @@ const themes = {
     backgroundColorWithHover: "bg-[#111c44] hover:bg-[#152254]",
   },
   light: {
-    backgroundColor: "white",
-    backgroundColorMint: "#f4f7fe",
+    backgroundColor: "#f4f7fe",
+    backgroundColorMint: "white",
     backgroundMainColor: "#7f1d1d",
     color: "#1b254b",
     colorMint: "#6d6f75",
