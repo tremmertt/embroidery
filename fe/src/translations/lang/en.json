@@ -1,0 +1,52 @@
+{
+  "lang": {
+    "English": "English",
+    "Vietnamese": "Vietnamese"
+  },
+  "action": {
+    "Create": "Create",
+    "CreateNew": "Create New",
+    "Edit": "Edit"
+  },
+  "Home": "Home",
+  "order": {
+    "Order": "Order",
+    "OrderList": "Order List"
+  },
+  "customer": {
+    "Customer": "Customer",
+    "CustomerList": "Customer List"
+  },
+  "staff": {
+    "Staff": "Staff",
+    "StaffList": "Staff List",
+    "CreateStaff": "Create Staff",
+    "EditStaff": "Edit Staff"
+  },
+  "agency": {
+    "Voucher": "Voucher",
+    "Agency": "Agency",
+    "AgencyList": "Agency List"
+  },
+  "product": {
+    "Product": "Product",
+    "ProductList": "Product List",
+    "CreateProduct": "Create Product",
+    "EditProduct": "Edit Product"
+  },
+  "dashboard": {
+    "Dashboard": "Dashboard"
+  },
+  "profile": {
+    "Profile": "Profile"
+  },
+  "setting": {
+    "Setting": "Setting"
+  },
+  "auth": {
+    "Authenticate": "Authenticate",
+    "SignIn": "Sign In",
+    "SignUp": "Sign Up",
+    "Logout": "Logout"
+  }
+}

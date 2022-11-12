@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Poppins';
+    src: local('Poppins'), url(./assets/fonts/Poppins-Black.ttf) format('opentype');
+}
+@font-face {
+    font-family: 'Poppins';
+    src: local('Poppins'), url(./assets/fonts/Poppins-Medium.ttf) format('opentype');
+}
+
+html{
+    font-family: Lato, Arial, serif;
+}
