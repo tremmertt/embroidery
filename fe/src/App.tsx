@@ -50,23 +50,20 @@ function App() {
   const { theme } = useContext(ThemeCustomContext);
 
   return (
-    <div
-      className="h-screen"
-      style={{ height: "100vh", color: theme.color, backgroundColor: theme.backgroundColorMint }}
-    >
+    <div style={{ height: "100vh !important", color: theme.color, backgroundColor: theme.backgroundColorMint }}>
       <CustomRouter history={history}>
         {/* <ScrollToTop> */}
 
         <Routes>
           {/* client */}
           <Route path="/" element={<ClientTemplate Component={HomePage} />} />
-          <Route path="/product" element={<ClientTemplate Component={ProductPage} />} />
+          {/* <Route path="/product" element={<ClientTemplate Component={ProductPage} />} />
           <Route path="/cart" element={<ClientTemplate Component={CartPage} />} />
           <Route path="/history" element={<ClientTemplate Component={HistoryPage} />} />
-          <Route path="/contact" element={<ClientTemplate Component={ContactPage} />} />
+          <Route path="/contact" element={<ClientTemplate Component={ContactPage} />} /> */}
 
           {/* admin */}
-          <Route path="/admin" element={<AdminTemplate Component={DashBoardPage} />} />
+          {/* <Route path="/admin" element={<AdminTemplate Component={DashBoardPage} />} />
           <Route path="/admin/orders" element={<AdminTemplate Component={OrderListPage} />} />
           <Route path="/admin/customers" element={<AdminTemplate Component={CustomerListPage} />} />
           <Route path="/admin/staffs" element={<AdminTemplate Component={StaffListPage} />} />
@@ -78,7 +75,7 @@ function App() {
           <Route path="/admin/agencies" element={<AdminTemplate Component={AgencyListPage} />} />
           <Route path="/admin/setting" element={<AdminTemplate Component={SettingPage} />} />
           <Route path="/admin/profile" element={<AdminTemplate Component={ProfilePage} />} />
-          <Route path="/signin" element={<AdminTemplate Component={SigninPage} />} />
+          <Route path="/signin" element={<AdminTemplate Component={SigninPage} />} /> */}
         </Routes>
         {/* </ScrollToTop> */}
       </CustomRouter>
