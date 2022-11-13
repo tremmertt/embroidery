@@ -126,7 +126,8 @@ class Customer(models.Model):
         except jwt.InvalidTokenError:
             return 'Invalid token. Please log in again.'
 
-    def login_by_google(self, config=None):
+    @staticmethod
+    def login_by_google(config=None):
         from modules.embroidery.models.google.google_account import AccountGoogleService
 
         if config and config.get('state') and config.get('code'):

@@ -14,7 +14,7 @@ root_dir = os.path.abspath(file_dir + "/..")
 sys.path.append(os.path.normpath(root_dir))
 
 from googleapiclient.discovery import build
-from modules.embroidery.models.client_google_service import ClientConfigBuilder
+from modules.embroidery.models.google.client_google_service import ClientConfigBuilder
 from google_auth_oauthlib.flow import InstalledAppFlow
 from oauthlib.oauth2.rfc6749.errors import InvalidGrantError
 
@@ -39,10 +39,7 @@ class AccountGoogleService(object):
 
         flow = InstalledAppFlow.from_client_config(client_config.Build(), scopes=_SCOPE)
         flow.redirect_uri = _REDIRECT_URI
-        state = 'Test'
-        # HelperService.encodeBase64(
-        #     f"GOOGLE#{tenant_id}#{advertiser_id}#{hashlib.sha256(os.urandom(1024)).hexdigest()}#{id_token}#{client_random_code}"
-        # )
+        state = hashlib.sha256(os.urandom(1024)).hexdigest() 
         
         print("state:", state)
         auth_url, state = flow.authorization_url(
