@@ -6,6 +6,7 @@ import { Router, Routes, Route } from "react-router-dom";
 
 import HomePage from "./pages/client/HomePage";
 import Login from "./pages/client/Login";
+import LoginSuccess from "./pages/client/LoginSuccess";
 import ErrorPage from "./pages/client/ErrorPage";
 import Signup from "./pages/client/Signup";
 // import CartPage from "./pages/client/CartPage";
@@ -30,7 +31,7 @@ import Signup from "./pages/client/Signup";
 // import CustomerListPage from "./pages/admin/customer/CustomerListPage";
 
 import ClientTemplate from "./templates/ClientTemplate";
-import AdminTemplate from "./templates/AdminTemplate";
+// import AdminTemplate from "./templates/AdminTemplate";
 import { useContext, useLayoutEffect, useState } from "react";
 import { ThemeCustomContext } from "./settings/theme-context";
 // https://mui.com/material-ui/material-icons/?theme=Sharp&query=user
@@ -60,6 +61,7 @@ function App() {
           {/* client */}
           <Route path="/" element={<ClientTemplate Component={HomePage} />} />
           <Route path="/login" element={<ClientTemplate Component={Login} />} />
+          <Route path="/login-success" element={<ClientTemplate Component={LoginSuccess} />} />
           <Route path="/signup" element={<ClientTemplate Component={Signup} />} />
           <Route path="/123" element={<ClientTemplate Component={ErrorPage} />} />
           {/* <Route path="/product" element={<ClientTemplate Component={ProductPage} />} />

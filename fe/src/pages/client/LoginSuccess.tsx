@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LoginService from "../../service/LoginService";
-export default function Login() {
-  const getUrlLogin = async (media: string) => {
-    const { url, state } = await LoginService.getUrlLogin(media);
-    console.log(url, state);
-    window.open(url, "_blank");
+import { useParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import SearchParams from "../../custom/SearchParams";
+export default function LoginSuccess() {
+  const [searchParams, setSearch] = SearchParams.useCustomSearchParams();
+
+  const login = async () => {
+    console.log("searchParams");
+    const config = {
+      state: (searchParams as any).state,
+      code: (searchParams as any).code,
+    };
+    await LoginService.getUrlLogin("google", config);
   };
+
+  login();
 
   return (
     <div>
@@ -81,7 +91,6 @@ export default function Login() {
                     data-mdb-ripple="true"
                     data-mdb-ripple-color="light"
                     className="inline-block p-3 bg-red-700 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-lg transition duration-150 ease-in-out mx-1"
-                    onClick={() => getUrlLogin("google")}
                   >
                     {/* Facebook */}
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" className="w-4 h-4">
