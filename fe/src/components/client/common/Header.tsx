@@ -20,17 +20,17 @@ const Header = () => {
   const navigationItemsMap = () => {
     const items = [];
     const navigationItems = [
-      { name: "Home", link: "/", id: "home-component" },
-      { name: "Our Purpose", link: "/", id: "our-purpose-component" },
-      { name: "Contact", link: "/", id: "contact-component" },
-      { name: "Design", link: "/", id: "design-component" },
-      { name: "Login", link: "/", id: "login-component" },
+      { name: "Home", link: "#", id: "home-component" },
+      { name: "Our Purpose", link: "#", id: "our-purpose-component" },
+      { name: "Contact", link: "#", id: "contact-component" },
+      { name: "Design", link: "#", id: "design-component" },
+      { name: "Login", link: "/login", id: "login-component" },
     ];
     for (const item of navigationItems) {
       items.push(
         <li key={item.name}>
           <Link
-            to="#"
+            to={item.link}
             className="block py-2 pr-4 pl-3 hover:font-semibold text-gray-700 hover:text-red-800"
             aria-current="page"
             onClick={() => handleTransitionToPurposeComponent(item.id)}

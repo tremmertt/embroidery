@@ -7,8 +7,8 @@ import { Provider } from "react-redux";
 const themes = {
   dark: {
     backgroundColor: "#111c44",
-    backgroundColorMint: "#fa7272",
-    backgroundMainColor: "bg-red-400",
+    backgroundColorMint: "#111c44",
+    backgroundMainColor: "#111c44",
     color: "white",
     colorMint: "#6d6f75",
     dropShadow: "drop-shadow-[0_0px_0px_rgba(250,250,250,0.5)]",
@@ -19,7 +19,7 @@ const themes = {
   light: {
     backgroundColor: "#f4f7fe",
     backgroundColorMint: "white",
-    backgroundMainColor: "#7f1d1d",
+    backgroundMainColor: "white",
     color: "#1b254b",
     colorMint: "#6d6f75",
     dropShadow: "drop-shadow-[0_0px_0px_rgba(0,0,0,0.25)]",
@@ -27,11 +27,23 @@ const themes = {
     textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-[#6d6f75] hover:text-[#1b254b] ",
     backgroundColorWithHover: "bg-[#f4f7fe] hover:bg-[#e3e6ef]",
   },
+  red: {
+    backgroundColor: "white",
+    backgroundColorMint: "#9A0007",
+    backgroundMainColor: "#7f1d1d",
+    color: "#fff",
+    colorMint: "#6d6f75",
+    dropShadow: "drop-shadow-[0_0px_0px_rgba(0,0,0,0.25)]",
+    textColorActiveWithHoverAdmin: "font-extrabold text-[#1b254b]",
+    textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-[#6d6f75] hover:text-[#1b254b] ",
+    backgroundColorWithHover: "bg-[#f4f7fe] hover:bg-[#e3e6ef]",
+    borderColor: "#000",
+  },
 };
 
 const initialState = {
   dark: true,
-  theme: themes.dark,
+  theme: themes.light,
   direction: "rtl",
   toggle: () => {},
 };
