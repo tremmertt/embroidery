@@ -9,14 +9,14 @@ import BestSeller from "../../components/client/home/BestSeller";
 import FooterSearch from "../../components/client/home/FooterSearch";
 
 export default function HomePage() {
-  return (
-    <div>
-      {/* <CarouselBanner />
-      <BestSeller /> */}
-      <Banner />
-      <Purpose />
-      <Contact />
-      {/* <Feature />
+    return (
+      <div>
+        {/* <CarouselBanner />
+        <BestSeller /> */}
+        <Banner />
+        <Purpose />
+        <Contact />
+        {/* <Feature />
       <LatestNews />
       <AnotherProduct />
       <FooterSearch /> */}

@@ -7,7 +7,8 @@ import { Provider } from "react-redux";
 const themes = {
   dark: {
     backgroundColor: "#111c44",
-    backgroundColorMint: "#0b1437",
+    backgroundColorMint: "#111c44",
+    backgroundMainColor: "#111c44",
     color: "white",
     colorMint: "#6d6f75",
     dropShadow: "drop-shadow-[0_0px_0px_rgba(250,250,250,0.5)]",
@@ -16,8 +17,9 @@ const themes = {
     backgroundColorWithHover: "bg-[#111c44] hover:bg-[#152254]",
   },
   light: {
-    backgroundColor: "white",
-    backgroundColorMint: "#f4f7fe",
+    backgroundColor: "#f4f7fe",
+    backgroundColorMint: "white",
+    backgroundMainColor: "white",
     color: "#1b254b",
     colorMint: "#6d6f75",
     dropShadow: "drop-shadow-[0_0px_0px_rgba(0,0,0,0.25)]",
@@ -28,6 +30,7 @@ const themes = {
   red: {
     backgroundColor: "white",
     backgroundColorMint: "#9A0007",
+    backgroundMainColor: "#7f1d1d",
     color: "#fff",
     colorMint: "#6d6f75",
     dropShadow: "drop-shadow-[0_0px_0px_rgba(0,0,0,0.25)]",
@@ -40,7 +43,7 @@ const themes = {
 
 const initialState = {
   dark: true,
-  theme: themes.red,
+  theme: themes.light,
   direction: "rtl",
   toggle: () => {},
 };

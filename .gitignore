@@ -1,5 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+/be-admin
+
 # dependencies
 /fe/node_modules
 /fe/dist
@@ -8,6 +10,7 @@
 /node_modules
 /.pnp
 .pnp.js
+
 
 # testing
 /coverage

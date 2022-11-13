@@ -8,26 +8,26 @@ import HomePage from "./pages/client/HomePage";
 import Login from "./pages/client/Login";
 import ErrorPage from "./pages/client/ErrorPage";
 import Signup from "./pages/client/Signup";
-import CartPage from "./pages/client/CartPage";
-import HistoryPage from "./pages/client/HistoryPage";
-import ContactPage from "./pages/client/ContactPage";
+// import CartPage from "./pages/client/CartPage";
+// import HistoryPage from "./pages/client/HistoryPage";
+// import ContactPage from "./pages/client/ContactPage";
 
-import DashBoardPage from "./pages/admin/dashboard/DashBoardPage";
-import SettingPage from "./pages/admin/setting/SettingPage";
-import ProfilePage from "./pages/admin/profile/ProfilePage";
-import SigninPage from "./pages/admin/auth/SigninPage";
-import OrderListPage from "./pages/admin/order/OrderListPage";
+// import DashBoardPage from "./pages/admin/dashboard/DashBoardPage";
+// import SettingPage from "./pages/admin/setting/SettingPage";
+// import ProfilePage from "./pages/admin/profile/ProfilePage";
+// import SigninPage from "./pages/admin/auth/SigninPage";
+// import OrderListPage from "./pages/admin/order/OrderListPage";
 
-import StaffListPage from "./pages/admin/staff/StaffListPage";
-import CreateStaffPage from "./pages/admin/staff/CreateStaffPage";
-import EditStaffPage from "./pages/admin/staff/EditStaffPage";
+// import StaffListPage from "./pages/admin/staff/StaffListPage";
+// import CreateStaffPage from "./pages/admin/staff/CreateStaffPage";
+// import EditStaffPage from "./pages/admin/staff/EditStaffPage";
 
-import ProductListPage from "./pages/admin/product/ProductListPage";
-import CreateProductPage from "./pages/admin/product/CreateProductPage";
-import EditProductPage from "./pages/admin/product/EditProductPage";
+// import ProductListPage from "./pages/admin/product/ProductListPage";
+// import CreateProductPage from "./pages/admin/product/CreateProductPage";
+// import EditProductPage from "./pages/admin/product/EditProductPage";
 
-import AgencyListPage from "./pages/admin/agency/AgencyListPage";
-import CustomerListPage from "./pages/admin/customer/CustomerListPage";
+// import AgencyListPage from "./pages/admin/agency/AgencyListPage";
+// import CustomerListPage from "./pages/admin/customer/CustomerListPage";
 
 import ClientTemplate from "./templates/ClientTemplate";
 import AdminTemplate from "./templates/AdminTemplate";
@@ -52,10 +52,7 @@ function App() {
   const { theme } = useContext(ThemeCustomContext);
 
   return (
-    <div
-      className="h-screen"
-      style={{ height: "100vh", color: theme.color, backgroundColor: theme.backgroundColorMint }}
-    >
+    <div style={{ height: "100vh !important", color: theme.color, backgroundColor: theme.backgroundColorMint }}>
       <CustomRouter history={history}>
         {/* <ScrollToTop> */}
 

@@ -1,0 +1,41 @@
+services:
+  # mongodb:
+  #   image: mongo:latest
+  #   restart: always 
+  #   container_name: "mongodb"
+  #   ports:
+  #     - ${DATABASE_PORT}:${DATABASE_PORT}
+  #   volumes: 
+  #     - ./data-mongodb:/data/db
+  #   environment:
+  #     - DATABASE_USER=${DATABASE_USER}
+  #     - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+  #     - DATABASE_NAME=${DATABASE_NAME} 
+  #   env_file:
+  #     - ./.env 
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    # command: mongod --smallfiles --logpath=/dev/null # --quiet
+
+  web:
+    build: .
+    restart: always 
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py loaddata fixtures/* && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    env_file:
+      - ./.env
+volumes:
+  data:

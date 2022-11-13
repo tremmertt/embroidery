@@ -8,7 +8,7 @@ export default function ErrorPage() {
 
   return (
     <div>
-      <main
+      {/* <main
       style={{ color: theme.color, backgroundColor: theme.backgroundColorMint }}
       
       className="h-screen w-full flex flex-col justify-center items-center">
@@ -25,9 +25,7 @@ export default function ErrorPage() {
             </span>
           </a>
         </button>
-      </main>
-
+      </main> */}
     </div>
   );
 }
-
