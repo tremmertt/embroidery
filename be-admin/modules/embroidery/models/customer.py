@@ -78,6 +78,7 @@ class Customer(models.Model):
     customer_type = models.CharField(max_length=50, choices=CustomerType.choices, default=CustomerType.INDIVIDUAL)
     login_type = models.CharField(max_length=50, choices=LoginType.choices, default=LoginType.GOOGLE)
     company = models.CharField(max_length=256, blank=True, default="")
+    meta_data = JSONField(default=dict)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -131,16 +132,21 @@ class Customer(models.Model):
         from modules.embroidery.models.google.google_account import AccountGoogleService
 
         if config and config.get('state') and config.get('code'):
-            config, credentials = AccountGoogleService.get_config_auth_google(
-                state=config['state'],
-                code=config['code'],
-                scope=' '.join([
-                    'openid', 
-                    'https://www.googleapis.com/auth/userinfo.profile',
-                    'https://www.googleapis.com/auth/userinfo.email'
-                ])
-            )
-            user_info = AccountGoogleService.get_user_info(credentials)
+            try:
+                config, credentials = AccountGoogleService.get_config_auth_google(
+                    state=config['state'],
+                    code=config['code'],
+                    scope=' '.join([
+                        'openid', 
+                        'https://www.googleapis.com/auth/userinfo.profile',
+                        'https://www.googleapis.com/auth/userinfo.email'
+                    ])
+                )
+                user_info = AccountGoogleService.get_user_info(credentials)
+                return user_info
+            except Exception as err:
+                print(err)
+                return None
         else:
             url = AccountGoogleService.get_link_auth_google()
             return url

@@ -2,8 +2,10 @@ from django.shortcuts import render
 from rest_framework import generics, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.db.models import JSONField
 
-from modules.embroidery.models.customer import Customer
+from modules.embroidery.models.customer import Customer, CustomerType, LoginType
+from modules.embroidery.serializers.login import LoginSerializer
 from modules.embroidery.serializers.customer import CustomerSerializer
 from django.shortcuts import render
 from rest_framework import generics, filters
@@ -16,10 +18,42 @@ class LoginView(APIView):
         url, state = Customer.login_by_google()
         return Response({"url": url, "state": state})
     
-    # def post(self, request):
-    #     customer = request.data.get('customer')
-    #     # Create an customer from the above data
-    #     serializer = CustomerSerializer(data=customer)
-    #     if serializer.is_valid(raise_exception=True):
-    #         customer_saved = serializer.save()
-    #     return Response({"success": "Customer '{}' created successfully".format(customer_saved.id)})
+    def post(self, request, media=None): 
+        config = {
+            "state": request.data.get('state'),
+            "code": request.data.get('code')
+        }
+
+        user = Customer.login_by_google(config)
+        if user and user.get('id'): 
+            customer = {
+                "name": user['name'],
+                "email": user['email'], 
+                "customer_type": CustomerType.INDIVIDUAL,
+                "login_type": LoginType.GOOGLE,
+                "name": user['name'],
+                "meta_data": user,
+            }
+            print('customer', customer)
+            try:
+                customer_db = Customer.objects.get(email=customer['email'])
+            except:
+                customer_db = None
+            if customer_db == None:
+                customer_db = Customer.objects.create(**customer)
+                serializer = CustomerSerializer(customer_db,many=False) 
+                return Response({
+                    "message":"created customer successfully",
+                    "customer": serializer.data,
+                    "token": customer_db.encode_auth_token()
+                }) 
+            else:
+                serializer = CustomerSerializer(customer_db,many=False) 
+                return Response({
+                    "message":"login successfully", 
+                    "customer": serializer.data,
+                    "token": customer_db.encode_auth_token()
+                }) 
+
+        return Response(status=404,data={"failed": "Customer created failed"})
+        
