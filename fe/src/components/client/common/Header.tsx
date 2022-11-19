@@ -31,7 +31,7 @@ const Header = () => {
     else {
       try {
         const ele = document.getElementById(id);
-        if (ele) window.scroll({ left: ele.offsetLeft, top: ele.offsetTop, behavior: "smooth" });
+        if (ele) window.scroll({ left: ele.offsetLeft, top: ele.offsetTop - 75, behavior: "smooth" });
       } catch (err) {
         console.log("err", err);
       }
@@ -57,7 +57,7 @@ const Header = () => {
       { name: "Home", link: "/#home", id: "home-component" },
       { name: "Our Purpose", link: "/#our-purpose", id: "our-purpose-component" },
       { name: "Contact", link: "/#contact", id: "contact-component" },
-      { name: "Design", link: "/design", id: "design-component" },
+      { name: "Design", link: "/#showcase", id: "showcase-component" },
       { name: "Login", link: "/login", id: "login-component" },
     ];
 
@@ -124,7 +124,7 @@ const Header = () => {
 
   return (
     <div
-      className="sticky"
+      className="sticky shadow-md"
       style={{ top: "0", zIndex: 1000, color: theme.color, backgroundColor: theme.backgroundColorMint }}
     >
       <Fragment>
