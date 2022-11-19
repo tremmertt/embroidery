@@ -78,6 +78,7 @@ class Customer(models.Model):
     customer_type = models.CharField(max_length=50, choices=CustomerType.choices, default=CustomerType.INDIVIDUAL)
     login_type = models.CharField(max_length=50, choices=LoginType.choices, default=LoginType.GOOGLE)
     company = models.CharField(max_length=256, blank=True, default="")
+    image = models.CharField(max_length=500, blank=True, default="") 
     meta_data = JSONField(default=dict)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

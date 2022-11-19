@@ -10,6 +10,7 @@ class CustomerSerializer(serializers.ModelSerializer):
             "name",
             "email",
             "phone_number",
+            "image",
             "company",
             "address",
         ]

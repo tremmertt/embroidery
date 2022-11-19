@@ -19,41 +19,43 @@ class LoginView(APIView):
         return Response({"url": url, "state": state})
     
     def post(self, request, media=None): 
-        config = {
-            "state": request.data.get('state'),
-            "code": request.data.get('code')
-        }
-
-        user = Customer.login_by_google(config)
-        if user and user.get('id'): 
-            customer = {
-                "name": user['name'],
-                "email": user['email'], 
-                "customer_type": CustomerType.INDIVIDUAL,
-                "login_type": LoginType.GOOGLE,
-                "name": user['name'],
-                "meta_data": user,
+        if media == 'google':
+            config = {
+                "state": request.data.get('state'),
+                "code": request.data.get('code')
             }
-            print('customer', customer)
-            try:
-                customer_db = Customer.objects.get(email=customer['email'])
-            except:
-                customer_db = None
-            if customer_db == None:
-                customer_db = Customer.objects.create(**customer)
-                serializer = CustomerSerializer(customer_db,many=False) 
-                return Response({
-                    "message":"created customer successfully",
-                    "customer": serializer.data,
-                    "token": customer_db.encode_auth_token()
-                }) 
-            else:
-                serializer = CustomerSerializer(customer_db,many=False) 
-                return Response({
-                    "message":"login successfully", 
-                    "customer": serializer.data,
-                    "token": customer_db.encode_auth_token()
-                }) 
+
+            user = Customer.login_by_google(config)
+            if user and user.get('id'): 
+                customer = {
+                    "name": user['name'],
+                    "email": user['email'], 
+                    "customer_type": CustomerType.INDIVIDUAL,
+                    "login_type": LoginType.GOOGLE,
+                    "name": user['name'],
+                    "image": user['picture'],
+                    "meta_data": user,
+                }
+                print('customer', customer)
+                try:
+                    customer_db = Customer.objects.get(email=customer['email'])
+                except:
+                    customer_db = None
+                if customer_db == None:
+                    customer_db = Customer.objects.create(**customer)
+                    serializer = CustomerSerializer(customer_db,many=False) 
+                    return Response({
+                        "message":"created customer successfully",
+                        "customer": serializer.data,
+                        "token": customer_db.encode_auth_token()
+                    }) 
+                else:
+                    serializer = CustomerSerializer(customer_db,many=False) 
+                    return Response({
+                        "message":"login successfully", 
+                        "customer": serializer.data,
+                        "token": customer_db.encode_auth_token()
+                    }) 
 
         return Response(status=404,data={"failed": "Customer created failed"})
         
