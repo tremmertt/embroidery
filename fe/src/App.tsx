@@ -2,6 +2,7 @@ import "./index.css";
 import { createBrowserHistory } from "history";
 import { Router, Routes, Route } from "react-router-dom";
 
+import "react-toastify/dist/ReactToastify.css";
 // import ScrollToTop from "./ScrollToTop";
 
 import HomePage from "./pages/client/HomePage";
@@ -33,8 +34,9 @@ import Signup from "./pages/client/Signup";
 import ClientTemplate from "./templates/ClientTemplate";
 // import AdminTemplate from "./templates/AdminTemplate";
 import { useContext, useLayoutEffect, useState } from "react";
-import { ThemeCustomContext } from "./settings/theme-context";
-// https://mui.com/material-ui/material-icons/?theme=Sharp&query=user
+import { ThemeCustomContext } from "./settings/theme-context"; // https://mui.com/material-ui/material-icons/?theme=Sharp&query=user
+
+import { toast, ToastContainer } from "react-toastify"; //https://www.npmjs.com/package/react-toastify
 
 export const history = createBrowserHistory();
 
@@ -54,6 +56,18 @@ function App() {
 
   return (
     <div style={{ height: "100vh !important", color: theme.color, backgroundColor: theme.backgroundColorMint }}>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <CustomRouter history={history}>
         {/* <ScrollToTop> */}
 

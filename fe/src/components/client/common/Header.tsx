@@ -1,10 +1,31 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Fragment, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Avatar, Button, Menu, MenuItem } from "@mui/material";
+import SearchParams from "custom/SearchParams";
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import LoginAction from "redux/actions/LoginAction";
+import LoginService from "service/LoginService";
 import { ThemeCustomContext } from "../../../settings/theme-context";
 
 const Header = () => {
   const { theme } = useContext(ThemeCustomContext);
+  const { customer } = useSelector((state: any) => state.LoginReducer);
+  const dispatch = useDispatch();
+  const transToComponent = () => {
+    const timeout = setTimeout(() => {
+      console.log("12", `${window.location.hash.split("#").join("")}-component`);
+      handleTransitionToPurposeComponent(`${window.location.hash.split("#").join("")}-component`);
+      clearTimeout(timeout);
+    }, 300);
+  };
+  if (window.location.hash) transToComponent();
+
+  useEffect(() => {
+    console.log(window.location.hash);
+    if (window.location.hash) transToComponent();
+  }, []);
+
   const handleTransitionToPurposeComponent = (id: string) => {
     if (id === "home-component") window.scrollTo({ left: 0, top: -20, behavior: "smooth" });
     else {
@@ -17,28 +38,78 @@ const Header = () => {
     }
   };
 
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    dispatch(LoginAction.logout());
+  };
+
   const navigationItemsMap = () => {
     const items = [];
     const navigationItems = [
-      { name: "Home", link: "#", id: "home-component" },
-      { name: "Our Purpose", link: "#", id: "our-purpose-component" },
-      { name: "Contact", link: "#", id: "contact-component" },
-      { name: "Design", link: "#", id: "design-component" },
+      { name: "Home", link: "/#home", id: "home-component" },
+      { name: "Our Purpose", link: "/#our-purpose", id: "our-purpose-component" },
+      { name: "Contact", link: "/#contact", id: "contact-component" },
+      { name: "Design", link: "/design", id: "design-component" },
       { name: "Login", link: "/login", id: "login-component" },
     ];
+
     for (const item of navigationItems) {
-      items.push(
-        <li key={item.name}>
-          <Link
-            to={item.link}
-            className="block py-2 pr-4 pl-3 hover:font-semibold text-gray-700 hover:text-red-800"
-            aria-current="page"
-            onClick={() => handleTransitionToPurposeComponent(item.id)}
-          >
-            {item.name}
-          </Link>
-        </li>
-      );
+      if (item.name === "Login" && customer && customer.id) {
+        console.log(customer);
+        items.push(
+          <li key={item.name}>
+            <Button
+              variant="text"
+              id="basic-button"
+              disableRipple
+              className="rounded-lg"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              disableElevation
+              disableFocusRipple
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              <Avatar alt={customer.name} src={customer.image} />
+            </Button>
+
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+            >
+              {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>My account</MenuItem> */}
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </Menu>
+          </li>
+        );
+      } else {
+        items.push(
+          <li key={item.name}>
+            <Link
+              to={item.link}
+              className="block py-2 pr-4 pl-3 hover:font-normal text-md text-gray-700 hover:text-red-800"
+              aria-current="page"
+              onClick={() => handleTransitionToPurposeComponent(item.id)}
+            >
+              {item.name}
+            </Link>
+          </li>
+        );
+      }
     }
 
     return (
@@ -72,7 +143,7 @@ const Header = () => {
               >
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
               </svg>
-              <span className="ml-3 text-xl">Logo</span>
+              <span className="ml-3 text-xl font-bold">Embroidery</span>
             </Link>
             <button
               data-collapse-toggle="navbar-default"

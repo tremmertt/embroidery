@@ -1,6 +1,7 @@
-import { LOGIN_BY_SOCIAL } from "./type/LoginType";
+import { LOGIN_BY_SOCIAL, LOGOUT } from "./type/LoginType";
 import LoginService from "../../service/LoginService";
 import { Dispatch } from "redux";
+import { toast } from "react-toastify";
 
 const loginBySocialMediaAction = (media: string, config: any) => {
   return async (dispatch: Dispatch) => {
@@ -25,5 +26,19 @@ const loginBySocialMediaAction = (media: string, config: any) => {
   };
 };
 
-const LoginAction = { loginBySocialMediaAction };
+const logout = () => {
+  return async (dispatch: Dispatch) => {
+    try {
+      LoginService.logout();
+      dispatch({
+        type: LOGOUT,
+      });
+      toast("Logout", { type: "success" });
+    } catch (errors) {
+      console.error("errors", errors);
+    }
+  };
+};
+
+const LoginAction = { loginBySocialMediaAction, logout };
 export default LoginAction;

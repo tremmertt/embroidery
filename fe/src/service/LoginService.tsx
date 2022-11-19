@@ -6,7 +6,8 @@ export interface ICustomer {
   email: string;
   id: string;
   name: string;
-  phone_number: string;
+  image: string;
+  phoneNumber: string;
   loginType: string;
   token: string;
 }
@@ -20,6 +21,15 @@ export default class LoginService {
       return customer;
     }
     return null;
+  };
+
+  static logout = () => {
+    const customerStr = localStorage.getItem("customer");
+    if (customerStr) {
+      const customer = JSON.parse(customerStr);
+      localStorage.removeItem(`${customer.id}.token`);
+      localStorage.removeItem(`customer`);
+    }
   };
 
   static getToken = (): string => {
