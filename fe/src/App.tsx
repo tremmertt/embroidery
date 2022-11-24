@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 // import ScrollToTop from "./ScrollToTop";
 
 import HomePage from "./pages/client/HomePage";
+import ShowRoomPage from "./pages/client/ShowRoomPage";
 import Login from "./pages/client/Login";
 import LoginSuccess from "./pages/client/LoginSuccess";
 import ErrorPage from "./pages/client/ErrorPage";
@@ -74,6 +75,7 @@ function App() {
         <Routes>
           {/* client */}
           <Route path="/" element={<ClientTemplate Component={HomePage} />} />
+          <Route path="/design" element={<ClientTemplate Component={ShowRoomPage} />} />
           <Route path="/login" element={<ClientTemplate Component={Login} />} />
           <Route path="/login-success" element={<ClientTemplate Component={LoginSuccess} />} />
           <Route path="/signup" element={<ClientTemplate Component={Signup} />} />

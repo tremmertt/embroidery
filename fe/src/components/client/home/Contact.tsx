@@ -10,8 +10,8 @@ export default function Contact() {
   return (
     <div className="container-fluid" id="contact-component" style={{ backgroundColor: "#f5f6f8" }}>
       <div
-        className="container mx-auto rounded-xl shadow-md my-4 h-auto py-14"
-        style={{ backgroundColor: theme.backgroundColor }}
+        className="container mx-auto rounded-xl h-auto py-14"
+        //style={{ backgroundColor: theme.backgroundColor }}
       >
         <div className="flex-col justify-center items-center text-center">
           <h1 className="tracking-wide font-sans font-extrabold lg:text-4xl sm:text-3xl text-4xl ">

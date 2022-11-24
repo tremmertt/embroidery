@@ -14,7 +14,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const transToComponent = () => {
     const timeout = setTimeout(() => {
-      console.log("12", `${window.location.hash.split("#").join("")}-component`);
       handleTransitionToPurposeComponent(`${window.location.hash.split("#").join("")}-component`);
       clearTimeout(timeout);
     }, 300);
@@ -22,7 +21,6 @@ const Header = () => {
   if (window.location.hash) transToComponent();
 
   useEffect(() => {
-    console.log(window.location.hash);
     if (window.location.hash) transToComponent();
   }, []);
 
@@ -57,7 +55,7 @@ const Header = () => {
       { name: "Home", link: "/#home", id: "home-component" },
       { name: "Our Purpose", link: "/#our-purpose", id: "our-purpose-component" },
       { name: "Contact", link: "/#contact", id: "contact-component" },
-      { name: "Design", link: "/#showcase", id: "showcase-component" },
+      { name: "Design", link: "/design", id: "showcase-component" },
       { name: "Login", link: "/login", id: "login-component" },
     ];
 
@@ -97,12 +95,15 @@ const Header = () => {
           </li>
         );
       } else {
+        const link = window.location.pathname === "/" && item.link === "/design" ? "/#showcase" : item.link;
+        console.log(window.location.pathname);
         items.push(
           <li key={item.name}>
             <Link
-              to={item.link}
+              to={link}
               className="block py-2 pr-4 pl-3 hover:font-normal text-md text-gray-700 hover:text-red-800"
               aria-current="page"
+              style={{ color: theme.colorMain }}
               onClick={() => handleTransitionToPurposeComponent(item.id)}
             >
               {item.name}
@@ -115,7 +116,7 @@ const Header = () => {
     return (
       <ul
         className="flex flex-col p-4 mt-4 border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 lg:text-lg"
-        style={{ color: theme.color, backgroundColor: theme.backgroundColorMint }}
+        style={{ backgroundColor: theme.backgroundMainColor }}
       >
         {items}
       </ul>
@@ -125,12 +126,12 @@ const Header = () => {
   return (
     <div
       className="sticky shadow-md"
-      style={{ top: "0", zIndex: 1000, color: theme.color, backgroundColor: theme.backgroundColorMint }}
+      style={{ top: "0", zIndex: 1000, color: theme.color, backgroundColor: theme.backgroundMainColor }}
     >
       <Fragment>
         <div className="mx-auto py-0 overflow-hidden">
           <div className="container flex flex-wrap justify-between items-center mx-auto">
-            <Link className="flex title-font font-medium items-center text-gray-900 mb-4 mb-0" to="#">
+            <Link className="flex title-font font-medium items-center text-gray-900 mb-0" to="#">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -143,7 +144,14 @@ const Header = () => {
               >
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
               </svg>
-              <span className="ml-3 text-xl font-bold">Embroidery</span>
+              <span
+                className="ml-3 text-xl font-bold"
+                style={{
+                  color: theme.colorMain,
+                }}
+              >
+                Embroidery
+              </span>
             </Link>
             <button
               data-collapse-toggle="navbar-default"

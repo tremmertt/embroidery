@@ -5,13 +5,21 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import EuroIcon from "@mui/icons-material/Euro";
 import CurrencyYenIcon from "@mui/icons-material/CurrencyYen";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
+import { ThemeCustomContext } from "settings/theme-context";
+import { useContext } from "react";
 
 const Footer = () => {
+  const { theme } = useContext(ThemeCustomContext);
   return (
     <div>
-      <footer className="text-white body-font md:mx-auto bg-red-800">
+      <footer
+        className="text-white md:mx-auto "
+        style={{
+          backgroundColor: theme.backgroundMainColor,
+        }}
+      >
         <div className="container px-5 py-24 mx-auto">
-          <div className="flex flex-wrap md:text-left text-center order-first">
+          <div className="flex flex-wrap items-between justify-between md:text-left text-center order-first">
             <div className="lg:w-1/2 md:w-auto w-full px-4">
               <div className="flex py-3">
                 <img
@@ -19,36 +27,36 @@ const Footer = () => {
                   src="https://media.istockphoto.com/vectors/needle-with-thread-vector-icon-sewing-concept-symbol-or-design-vector-id898233082?k=20&m=898233082&s=612x612&w=0&h=6gffKipltwm055qY0M5wZ_TmZJ_uqK3n7EyOjwh2wEY="
                   alt=""
                 />
-                <h2 className="title-font text-white tracking-widest text-md mt-5 font-bold px-4"> Embroidery </h2>
+                <h2 className="text-white tracking-widest text-md mt-5 font-bold px-4"> Embroidery </h2>
               </div>
-              <p className="text-white text-md font-serif font-thin">
+              <p className="text-white text-md font-thin">
                 {" "}
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                 industry's standard dummy text ever.Since the 1500s, when an unknown printer.{" "}
               </p>
             </div>
             <div className="lg:w-1/3 md:w-auto w-full px-4 justify-center">
-              <h2 className="title-font font-bold text-white tracking-wide underline underline-offset-3 mt-4 text-xl mb-3">
+              <h2 className="font-bold text-white tracking-wide underline underline-offset-3 mt-4 text-xl mb-3">
                 More info
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <Link to="#" className="text-white hover:font-bold">
+                  <Link to="#" className="text-white">
                     About Us
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" className="text-white hover:font-bold">
+                  <Link to="#" className="text-white">
                     Information
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" className="text-white hover:font-bold">
+                  <Link to="#" className="text-white">
                     Privacy Policy
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" className="text-white hover:font-bold">
+                  <Link to="#" className="text-white">
                     Terms & Conditions
                   </Link>
                 </li>
@@ -56,7 +64,7 @@ const Footer = () => {
             </div>
           </div>
           {/* <hr className="my-6 border-gray-200 sm:mx-auto dark:border-white lg:my-8" /> */}
-          <div className="sm:flex sm:items-center sm:justify-between">
+          <div className="sm:flex sm:items-center px-4 sm:justify-between">
             {/* <span className="text-sm text-white sm:text-center dark:text-white">© 2022 <a href="https://flowbite.com/" className="hover:underline">Flowbite™</a>. All Rights Reserved.
             </span> */}
             <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
@@ -80,7 +88,7 @@ const Footer = () => {
                 </svg>
                 <span className="sr-only">Instagram page</span>
               </a>
-              <a href="#" className="text-white hover:text-gray-900 dark:hover:text-white">
+              {/* <a href="#" className="text-white hover:text-gray-900 dark:hover:text-white">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
                 </svg>
@@ -105,7 +113,7 @@ const Footer = () => {
                   />
                 </svg>
                 <span className="sr-only">Dribbbel account</span>
-              </a>
+              </a> */}
             </div>
 
             <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">

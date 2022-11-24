@@ -7,17 +7,17 @@ export default function Purpose() {
     <div className="container text-center mx-auto h-auto md:pt-14 pt-24 " id="our-purpose-component">
       <div className="tracking-wide font-sans font-extrabold lg:text-4xl sm:text-3xl text-4xl ">What is Embroidery</div>
 
-      <p className="text-md md:text-xl pt-2 pb-12 italic w-full">
+      <p className="text-md md:text-md pt-2 pb-12 italic w-full">
         {" "}
         - We want to bring you the best experience with our services -
       </p>
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-2">
         <div
-          style={{ backgroundColor: theme.backgroundColor }}
-          className="rounded-lg shadow-md col-span-2 px-2 text-center flex justify-center items-center flex-col"
+          // style={{ backgroundColor: theme.backgroundColor }}
+          className="col-span-1 px-2 text-center flex justify-center items-center flex-col"
         >
-          <div className="w-full sm:w-4/5 flex justify-center items-center ">
-            <div className="w-full sm:w-4/5">
+          <div className="flex justify-center items-center">
+            <div className="w-full">
               <h3 className="font-bold underline underline-offset-4 lg:text-3xl text-left text-2xl">
                 01. We support to
               </h3>
@@ -42,7 +42,7 @@ export default function Purpose() {
             </div>
           </div>
         </div>
-        <div className=" col-span-1 flex justify-center pl-12 items-center py-7">
+        <div className=" col-span-1 flex justify-start pl-12 items-start py-7">
           <img src={require("../../../assets/img/Group 591.png")} style={{ height: 260 }} alt="" />
         </div>
       </div>
@@ -52,8 +52,8 @@ export default function Purpose() {
           <img src={require("../../../assets/img/Open Peeps Bust.png")} alt="" height="200" />
         </div>
         <div
-          style={{ backgroundColor: theme.backgroundColor }}
-          className="rounded-lg shadow-md  col-span-2  sm:col-span-1 px-2 text-left flex justify-center items-center flex-col"
+          // style={{ backgroundColor: theme.backgroundColor }}
+          className="rounded-lg col-span-2  sm:col-span-1 px-2 text-left flex justify-center items-center flex-col"
         >
           <div className="w-full sm:w-4/5">
             <h3 className="text-center sm:text-left font-bold underline underline-offset-4 lg:text-3xl text-left text-2xl">
