@@ -15,7 +15,7 @@ from rest_framework.generics import get_object_or_404
 
 class LoginView(APIView):
     def get(self, request, media=None):  
-        url, state = Customer.login_by_google()
+        url, state = Customer.login_by_google() 
         return Response({"url": url, "state": state})
     
     def post(self, request, media=None): 
@@ -44,6 +44,7 @@ class LoginView(APIView):
                 if customer_db == None:
                     customer_db = Customer.objects.create(**customer)
                     serializer = CustomerSerializer(customer_db,many=False) 
+                    print('serializer.data',serializer.data)
                     return Response({
                         "message":"created customer successfully",
                         "customer": serializer.data,

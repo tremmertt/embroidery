@@ -25,7 +25,7 @@ _SCOPE = [
     'https://www.googleapis.com/auth/userinfo.profile',
     'https://www.googleapis.com/auth/userinfo.email'
 ]
-_REDIRECT_URI = 'http://localhost:3000/login-success'
+_REDIRECT_URI = os.getenv('GOOGLE_REDIRECT_URI')
 
 class AccountGoogleService(object):
     @staticmethod

@@ -5,8 +5,7 @@ import LoginService from "../../service/LoginService";
 export default function Login() {
   const getUrlLogin = async (media: string) => {
     const { url, state } = await LoginService.getUrlLogin(media);
-    console.log(url, state);
-    window.open(url, "_blank");
+    window.location.href = url;
   };
   const { customer } = useSelector((state: any) => state.LoginReducer);
   const navigate = useNavigate();
