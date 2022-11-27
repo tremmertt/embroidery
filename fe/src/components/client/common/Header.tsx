@@ -1,13 +1,43 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Avatar, Button, Menu, MenuItem } from "@mui/material";
-import React, { Fragment, useContext, useEffect } from "react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+} from "@mui/material";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LoginAction from "redux/actions/LoginAction";
 import { ThemeCustomContext } from "../../../settings/theme-context";
+import MenuIcon from "@mui/icons-material/Menu";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import WorkspacesIcon from "@mui/icons-material/Workspaces";
+import HomeIcon from "@mui/icons-material/Home";
+import CallIcon from "@mui/icons-material/Call";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
+
+type Anchor = "top" | "left" | "bottom" | "right";
 
 const Header = () => {
   const { theme } = useContext(ThemeCustomContext);
+  const [anchor, setAnchor] = useState("right" as Anchor);
+  const [state, setState] = useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
   const { customer } = useSelector((state: any) => state.LoginReducer);
   const dispatch = useDispatch();
   const transToComponent = () => {
@@ -21,7 +51,7 @@ const Header = () => {
   if (window.location.hash) transToComponent();
   useEffect(() => {
     if (window.location.hash) transToComponent();
-  }, []);
+  });
 
   const handleTransitionToPurposeComponent = (id: string) => {
     if (id === "home-component") window.scrollTo({ left: 0, top: -20, behavior: "smooth" });
@@ -31,7 +61,7 @@ const Header = () => {
         if (ele)
           window.scroll({
             left: ele.offsetLeft,
-            top: isSP ? ele.offsetTop - 40 : ele.offsetTop - 65,
+            top: isSP ? ele.offsetTop - 40 : ele.offsetTop - 60,
             behavior: "smooth",
           });
       } catch (err) {
@@ -91,8 +121,6 @@ const Header = () => {
                 "aria-labelledby": "basic-button",
               }}
             >
-              {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem> */}
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </li>
@@ -125,6 +153,106 @@ const Header = () => {
     );
   };
 
+  const toggleDrawer = (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (
+      event.type === "keydown" &&
+      ((event as React.KeyboardEvent).key === "Tab" || (event as React.KeyboardEvent).key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor: Anchor) => {
+    const navigationItems = [
+      { name: "Home", link: "/#home", id: "home-component", icon: <HomeIcon></HomeIcon> },
+      {
+        name: "Our Purpose",
+        link: "/#our-purpose",
+        id: "our-purpose-component",
+        icon: <WorkspacesIcon></WorkspacesIcon>,
+      },
+      { name: "Contact", link: "/#contact", id: "contact-component", icon: <CallIcon></CallIcon> },
+      { name: "Design", link: "/design", id: "showcase-component", icon: <DesignServicesIcon></DesignServicesIcon> },
+    ];
+
+    const navigationAuthenItems =
+      customer && customer.id
+        ? [{ name: "Logout", link: "#", id: "logout-component", icon: <LogoutIcon></LogoutIcon> }]
+        : [{ name: "Login", link: "/login", id: "login-component", icon: <LoginIcon></LoginIcon> }];
+
+    return (
+      <Box
+        sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+        role="presentation"
+        className="flex justify-center items-center"
+        onClick={toggleDrawer(anchor, false)}
+        onKeyDown={toggleDrawer(anchor, false)}
+      >
+        {customer ? (
+          <div>
+            <Button
+              variant="text"
+              id="basic-button"
+              disableRipple
+              fullWidth
+              className="rounded-lg flex items-center "
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              disableElevation
+              disableFocusRipple
+              aria-expanded={open ? "true" : undefined}
+            >
+              <Avatar sx={{ width: 40, height: 40 }} alt={customer.name} src={customer.image} />
+            </Button>
+            <Divider />
+          </div>
+        ) : (
+          <></>
+        )}
+        <List>
+          {navigationItems.map((item, index) => {
+            const link = window.location.pathname === "/" && item.link === "/design" ? "/#showcase" : item.link;
+            return (
+              <Link to={link} key={`${item.name}-${index}-mobile`}>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.name} />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+            );
+          })}
+        </List>
+        <Divider />
+        <List>
+          {navigationAuthenItems.map((item, index) => {
+            const link = item.link;
+            return item.name === "Login" ? (
+              <Link to={link} key={`${item.name}-${index}-mobile`}>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.name} />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+            ) : (
+              <ListItem disablePadding onClick={handleLogout} key={`${item.name}-${index}-mobile`}>
+                <ListItemButton>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.name} />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+        </List>
+      </Box>
+    );
+  };
+
   return (
     <div
       className="sticky shadow-md"
@@ -134,19 +262,6 @@ const Header = () => {
         <div className="mx-auto py-0 overflow-hidden">
           <div className="container flex flex-wrap justify-between items-center mx-auto">
             <Link className="flex title-font px-2 font-medium items-center text-gray-900 mb-0" to="/">
-              {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                className="md:w-10 md:h-10 w-6 h-6 text-white md:p-2 p-1 bg-red-600 rounded-full"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-              </svg> */}
-
               <img
                 src={require("../../../assets/img/logo.png")}
                 style={{ height: isSP ? 30 : 36 }}
@@ -162,28 +277,26 @@ const Header = () => {
                 Embroidery
               </span>
             </Link>
-            <button
-              data-collapse-toggle="navbar-default"
-              type="button"
-              className="inline-flex items-center p-4 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-200 dark:text-red-400 dark:hover:bg-red-700 dark:focus:ring-red-600"
-              aria-controls="navbar-default"
-              aria-expanded="false"
+            <Button
+              variant="text"
+              id="basic-button"
+              disableRipple
+              className="rounded-lg w-12 h-12 md:hidden"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              disableElevation
+              disableFocusRipple
+              aria-expanded={open ? "true" : undefined}
+              onClick={toggleDrawer(anchor, true)}
+              style={{
+                color: theme.colorMain,
+              }}
             >
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className="w-6 h-6"
-                aria-hidden="true"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
+              <MenuIcon fontSize="medium" color="inherit"></MenuIcon>
+            </Button>
+            <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+              {list(anchor)}
+            </Drawer>
             <div className="hidden w-full md:block md:w-auto " id="navbar-default">
               {navigationItemsMap()}
             </div>

@@ -10,13 +10,14 @@ import { ThemeCustomContext } from "settings/theme-context";
 import RuleTextField from "custom/RuleTextField";
 
 export default function Login() {
-  const [showPassword, setShowPassword] = useState(false);
   const { theme } = useContext(ThemeCustomContext);
   const { t } = useTranslation();
   useTitle(t("login.LoginPage"));
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [errorObj, setErrorObj] = useState({
     email: {
       isValid: true,
@@ -27,6 +28,43 @@ export default function Login() {
       messageErrors: [] as string[],
     },
   });
+
+  const validateForm = () => {
+    let isValid = true;
+    isValid = checkValid(email, "email", "required|email") && isValid;
+    isValid = checkValid(password, "password", "required|password") && isValid;
+    setIsFormValid(!isValid);
+    return isValid;
+  };
+
+  const loginHandler = (e: React.FormEvent) => {
+    if (validateForm()) {
+      console.log("valid form");
+    } else {
+      console.log("inValid form");
+    }
+  };
+  const checkValid = (
+    value: string,
+    field: "email" | "password",
+    rules = "required",
+    valueConfirm?: string,
+    fieldConfirm?: string
+  ) => {
+    const { isValid, messages } = RuleTextField.checkValid(value, field, rules, valueConfirm, fieldConfirm);
+
+    if (isValid) {
+      errorObj[field].isValid = true;
+      errorObj[field].messageErrors = [];
+      setErrorObj(errorObj);
+    } else {
+      errorObj[field].isValid = false;
+      errorObj[field].messageErrors = messages;
+      setErrorObj(errorObj);
+      setIsFormValid(false);
+    }
+    return isValid;
+  };
 
   const getUrlLogin = async (media: string) => {
     const { url, state } = await LoginService.getUrlLogin(media);
@@ -60,8 +98,8 @@ export default function Login() {
 
   return (
     <div>
-      <section className="h-full py-24">
-        <div className="px-6 h-full text-gray-800">
+      <section className="h-full md:py-24 py-12">
+        <div className="md:px-6 px-2 h-full text-gray-800">
           <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
             <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
               <img
@@ -70,7 +108,7 @@ export default function Login() {
                 alt="Sample"
               />
             </div>
-            <div className="px-20 grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
+            <div className="md:px-20 px-2 grow-0 shrink-1 md:shrink-0 basis-auto w-full xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
               <form>
                 {/* Email input */}
                 <div className="mb-6">
@@ -93,7 +131,10 @@ export default function Login() {
                     id="emailInputSignUp"
                     placeholder="Email Address"
                     helperText={errorObj.email.messageErrors ? errorObj.email.messageErrors[0] : ""}
-                    onChange={(evt) => setValue(evt.target.value, "email", "required")}
+                    onChange={(evt) => {
+                      setEmail(evt.target.value);
+                      checkValid(evt.target.value, "email", "required|email");
+                    }}
                     value={email}
                     autoComplete="on"
                     type="text"
@@ -120,7 +161,10 @@ export default function Login() {
                     id="passwordInputSignUp"
                     placeholder="Password"
                     helperText={errorObj.password.messageErrors ? errorObj.password.messageErrors[0] : ""}
-                    onChange={(evt) => setValue(evt.target.value, "password", "required")}
+                    onChange={(evt) => {
+                      setPassword(evt.target.value);
+                      checkValid(evt.target.value, "password", "required|password");
+                    }}
                     value={password}
                     autoComplete="on"
                     type={showPassword ? "text" : "password"}
@@ -158,7 +202,11 @@ export default function Login() {
                 <div className="text-center lg:text-left">
                   <button
                     type="button"
-                    className="inline-block px-7 py-3 bg-red-700 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-lg transition duration-150 ease-in-out"
+                    onClick={(e) => loginHandler(e)}
+                    style={{
+                      backgroundColor: theme.backgroundMainColor,
+                    }}
+                    className="inline-block px-7 py-3 bg-red-700 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out"
                   >
                     Login
                   </button>
@@ -181,8 +229,11 @@ export default function Login() {
                     type="button"
                     data-mdb-ripple="true"
                     data-mdb-ripple-color="light"
-                    className="inline-block p-3 bg-red-700 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-lg transition duration-150 ease-in-out mx-1"
+                    className="inline-block p-3 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-lg transition duration-150 ease-in-out mx-1"
                     onClick={() => getUrlLogin("google")}
+                    style={{
+                      backgroundColor: theme.backgroundMainColor,
+                    }}
                   >
                     {/* Google */}
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 512" className="w-4 h-4">
@@ -196,7 +247,10 @@ export default function Login() {
                     type="button"
                     data-mdb-ripple="true"
                     data-mdb-ripple-color="light"
-                    className="inline-block p-3 bg-red-700 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-lg transition duration-150 ease-in-out mx-1"
+                    style={{
+                      backgroundColor: theme.backgroundMainColor,
+                    }}
+                    className="inline-block p-3 bg-red-700 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-lg transition duration-150 ease-in-out mx-1"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" className="w-4 h-4">
                       <path

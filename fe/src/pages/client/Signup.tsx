@@ -9,6 +9,7 @@ import useTitle from "../../components/general/useTitle";
 export default function Signup() {
   const { t } = useTranslation();
   useTitle(t("login.SignUpPage"));
+
   const { theme } = useContext(ThemeCustomContext);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,6 +17,7 @@ export default function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const [errorObj, setErrorObj] = useState({
     name: {
@@ -36,44 +38,55 @@ export default function Signup() {
     },
   });
 
-  const signUpHandler = () => {};
-
-  // console.log("name: " + name);
-  // console.log("email: " + email);
-  // console.log("password: " + password);
-  // console.log("confirmPassword: " + confirmPassword);
-
-  const submit = (e: React.FormEvent) => {
-    console.log(submit);
+  const validateForm = () => {
+    let isValid = true;
+    isValid = checkValid(name, "name", "required|normalText") && isValid;
+    isValid = checkValid(email, "email", "required|email") && isValid;
+    isValid = checkValid(password, "password", "required|password") && isValid;
+    isValid =
+      checkValid(confirmPassword, "confirmPassword", "required|password|confirmPassword", password, "password") &&
+      isValid;
+    setIsFormValid(!isValid);
+    return isValid;
   };
 
-  const setValue = (value: string, field: "name" | "email" | "password" | "confirmPassword", rules = "required") => {
-    const { isValid, messages } = RuleTextField.checkValid(value, field, rules);
+  const signUpHandler = (e: React.FormEvent) => {
+    if (validateForm()) {
+      console.log("valid form");
+    } else {
+      console.log("inValid form");
+    }
+  };
+  const checkValid = (
+    value: string,
+    field: "name" | "email" | "password" | "confirmPassword",
+    rules = "required",
+    valueConfirm?: string,
+    fieldConfirm?: string
+  ) => {
+    const { isValid, messages } = RuleTextField.checkValid(value, field, rules, valueConfirm, fieldConfirm);
+
     if (isValid) {
-      console.log("valid", field, value);
       errorObj[field].isValid = true;
       errorObj[field].messageErrors = [];
       setErrorObj(errorObj);
     } else {
-      console.log("invalid", field, value);
       errorObj[field].isValid = false;
       errorObj[field].messageErrors = messages;
       setErrorObj(errorObj);
+      setIsFormValid(false);
     }
-    if (field === "name") setName(value);
-    else if (field === "email") setEmail(value);
-    else if (field === "password") setPassword(value);
-    else if (field === "confirmPassword") setConfirmPassword(value);
+    return isValid;
   };
 
   return (
     <div>
       <section className="h-full md:py-24 py-12">
-        <div className="px-6 h-full text-gray-800">
+        <div className="md:px-6 px-2 h-full text-gray-800">
           <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
-            <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
+            <div className="grow-0 shrink-1 md:shrink-0 basis-auto w-full xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
               <h1 className="text-red-900 font-semibold text-4xl pb-6 text-center"> SIGN UP </h1>
-              <form className="rounded-2xl" onSubmit={(e) => submit(e)} noValidate={false}>
+              <form className="rounded-2xl px-2">
                 <div className="mb-6">
                   <TextField
                     /* styles the wrapper */
@@ -94,7 +107,10 @@ export default function Signup() {
                     id="nameInputSignUp"
                     placeholder="Full Name"
                     helperText={errorObj.name.messageErrors ? errorObj.name.messageErrors[0] : ""}
-                    onChange={(evt) => setValue(evt.target.value, "name", "required|normalText")}
+                    onChange={(evt) => {
+                      setName(evt.target.value);
+                      checkValid(evt.target.value, "name", "required|normalText");
+                    }}
                     value={name}
                     type="text"
                   />
@@ -119,7 +135,10 @@ export default function Signup() {
                     id="emailInputSignUp"
                     placeholder="Email Address"
                     helperText={errorObj.email.messageErrors ? errorObj.email.messageErrors[0] : ""}
-                    onChange={(evt) => setValue(evt.target.value, "email", "required")}
+                    onChange={(evt) => {
+                      setEmail(evt.target.value);
+                      checkValid(evt.target.value, "email", "required|email");
+                    }}
                     value={email}
                     autoComplete="on"
                     type="text"
@@ -146,7 +165,10 @@ export default function Signup() {
                     id="passwordInputSignUp"
                     placeholder="Password"
                     helperText={errorObj.password.messageErrors ? errorObj.password.messageErrors[0] : ""}
-                    onChange={(evt) => setValue(evt.target.value, "password", "required")}
+                    onChange={(evt) => {
+                      setPassword(evt.target.value);
+                      checkValid(evt.target.value, "password", "required|password");
+                    }}
                     value={password}
                     autoComplete="on"
                     type={showPassword ? "text" : "password"}
@@ -186,7 +208,16 @@ export default function Signup() {
                     id="confirmPasswordInputSignUp"
                     placeholder="Confirm Password"
                     helperText={errorObj.confirmPassword.messageErrors ? errorObj.confirmPassword.messageErrors[0] : ""}
-                    onChange={(evt) => setValue(evt.target.value, "confirmPassword", "required")}
+                    onChange={(evt) => {
+                      setConfirmPassword(evt.target.value);
+                      checkValid(
+                        evt.target.value,
+                        "confirmPassword",
+                        "required|password|confirmPassword",
+                        password,
+                        "password"
+                      );
+                    }}
                     value={confirmPassword}
                     autoComplete="on"
                     type={showConfirmPassword ? "text" : "password"}
@@ -209,8 +240,11 @@ export default function Signup() {
                 <div className="text-center lg:text-left">
                   <button
                     type="button"
-                    onClick={(e) => submit(e)}
-                    className="inline-block px-7 py-3 bg-red-700 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-lg transition duration-150 ease-in-out"
+                    onClick={(e) => signUpHandler(e)}
+                    className="inline-block px-7 py-3 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-lg transition duration-150 ease-in-out"
+                    style={{
+                      backgroundColor: theme.backgroundMainColor,
+                    }}
                   >
                     Sign Up
                   </button>

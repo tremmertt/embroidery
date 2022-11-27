@@ -1,4 +1,5 @@
 import React from "react";
+import Zoom from "react-medium-image-zoom";
 
 export default function ShowRoom() {
   const isSP = window.innerWidth < 640 ? true : false;
@@ -39,7 +40,10 @@ export default function ShowRoom() {
     const image = require(`../../../assets/img/showcase${fileName}`);
     items.push(
       <div className="shrink-0" key={`${i}-image-showroom`}>
-        <img src={image} style={{ height: isSP ? 80 : 260 }} alt="" />
+        <Zoom>
+          {" "}
+          <img src={image} style={{ height: isSP ? 130 : 260, width: isSP ? 130 : 260 }} alt="" />
+        </Zoom>
       </div>
     );
   }

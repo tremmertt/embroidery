@@ -4,6 +4,10 @@
 fe/node_modules
 fe/dist
 fe/build
+fe/.env
+fe/.env.local
+fe/.env.production
+
 be/node_modules
 be/dist
 /node_modules

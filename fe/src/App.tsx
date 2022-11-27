@@ -2,6 +2,7 @@ import "./index.css";
 import { createBrowserHistory } from "history";
 import { Router, Routes, Route } from "react-router-dom";
 
+import "react-medium-image-zoom/dist/styles.css";
 import "react-toastify/dist/ReactToastify.css";
 import "./translations/i18n";
 import HomePage from "./pages/client/HomePage";
@@ -57,7 +58,7 @@ function App() {
   return (
     <div style={{ height: "100vh !important", color: theme.color, backgroundColor: theme.backgroundColorMint }}>
       <ToastContainer
-        position="bottom-center"
+        position="top-right"
         autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}

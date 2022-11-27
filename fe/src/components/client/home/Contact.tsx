@@ -1,12 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import ContactsIcon from "@mui/icons-material/Contacts";
-import { ThemeCustomContext } from "settings/theme-context";
 
 export default function Contact() {
-  const { theme } = useContext(ThemeCustomContext);
-
   return (
     <div className="container-fluid" id="contact-component">
       <div
