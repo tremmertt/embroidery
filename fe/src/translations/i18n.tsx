@@ -4,6 +4,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import moment from "moment-timezone";
 import TRANSLATIONS_VN from "./lang/vn.json";
 import TRANSLATIONS_EN from "./lang/en.json";
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -18,7 +19,6 @@ i18n
       },
     },
   });
-
 i18n.init({
   interpolation: {
     format: function (value, format, lng) {
@@ -29,3 +29,4 @@ i18n.init({
   },
 });
 export { i18n };
+console.log("init i18n");

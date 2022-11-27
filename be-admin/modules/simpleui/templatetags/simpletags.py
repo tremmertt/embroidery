@@ -8,7 +8,7 @@ import sys
 import time
 
 import django
-import simpleui
+import modules.simpleui
 from django import template
 from django.contrib.admin.templatetags.admin_urls import add_preserved_filters
 from django.core.serializers.json import DjangoJSONEncoder

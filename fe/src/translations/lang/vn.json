@@ -48,5 +48,9 @@
     "SignIn": "Đăng nhập",
     "SignUp": "Đăng kí",
     "Logout": "Đăng xuất"
+  },
+  "login": {
+    "LoginPage": "Đăng nhập",
+    "SignUpPage": "Đăng kí"
   }
 }

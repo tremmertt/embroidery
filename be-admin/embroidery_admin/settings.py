@@ -13,10 +13,12 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 import sys
 
+from os.path import join, dirname
 from dotenv import load_dotenv
 from pathlib import Path
 
-load_dotenv()
+dotenv_path = join(dirname(__file__), '../.env.local')
+load_dotenv(dotenv_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,13 +33,22 @@ SECRET_KEY = os.getenv("APP_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("APP_DEBUG")
 
+ALLOWED_HOSTS = ['localhost','127.0.0.1', 'rcpmw3me3e.execute-api.ap-southeast-1.amazonaws.com',]
 
-ALLOWED_HOSTS = ["*"]
+S3_BUCKET_NAME = "embroidery-admin-dev"
+STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+AWS_S3_BUCKET_NAME_STATIC = S3_BUCKET_NAME
+# serve the static files directly from the specified s3 bucket
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % S3_BUCKET_NAME
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
+# if you have configured a custom domain for your static files use:
+#AWS_S3_PUBLIC_URL_STATIC = "https://static.yourdomain.com/"
 
 # Application definition
 
 INSTALLED_APPS = [
+    "django_s3_storage",
     "modules.simpleui.apps.SimpleApp",
     "django.contrib.admin",
     "django.contrib.contenttypes",
@@ -57,6 +68,7 @@ INSTALLED_APPS = [
     # "crispy_forms",
     "modules.contact.apps.ContactConfig",
     
+    
     # "modules.django_mailbox.apps.MailBoxConfig",
     # 'social_django',
     # 'social.apps.django_app.default'
@@ -65,6 +77,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",

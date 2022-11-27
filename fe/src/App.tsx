@@ -2,36 +2,41 @@ import "./index.css";
 import { createBrowserHistory } from "history";
 import { Router, Routes, Route } from "react-router-dom";
 
-// import ScrollToTop from "./ScrollToTop";
-
+import "react-toastify/dist/ReactToastify.css";
+import "./translations/i18n";
 import HomePage from "./pages/client/HomePage";
-import ProductPage from "./pages/client/ProductPage";
-import CartPage from "./pages/client/CartPage";
-import HistoryPage from "./pages/client/HistoryPage";
-import ContactPage from "./pages/client/ContactPage";
+import ShowRoomPage from "./pages/client/ShowRoomPage";
+import Login from "./pages/client/Login";
+import LoginSuccess from "./pages/client/LoginSuccess";
+import ErrorPage from "./pages/client/ErrorPage";
+import Signup from "./pages/client/Signup";
 
-import DashBoardPage from "./pages/admin/dashboard/DashBoardPage";
-import SettingPage from "./pages/admin/setting/SettingPage";
-import ProfilePage from "./pages/admin/profile/ProfilePage";
-import SigninPage from "./pages/admin/auth/SigninPage";
-import OrderListPage from "./pages/admin/order/OrderListPage";
+// import CartPage from "./pages/client/CartPage";
+// import HistoryPage from "./pages/client/HistoryPage";
+// import ContactPage from "./pages/client/ContactPage";
 
-import StaffListPage from "./pages/admin/staff/StaffListPage";
-import CreateStaffPage from "./pages/admin/staff/CreateStaffPage";
-import EditStaffPage from "./pages/admin/staff/EditStaffPage";
+// import DashBoardPage from "./pages/admin/dashboard/DashBoardPage";
+// import SettingPage from "./pages/admin/setting/SettingPage";
+// import ProfilePage from "./pages/admin/profile/ProfilePage";
+// import SigninPage from "./pages/admin/auth/SigninPage";
+// import OrderListPage from "./pages/admin/order/OrderListPage";
 
-import ProductListPage from "./pages/admin/product/ProductListPage";
-import CreateProductPage from "./pages/admin/product/CreateProductPage";
-import EditProductPage from "./pages/admin/product/EditProductPage";
+// import StaffListPage from "./pages/admin/staff/StaffListPage";
+// import CreateStaffPage from "./pages/admin/staff/CreateStaffPage";
+// import EditStaffPage from "./pages/admin/staff/EditStaffPage";
 
-import AgencyListPage from "./pages/admin/agency/AgencyListPage";
-import CustomerListPage from "./pages/admin/customer/CustomerListPage";
+// import ProductListPage from "./pages/admin/product/ProductListPage";
+// import CreateProductPage from "./pages/admin/product/CreateProductPage";
+// import EditProductPage from "./pages/admin/product/EditProductPage";
+
+// import AgencyListPage from "./pages/admin/agency/AgencyListPage";
+// import CustomerListPage from "./pages/admin/customer/CustomerListPage";
 
 import ClientTemplate from "./templates/ClientTemplate";
-import AdminTemplate from "./templates/AdminTemplate";
+// import AdminTemplate from "./templates/AdminTemplate";
 import { useContext, useLayoutEffect, useState } from "react";
-import { ThemeCustomContext } from "./settings/theme-context";
-// https://mui.com/material-ui/material-icons/?theme=Sharp&query=user
+import { ThemeCustomContext } from "./settings/theme-context"; // https://mui.com/material-ui/material-icons/?theme=Sharp&query=user
+import { ToastContainer } from "react-toastify"; //https://www.npmjs.com/package/react-toastify
 
 export const history = createBrowserHistory();
 
@@ -51,12 +56,27 @@ function App() {
 
   return (
     <div style={{ height: "100vh !important", color: theme.color, backgroundColor: theme.backgroundColorMint }}>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <CustomRouter history={history}>
-        {/* <ScrollToTop> */}
-
         <Routes>
           {/* client */}
           <Route path="/" element={<ClientTemplate Component={HomePage} />} />
+          <Route path="/design" element={<ClientTemplate Component={ShowRoomPage} />} />
+          <Route path="/login" element={<ClientTemplate Component={Login} />} />
+          <Route path="/login-success" element={<ClientTemplate Component={LoginSuccess} />} />
+          <Route path="/signup" element={<ClientTemplate Component={Signup} />} />
+          <Route path="/123" element={<ClientTemplate Component={ErrorPage} />} />
           {/* <Route path="/product" element={<ClientTemplate Component={ProductPage} />} />
           <Route path="/cart" element={<ClientTemplate Component={CartPage} />} />
           <Route path="/history" element={<ClientTemplate Component={HistoryPage} />} />
@@ -77,7 +97,6 @@ function App() {
           <Route path="/admin/profile" element={<AdminTemplate Component={ProfilePage} />} />
           <Route path="/signin" element={<AdminTemplate Component={SigninPage} />} /> */}
         </Routes>
-        {/* </ScrollToTop> */}
       </CustomRouter>
     </div>
   );

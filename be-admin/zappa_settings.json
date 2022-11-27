@@ -1,0 +1,11 @@
+{
+  "dev": {
+    "django_settings": "embroidery_admin.settings",
+    "aws_region": "ap-southeast-1",
+    "profile_name": "pcw-admin",
+    "project_name": "embroidery-admin",
+    "runtime": "python3.9",
+    "timeout_seconds": 300,
+    "s3_bucket": "embroidery-admin-dev"
+  }
+}

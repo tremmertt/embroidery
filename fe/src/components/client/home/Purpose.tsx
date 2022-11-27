@@ -1,69 +1,77 @@
 import React from "react";
 
 export default function Purpose() {
+  const isSP = window.innerWidth < 640 ? true : false;
+
   return (
-    <div className="container-fluid text-center mx-auto h-auto pt-16 sm:pt-24 " id="our-purpose-component">
-      <h1 className="text-red-900 tracking-wide font-sans font-extrabold lg:text-4xl sm:text-3xl text-4xl inline-block justify-center text-center">
-        Our purpose
-      </h1>
-      <p className="text-md md:text-xl pt-2 pb-6 italic w-full">
+    <div className="container text-center mx-auto h-auto md:pt-14 py-6 " id="our-purpose-component">
+      <div className="tracking-wide font-sans font-extrabold text-2xl md:text-4xl  ">What is Embroidery</div>
+      <p className="text-sm md:text-lg pt-2 md:pb-12 pb-4 italic w-full">
         {" "}
         - We want to bring you the best experience with our services -
       </p>
       <div className="grid grid-cols-2">
-        <div className="col-span-2 sm:col-span-1 px-2 text-center flex justify-center items-center flex-col">
-          <div className="w-full sm:w-4/5 flex justify-center items-center ">
-            <div className="w-full sm:w-4/5">
-              <h3 className="font-bold underline underline-offset-4 lg:text-3xl text-left text-2xl">
-                01. We support to
-              </h3>
-              <ol className="list-decimal pl-5 leading-7 py-4 text-left">
-                <li>
-                  {" "}
-                  <b> Flat/Regular</b> embroidery digitizing{" "}
+        <div
+          // style={{ backgroundColor: theme.backgroundColor }}
+          className="col-span-2 md:col-span-1 px-2 text-center flex justify-center items-center md:items-end flex-col"
+        >
+          <div className="flex justify-center items-center md:py-0 pt-3">
+            <div className="w-full">
+              <div
+                style={{ fontSize: isSP ? 80 : 90 }}
+                className="md:my-4 my-4 leading-10 md:font-thin font-medium lg:text-3xl tracking-tight text-center md:text-right"
+              >
+                01.
+              </div>
+              <ol className="list-none md:text-md text-sm md:leading-7 md:py-4 p-0 text-center md:text-right">
+                <li className="my-3 font-bold underline text-xl md:text-3xl ">We support to</li>
+                <li className="md:py-0 py-1">
+                  <b> Flat/Regular</b> embroidery digitizing
                 </li>
-                <li>
-                  {" "}
-                  <b>3D Puff/Raised</b> embroidery digitizing{" "}
+                <li className="md:py-0 py-1">
+                  <b>3D Puff/Raised</b> embroidery digitizing
                 </li>
-                <li>
-                  {" "}
-                  <b>Patch</b> embroidery digitizing{" "}
+                <li className="md:py-0 py-1">
+                  <b>Patch</b> embroidery digitizing
                 </li>
-                <li>
-                  {" "}
-                  <b>And many others type of</b> embroidery digitizing{" "}
+                <li className="md:py-0 py-1">
+                  <b>And many others type of</b> embroidery digitizing
                 </li>
               </ol>
             </div>
           </div>
         </div>
-        <div className=" col-span-2 sm:col-span-1 flex justify-start pl-12 items-center py-7">
-          <img src={require("../../../assets/img/Group 591.png")} height="200" alt="" />
+        <div className="hidden md:block col-span-2 md:col-span-1 flex justify-start pl-12 items-start py-7">
+          <img src={require("../../../assets/img/Group 591.png")} style={{ height: 260 }} alt="" />
         </div>
       </div>
 
-      <div className="grid grid-cols-2 py-12">
-        <div className=" hidden col-span-2 sm:col-span-1 sm:flex justify-center items-center py-7">
-          <img src={require("../../../assets/img/Open Peeps Bust.png")} alt="" height="200" />
+      <div className="grid grid-cols-2 md:py-12 py-4">
+        <div className="md:col-span-1 col-span-2 flex md:justify-end justify-center items-center py-7">
+          <img src={require("../../../assets/img/Open Peeps Bust.png")} alt="" width={isSP ? "200" : "400"} />
         </div>
-        <div className="col-span-2  sm:col-span-1 px-2 text-left flex justify-center items-center flex-col">
+        <div
+          // style={{ backgroundColor: theme.backgroundColor }}
+          className="rounded-lg md:col-span-1 col-span-2 px-2 text-left flex justify-center items-center flex-col"
+        >
           <div className="w-full sm:w-4/5">
-            <h3 className="text-center sm:text-left font-bold underline underline-offset-4 lg:text-3xl text-left text-2xl">
-              02. Benefit we supply
-            </h3>
-            <ol className="list-disc pl-5 leading-7 py-4">
-              <li> Wilcom Digitizing. </li>
-              <li> Highly skilled digitisers. </li>
-              <li> Competitive pricing. </li>
-              <li> Fast Turnaround. </li>
-              <li> 50 logos daily capacity. </li>
-              <li> Major formats available. </li>
-              <li> Free format conversions. </li>
-              <li> Specialist in 3D, PUFF and small lettering. </li>
-              <li> Free editing.. will send PDF of every digitized design. </li>
-              <li> High level workflow system. </li>
-              <li> Online support. </li>
+            <div
+              style={{ fontSize: isSP ? 80 : 90 }}
+              className="md:my-4 my-4 leading-10 md:font-thin font-medium lg:text-3xl tracking-tight text-center md:text-left"
+            >
+              02.
+            </div>
+            <ol className="list-none md:text-md text-sm md:leading-7 md:py-4 p-0 text-center md:text-left">
+              <li className="my-3 font-bold underline text-xl md:text-3xl"> Benefit we supply </li>
+              <li className="md:py-0 py-1"> Wilcome Embroidery Digitizing logo, embroidery design. </li>
+              <li className="md:py-0 py-1"> Highly skilled digitisers. </li>
+              <li className="md:py-0 py-1"> Competitive pricing. </li>
+              <li className="md:py-0 py-1"> 50 logos daily capacity. </li>
+              <li className="md:py-0 py-1"> Any type of file convert to dst, jef, pes, emb. </li>
+              <li className="md:py-0 py-1"> Specialist in 3D, PUFF and small lettering. </li>
+              <li className="md:py-0 py-1"> High level workflow system. </li>
+              <li className="md:py-0 py-1"> Free Unlimited Revisions. </li>
+              <li className="md:py-0 py-1"> Online support. </li>
             </ol>
           </div>
         </div>

@@ -7,7 +7,6 @@ const useTitle = (title: string): void => {
 
   useEffect(() => {
     document.title = `${process.env.REACT_APP_NAME} - ${title}`;
-    console.log("document.title", document.title);
     return () => {
       document.title = `${process.env.REACT_APP_NAME} - ${title}`;
     };
