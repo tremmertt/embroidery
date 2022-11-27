@@ -82,11 +82,11 @@ export default function Signup() {
   return (
     <div>
       <section className="h-full md:py-24 py-12">
-        <div className="px-6 h-full text-gray-800">
+        <div className="md:px-6 px-2 h-full text-gray-800">
           <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
-            <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
+            <div className="grow-0 shrink-1 md:shrink-0 basis-auto w-full xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
               <h1 className="text-red-900 font-semibold text-4xl pb-6 text-center"> SIGN UP </h1>
-              <form className="rounded-2xl">
+              <form className="rounded-2xl px-2">
                 <div className="mb-6">
                   <TextField
                     /* styles the wrapper */
@@ -241,7 +241,10 @@ export default function Signup() {
                   <button
                     type="button"
                     onClick={(e) => signUpHandler(e)}
-                    className="inline-block px-7 py-3 bg-red-700 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-lg transition duration-150 ease-in-out"
+                    className="inline-block px-7 py-3 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-lg transition duration-150 ease-in-out"
+                    style={{
+                      backgroundColor: theme.backgroundMainColor,
+                    }}
                   >
                     Sign Up
                   </button>
