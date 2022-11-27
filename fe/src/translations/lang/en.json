@@ -48,5 +48,9 @@
     "SignIn": "Sign In",
     "SignUp": "Sign Up",
     "Logout": "Logout"
+  },
+  "login": {
+    "LoginPage": "Login",
+    "SignUpPage": "Sign Up"
   }
 }

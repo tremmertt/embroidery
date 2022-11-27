@@ -18,6 +18,8 @@ const themes = {
     backgroundColorWithHover: "bg-[#111c44] hover:bg-[#152254]",
     buttonWidthPrimary: 144,
     buttonHeightPrimary: 48,
+    textFieldWidthPrimary: 144,
+    textFieldHeightPrimary: 48,
   },
   light: {
     backgroundColor: "white",
@@ -32,6 +34,8 @@ const themes = {
     backgroundColorWithHover: "bg-[#f4f7fe] hover:bg-[#e3e6ef]",
     buttonWidthPrimary: 144,
     buttonHeightPrimary: 48,
+    textFieldWidthPrimary: 144,
+    textFieldHeightPrimary: 48,
   },
   red: {
     backgroundColor: "white",
@@ -47,6 +51,8 @@ const themes = {
     borderColor: "#000",
     buttonWidthPrimary: 144,
     buttonHeightPrimary: 48,
+    textFieldWidthPrimary: 144,
+    textFieldHeightPrimary: 48,
   },
 };
 

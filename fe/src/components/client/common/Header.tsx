@@ -65,7 +65,6 @@ const Header = () => {
 
     for (const item of navigationItems) {
       if (item.name === "Login" && customer && customer.id) {
-        console.log(customer);
         items.push(
           <li key={item.name}>
             <Button
@@ -100,7 +99,6 @@ const Header = () => {
         );
       } else {
         const link = window.location.pathname === "/" && item.link === "/design" ? "/#showcase" : item.link;
-        console.log(window.location.pathname);
         items.push(
           <li key={item.name} className="h-full">
             <Link

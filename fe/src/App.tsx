@@ -3,14 +3,14 @@ import { createBrowserHistory } from "history";
 import { Router, Routes, Route } from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";
-// import ScrollToTop from "./ScrollToTop";
-
+import "./translations/i18n";
 import HomePage from "./pages/client/HomePage";
 import ShowRoomPage from "./pages/client/ShowRoomPage";
 import Login from "./pages/client/Login";
 import LoginSuccess from "./pages/client/LoginSuccess";
 import ErrorPage from "./pages/client/ErrorPage";
 import Signup from "./pages/client/Signup";
+
 // import CartPage from "./pages/client/CartPage";
 // import HistoryPage from "./pages/client/HistoryPage";
 // import ContactPage from "./pages/client/ContactPage";
@@ -36,8 +36,7 @@ import ClientTemplate from "./templates/ClientTemplate";
 // import AdminTemplate from "./templates/AdminTemplate";
 import { useContext, useLayoutEffect, useState } from "react";
 import { ThemeCustomContext } from "./settings/theme-context"; // https://mui.com/material-ui/material-icons/?theme=Sharp&query=user
-
-import { toast, ToastContainer } from "react-toastify"; //https://www.npmjs.com/package/react-toastify
+import { ToastContainer } from "react-toastify"; //https://www.npmjs.com/package/react-toastify
 
 export const history = createBrowserHistory();
 
@@ -70,8 +69,6 @@ function App() {
         theme="light"
       />
       <CustomRouter history={history}>
-        {/* <ScrollToTop> */}
-
         <Routes>
           {/* client */}
           <Route path="/" element={<ClientTemplate Component={HomePage} />} />
@@ -100,7 +97,6 @@ function App() {
           <Route path="/admin/profile" element={<AdminTemplate Component={ProfilePage} />} />
           <Route path="/signin" element={<AdminTemplate Component={SigninPage} />} /> */}
         </Routes>
-        {/* </ScrollToTop> */}
       </CustomRouter>
     </div>
   );
