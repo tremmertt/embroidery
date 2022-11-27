@@ -13,10 +13,12 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 import sys
 
+from os.path import join, dirname
 from dotenv import load_dotenv
 from pathlib import Path
 
-load_dotenv()
+dotenv_path = join(dirname(__file__), '../.env.local')
+load_dotenv(dotenv_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
