@@ -36,9 +36,10 @@ const Footer = () => {
 
   const isSP = window.innerWidth < 640 ? true : false;
   if (window.location.hash) transToComponent();
+
   useEffect(() => {
     if (window.location.hash) transToComponent();
-  }, []);
+  });
 
   return (
     <div>

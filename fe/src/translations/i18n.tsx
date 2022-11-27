@@ -29,4 +29,3 @@ i18n.init({
   },
 });
 export { i18n };
-console.log("init i18n");

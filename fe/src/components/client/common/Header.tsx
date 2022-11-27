@@ -21,7 +21,7 @@ const Header = () => {
   if (window.location.hash) transToComponent();
   useEffect(() => {
     if (window.location.hash) transToComponent();
-  }, []);
+  });
 
   const handleTransitionToPurposeComponent = (id: string) => {
     if (id === "home-component") window.scrollTo({ left: 0, top: -20, behavior: "smooth" });
