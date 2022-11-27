@@ -16,8 +16,6 @@ const themes = {
     textColorActiveWithHoverAdmin: "font-extrabold text-[#fff]",
     textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-gray-500 hover:text-gray-300 ",
     backgroundColorWithHover: "bg-[#111c44] hover:bg-[#152254]",
-    buttonWidthPrimary: 144,
-    buttonHeightPrimary: 48,
   },
   light: {
     backgroundColor: "white",
@@ -30,8 +28,6 @@ const themes = {
     textColorActiveWithHoverAdmin: "font-extrabold text-[#1b254b]",
     textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-[#6d6f75] hover:text-[#1b254b] ",
     backgroundColorWithHover: "bg-[#f4f7fe] hover:bg-[#e3e6ef]",
-    buttonWidthPrimary: 144,
-    buttonHeightPrimary: 48,
   },
   red: {
     backgroundColor: "white",
@@ -45,8 +41,6 @@ const themes = {
     textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-[#6d6f75] hover:text-[#1b254b] ",
     backgroundColorWithHover: "bg-[#f4f7fe] hover:bg-[#e3e6ef]",
     borderColor: "#000",
-    buttonWidthPrimary: 144,
-    buttonHeightPrimary: 48,
   },
 };
 

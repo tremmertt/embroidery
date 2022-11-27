@@ -18,24 +18,19 @@ export default function FirstUsing() {
         color: theme.colorMain,
       }}
     >
-      <div className="backdrop-blur-md bg-black/20 flex-col justify-center items-center text-center py-12 h-auto py-20">
-        <h1 className="tracking-wide font-sans font-extrabold text-2xl md:text-4xl ">
+      <div className="backdrop-blur-md bg-black/20 flex-col justify-center items-center text-center my-4 h-auto py-20">
+        <h1 className="tracking-wide font-sans font-extrabold lg:text-4xl sm:text-3xl text-4xl ">
           Use Embroidery now - it's free!
         </h1>
-        <p className="text-sm md:text-lg pt-8 pb-12 text-center ">
+        <p className="text-md md:text-xl pt-8 pb-12 text-center ">
           More than 500 sample products to choose from.
           <br /> T-shirts, hoodies, mugs, bags, stickers and more.
         </p>
         <Button
-          style={{
-            width: theme.buttonWidthPrimary,
-            height: theme.buttonHeightPrimary,
-            color: theme.colorMain,
-            backgroundColor: theme.backgroundMainColor,
-          }}
+          style={{ width: 144, height: 48 }}
           variant="contained"
           id="basic-button"
-          className="rounded-lg font-bold"
+          className="rounded-lg"
           aria-haspopup="true"
           onClick={() => navigate("/login")}
         >

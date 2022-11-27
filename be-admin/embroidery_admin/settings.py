@@ -31,8 +31,7 @@ SECRET_KEY = os.getenv("APP_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("APP_DEBUG")
 
-
-ALLOWED_HOSTS = ["*", 'localhost:3000']
+ALLOWED_HOSTS = ['localhost:3000','127.0.0.1', 'rcpmw3me3e.execute-api.ap-southeast-1.amazonaws.com',]
 
 
 # Application definition
