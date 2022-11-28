@@ -8,8 +8,6 @@ import Tooltip from "@mui/material/Tooltip";
 import { ThemeCustomContext } from "../../../../settings/theme-context";
 import { useTranslation } from "react-i18next";
 import { makeStyles } from "@material-ui/core";
-import en from "../../../../assets/flag/en.png";
-import vn from "../../../../assets/flag/vn.png";
 import { useDispatch, useSelector } from "react-redux";
 import { i18n } from "../../../../translations/i18n";
 import { IRootState } from "../../../../redux/configStore";
@@ -23,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LanguageMenu() {
+  const en = require("../../../../assets/flag/en.png");
+  const vn = require("../../../../assets/flag/vn.png");
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { theme } = React.useContext(ThemeCustomContext);
   const { t } = useTranslation();

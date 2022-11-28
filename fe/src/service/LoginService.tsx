@@ -49,4 +49,12 @@ export default class LoginService {
   static loginBySocialMedia = async (media: string, config?: any) => {
     return await BaseService.post(`embroidery/api/login/${media}`, config);
   };
+
+  static loginByEmail = async (media: string, config?: any) => {
+    return await BaseService.post(`embroidery/api/signup/${media}`, config);
+  };
+
+  static signUpByEmail = async (media: string, config?: any) => {
+    return await BaseService.post(`embroidery/api/signup/${media}`, config);
+  };
 }

@@ -5,8 +5,11 @@ import { ThemeCustomContext } from "settings/theme-context";
 import RuleTextField from "../../custom/RuleTextField";
 import { useTranslation } from "react-i18next";
 import useTitle from "../../components/general/useTitle";
+import { useDispatch } from "react-redux";
+import LoginAction from "redux/actions/LoginAction";
 
 export default function Signup() {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   useTitle(t("login.SignUpPage"));
 
@@ -53,6 +56,13 @@ export default function Signup() {
   const signUpHandler = (e: React.FormEvent) => {
     if (validateForm()) {
       console.log("valid form");
+      dispatch(
+        LoginAction.signUpByEmailAction({
+          email: email,
+          name: name,
+          password: password,
+        })
+      );
     } else {
       console.log("inValid form");
     }

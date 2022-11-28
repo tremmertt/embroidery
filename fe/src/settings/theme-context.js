@@ -27,7 +27,7 @@ const themes = {
     backgroundMainColor: "#7f1d1d",
     colorMain: "white",
     color: "#1b254b",
-    colorMint: "#6d6f75",
+    colorMint: "#f19c79",
     dropShadow: "drop-shadow-[0_0px_0px_rgba(0,0,0,0.25)]",
     textColorActiveWithHoverAdmin: "font-extrabold text-[#1b254b]",
     textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-[#6d6f75] hover:text-[#1b254b] ",

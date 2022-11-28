@@ -73,6 +73,7 @@ class Customer(models.Model):
     name = models.CharField(max_length=256, default="Customer {}".format(str(datetime.timestamp(datetime.now())).split('.')[0]))
     email = models.EmailField(max_length=70, blank=True, unique=False)
     address = models.CharField(max_length=256, blank=True) 
+    password = models.BinaryField(blank=True)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True) # Validators should be a list
     customer_type = models.CharField(max_length=50, choices=CustomerType.choices, default=CustomerType.INDIVIDUAL)

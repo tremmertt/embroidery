@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LoginService from "../../service/LoginService";
 import { useTranslation } from "react-i18next";
@@ -8,11 +8,14 @@ import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { ThemeCustomContext } from "settings/theme-context";
 import RuleTextField from "custom/RuleTextField";
+import LoginAction from "redux/actions/LoginAction";
 
 export default function Login() {
   const { theme } = useContext(ThemeCustomContext);
   const { t } = useTranslation();
   useTitle(t("login.LoginPage"));
+
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,6 +43,12 @@ export default function Login() {
   const loginHandler = (e: React.FormEvent) => {
     if (validateForm()) {
       console.log("valid form");
+      dispatch(
+        LoginAction.loginByEmailAction({
+          email: email,
+          password: password,
+        })
+      );
     } else {
       console.log("inValid form");
     }
