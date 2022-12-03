@@ -30,7 +30,7 @@ import DefaultButton from "../../../custom/DefaultButton";
 type Anchor = "top" | "left" | "bottom" | "right";
 
 const Header = () => {
-  const { theme } = useContext(ThemeCustomContext);
+  const { theme, styleE } = useContext(ThemeCustomContext);
   const [anchor, setAnchor] = useState("right" as Anchor);
   const [state, setState] = useState({
     top: false,
@@ -102,7 +102,7 @@ const Header = () => {
             aria-current="page"
             style={{
               color: item.name === "TOP" ? theme.primaryTextColor : theme.subColor2,
-              fontSize: theme.fontSize16,
+              fontSize: styleE.fontSize16,
             }}
             onClick={() => handleTransitionToPurposeComponent(item.id)}
           >

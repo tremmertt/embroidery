@@ -3,7 +3,49 @@ import { store } from "../redux/configStore";
 import { Provider } from "react-redux";
 
 // const colors = ["#7551ff"];
-
+const styles = {
+  mobile: {
+    fontSize12: "10px",
+    fontSize14: "12px",
+    fontSize16: "14px",
+    fontSize20: "16px",
+    fontSize24: "20px",
+    fontSize28: "22px",
+    fontSize36: "24px",
+    fontSize42: "28px",
+    fontSize48: "30px",
+    fontSize60: "40px",
+    fontSize72: "44px",
+    fontSize84: "56px",
+  },
+  tablet: {
+    fontSize12: "12px",
+    fontSize14: "14px",
+    fontSize16: "16px",
+    fontSize20: "20px",
+    fontSize24: "24px",
+    fontSize28: "28px",
+    fontSize36: "36px",
+    fontSize42: "42px",
+    fontSize48: "48px",
+    fontSize72: "72px",
+    fontSize84: "84px",
+  },
+  pc: {
+    fontSize12: "12px",
+    fontSize14: "14px",
+    fontSize16: "16px",
+    fontSize20: "20px",
+    fontSize24: "24px",
+    fontSize28: "28px",
+    fontSize36: "36px",
+    fontSize42: "42px",
+    fontSize48: "48px",
+    fontSize60: "60px",
+    fontSize72: "72px",
+    fontSize84: "84px",
+  },
+};
 const themes = {
   // dark: {
   //   backgroundColor: "#111c44",
@@ -43,13 +85,6 @@ const themes = {
     primaryBackgroundColor: "#fff",
     subColor1: "#fff",
     subColor2: "#262626",
-    fontSize12: "12px",
-    fontSize14: "14px",
-    fontSize16: "16px",
-    fontSize20: "20px",
-    fontSize24: "24px",
-    fontSize28: "28px",
-    fontSize42: "42px",
 
     backgroundColor: "white",
     backgroundColorMint: "#f4f7fe",
@@ -87,6 +122,9 @@ const themes = {
 
 const initialState = {
   dark: true,
+  device: "pc",
+  isMobile: false,
+  styleE: styles.pc,
   theme: themes.lightV2,
   direction: "rtl",
   toggle: () => {},
@@ -94,13 +132,20 @@ const initialState = {
 const ThemeCustomContext = React.createContext(initialState);
 
 function ThemeProvider({ children }) {
+  const [device, setDevice] = React.useState(
+    window.innerWidth < 640 ? "mobile" : window.innerWidth < 1084 ? "tablet" : "pc"
+  );
+  const [isMobile, setIsMobile] = React.useState(false); // Default theme is pc
   const [dark, setDark] = React.useState(false); // Default theme is light
 
   // On mount, read the preferred theme from the persistence
   React.useEffect(() => {
+    const currentDevice = window.innerWidth < 640 ? "mobile" : window.innerWidth < 1084 ? "tablet" : "pc";
     const isDark = localStorage.getItem("dark") === "true";
+    if (currentDevice !== device) setDevice(device);
+    if (device === "mobile") setIsMobile(true);
     setDark(isDark);
-  }, [dark]);
+  }, [dark, device]);
 
   // To toggle between dark and light modes
   const toggle = () => {
@@ -110,9 +155,10 @@ function ThemeProvider({ children }) {
   };
 
   const theme = dark ? themes.lightV2 : themes.lightV2;
+  const styleE = styles[device];
 
   return (
-    <ThemeCustomContext.Provider value={{ theme, dark, toggle }}>
+    <ThemeCustomContext.Provider value={{ styleE, theme, dark, toggle, device, isMobile }}>
       <Provider store={store}>{children}</Provider>
     </ThemeCustomContext.Provider>
   );

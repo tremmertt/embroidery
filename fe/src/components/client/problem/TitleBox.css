@@ -1,0 +1,13 @@
+.title-box {
+  background: linear-gradient(to right, #CE7EDA 0%, #E45A4F 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.no-box{
+  background: linear-gradient(to right, #CE7EDA 0%, #E45A4F 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

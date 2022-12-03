@@ -27,23 +27,23 @@ const useButton = ({
   className?: string;
   fontSize?: string;
 }) => {
-  const { theme } = useContext(ThemeCustomContext);
+  const { theme, styleE, device } = useContext(ThemeCustomContext);
   switch (type) {
     case "large":
-      width = 216;
-      height = 64;
-      fontSize = theme.fontSize28;
+      width = device === "mobile" ? 120 : 216;
+      height = device === "mobile" ? 36 : 64;
+      fontSize = styleE.fontSize28;
       break;
     case "medium":
-      width = 216;
-      height = 64;
-      fontSize = theme.fontSize20;
+      width = device === "mobile" ? 120 : 216;
+      height = device === "mobile" ? 36 : 64;
+      fontSize = styleE.fontSize20;
       break;
     case "small":
     default:
-      width = 136;
-      height = 43;
-      fontSize = theme.fontSize16;
+      width = device === "mobile" ? 120 : 136;
+      height = device === "mobile" ? 36 : 43;
+      fontSize = styleE.fontSize16;
       break;
   }
 
@@ -61,6 +61,7 @@ const useButton = ({
         backgroundColor: variant === "outlined" ? theme.primaryBackgroundColor : theme.primaryTextColor,
         color: variant === "outlined" ? theme.primaryTextColor : theme.primaryBackgroundColor,
         borderColor: theme.primaryTextColor,
+        borderWidth: variant === "outlined" ? 1.5 : 0,
         textTransform: "none",
         fontSize: fontSize,
       }}
