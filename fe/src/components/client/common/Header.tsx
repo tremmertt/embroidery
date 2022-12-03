@@ -25,6 +25,7 @@ import WorkspacesIcon from "@mui/icons-material/Workspaces";
 import HomeIcon from "@mui/icons-material/Home";
 import CallIcon from "@mui/icons-material/Call";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
+import DefaultButton from "../../../custom/DefaultButton";
 
 type Anchor = "top" | "left" | "bottom" | "right";
 
@@ -86,67 +87,53 @@ const Header = () => {
   const navigationItemsMap = () => {
     const items = [];
     const navigationItems = [
-      { name: "Home", link: "/#home", id: "home-component" },
-      { name: "Our Purpose", link: "/#our-purpose", id: "our-purpose-component" },
+      { name: "TOP", link: "/#home", id: "home-component" },
       { name: "Contact", link: "/#contact", id: "contact-component" },
-      { name: "Design", link: "/design", id: "showcase-component" },
-      { name: "Login", link: "/login", id: "login-component" },
+      { name: "Showroom", link: "/design", id: "showcase-component" },
     ];
 
     for (const item of navigationItems) {
-      if (item.name === "Login" && customer && customer.id) {
-        items.push(
-          <li key={item.name}>
-            <Button
-              variant="text"
-              id="basic-button"
-              disableRipple
-              className="rounded-lg"
-              aria-controls={open ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              disableElevation
-              disableFocusRipple
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            >
-              <Avatar sx={{ width: 34, height: 34 }} alt={customer.name} src={customer.image} />
-            </Button>
+      const link = window.location.pathname === "/" && item.link === "/design" ? "/#showcase" : item.link;
+      items.push(
+        <li key={item.name} className="h-full flex items-center justify-center ">
+          <Link
+            to={link}
+            className=" block m-0  py-5 text-center hover:font-normal text-md text-gray-700 hover:text-red-800"
+            aria-current="page"
+            style={{
+              color: item.name === "TOP" ? theme.primaryTextColor : theme.subColor2,
+              fontSize: theme.fontSize16,
+            }}
+            onClick={() => handleTransitionToPurposeComponent(item.id)}
+          >
+            {item.name}
+          </Link>
+        </li>
+      );
+    }
+    const navigationButtonItems = [
+      { name: "Inquiry", link: "/#home", id: "home-component" },
+      { name: "Order", link: "/#contact", id: "contact-component" },
+    ];
 
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
-              }}
-            >
-              <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            </Menu>
-          </li>
-        );
-      } else {
-        const link = window.location.pathname === "/" && item.link === "/design" ? "/#showcase" : item.link;
-        items.push(
-          <li key={item.name} className="h-full">
-            <Link
-              to={link}
-              className="block m-0 p-2 hover:font-normal text-md text-gray-700 hover:text-red-800"
-              aria-current="page"
-              style={{ color: theme.colorMain }}
-              onClick={() => handleTransitionToPurposeComponent(item.id)}
-            >
-              {item.name}
-            </Link>
-          </li>
-        );
-      }
+    for (const item of navigationButtonItems) {
+      const link = window.location.pathname === "/" && item.link === "/design" ? "/#showcase" : item.link;
+      items.push(
+        <li key={item.name} className="h-full">
+          <DefaultButton
+            className="rounded-3xl"
+            type="small"
+            variant={item.name === "Inquiry" ? "outlined" : "contained"}
+            value={item.name}
+          ></DefaultButton>
+        </li>
+      );
     }
 
     return (
       <ul
-        className="flex flex-col p-3 m-0 border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 lg:text-lg"
-        style={{ backgroundColor: theme.backgroundMainColor }}
+        className="flex flex-col justify-center items-center m-0 border-gray-100 md:flex-row md:space-x-7 md:mt-0 md:text-sm md:font-medium md:border-0 lg:text-lg"
+        style={{ backgroundColor: theme.primaryBackgroundColor }}
       >
         {items}
       </ul>
@@ -256,16 +243,15 @@ const Header = () => {
   return (
     <div
       className="sticky shadow-md"
-      style={{ top: "0", zIndex: 1000, color: theme.color, backgroundColor: theme.backgroundMainColor }}
+      style={{ top: "0", zIndex: 1000, color: theme.primaryTextColor, backgroundColor: theme.primaryBackgroundColor }}
     >
       <Fragment>
         <div className="mx-auto py-0 overflow-hidden">
           <div className="container flex flex-wrap justify-between items-center mx-auto">
             <Link className="flex title-font px-2 font-medium items-center text-gray-900 mb-0" to="/">
               <img
-                src={require("../../../assets/img/logo.png")}
-                style={{ height: isSP ? 30 : 36 }}
-                className="rounded-3xl"
+                src={require("../../../assets/v2/img/logo64x64.png")}
+                style={{ height: isSP ? 30 : 50 }}
                 alt="logo"
               ></img>
               <span
