@@ -1,0 +1,1 @@
+pip install --platform=manylinux1_x86_64 --only-binary=:all: psycopg2-binary --target /Users/genkisystem/Desktop/Learning/embroidery/be-admin/venv/lib/python3.9/site-packages

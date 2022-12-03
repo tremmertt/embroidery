@@ -68,17 +68,21 @@ class LoginView(APIView):
                     customer_db = Customer.objects.get(email=email)
                 except:
                     customer_db = None
-                hashed_pass = customer_db.password
-                hashed_input_pass = password.encode('utf-8')
-
+                
                 if customer_db and customer_db.password:
-                    if bcrypt.checkpw(hashed_input_pass, bytes(hashed_pass)):
+                    hashed_pass = customer_db.password
+                    hashed_input_pass = password.encode('utf-8')
+                    if customer_db.is_confirm and bcrypt.checkpw(hashed_input_pass, bytes(hashed_pass)):
                         serializer = CustomerSerializer(customer_db,many=False) 
                         return Response({
                             "message":"login successfully", 
                             "customer": serializer.data,
                             "token": customer_db.encode_auth_token()
                         }) 
+                    else:
+                        return Response(status=404, data={
+                            "message":"Login failed, you need to confirm your email",
+                        })  
                 elif customer_db == None:
                     return Response(status=404, data={
                         "message":"Customer is not existed",
@@ -88,5 +92,5 @@ class LoginView(APIView):
                         "message":"Login failed, email or password incorrect",
                     }) 
 
-        return Response(status=404, data={"failed": "Customer created failed"})
+        return Response(status=404, data={"message": "Customer created failed"})
         

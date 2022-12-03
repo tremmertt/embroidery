@@ -5,7 +5,12 @@
     "profile_name": "pcw-admin",
     "project_name": "embroidery-admin",
     "runtime": "python3.9",
+    "slim_handler": true,
     "timeout_seconds": 300,
+    "layers": [
+      "arn:aws:lambda:ap-southeast-1:194560059530:layer:embroidery-admin-layer:8",
+      "arn:aws:lambda:ap-southeast-1:770693421928:layer:Klayers-p39-pillow:1"
+    ],
     "s3_bucket": "embroidery-admin-dev"
   }
 }

@@ -134,6 +134,7 @@ export default function Login() {
                         padding: "0 14px",
                       },
                     }}
+                    className="my-1"
                     fullWidth
                     error={!errorObj.email.isValid}
                     variant="outlined"
@@ -164,6 +165,7 @@ export default function Login() {
                         padding: "0 14px",
                       },
                     }}
+                    className="my-1"
                     fullWidth
                     error={!errorObj.password.isValid}
                     variant="outlined"

@@ -80,6 +80,8 @@ class Customer(models.Model):
     login_type = models.CharField(max_length=50, choices=LoginType.choices, default=LoginType.GOOGLE)
     company = models.CharField(max_length=256, blank=True, default="")
     image = models.CharField(max_length=500, blank=True, default="") 
+    code_confirm = models.CharField(max_length=500, blank=True, default="") 
+    is_confirm = models.BooleanField(default=True) 
     meta_data = JSONField(default=dict)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -91,14 +93,14 @@ class Customer(models.Model):
             return "{} - {}".format(self.name, self.email)
         return self.name
 
-    def encode_auth_token(self, user_id=None):
+    def encode_auth_token(self, user_id=None, seconds=600):
         """
         Generates the Auth Token
         :return: string
         """
         try:
             payload = {
-                'exp': datetime.utcnow() + timedelta(days=0, seconds=25),
+                'exp': datetime.utcnow() + timedelta(days=0, seconds=seconds),
                 'iat': datetime.utcnow(),
                 'sub': user_id if user_id else str(self.id)
             }

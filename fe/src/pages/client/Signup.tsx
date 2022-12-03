@@ -5,10 +5,14 @@ import { ThemeCustomContext } from "settings/theme-context";
 import RuleTextField from "../../custom/RuleTextField";
 import { useTranslation } from "react-i18next";
 import useTitle from "../../components/general/useTitle";
-import { useDispatch } from "react-redux";
-import LoginAction from "redux/actions/LoginAction";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingAction from "redux/actions/LoadingAction";
+import LoginService from "service/LoginService";
+import { toast } from "react-toastify";
+import { LoadingReducer } from "redux/reducers/LoadingReducer";
 
 export default function Signup() {
+  const { isLoading } = useSelector((state: any) => state.LoadingReducer);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   useTitle(t("login.SignUpPage"));
@@ -53,16 +57,37 @@ export default function Signup() {
     return isValid;
   };
 
-  const signUpHandler = (e: React.FormEvent) => {
+  const resetForm = () => {
+    setName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setIsFormValid(false);
+  };
+
+  const signUpHandler = async (e: React.FormEvent) => {
     if (validateForm()) {
       console.log("valid form");
-      dispatch(
-        LoginAction.signUpByEmailAction({
-          email: email,
-          name: name,
-          password: password,
+      dispatch(LoadingAction.displayLoading());
+      await LoginService.signUpByEmail({
+        email: email,
+        name: name,
+        password: password,
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            toast(`Sign up is successful, please check your email!`, { type: "success" });
+          }
+          resetForm();
+          return res.data;
         })
-      );
+        .catch((err) => {
+          console.log("error", { ...err });
+          if (err.response.status === 409) {
+            toast(err.response.data.message, { type: "error" });
+          }
+        });
+      dispatch(LoadingAction.hideLoading());
     } else {
       console.log("inValid form");
     }
@@ -111,6 +136,7 @@ export default function Signup() {
                         padding: "0 14px",
                       },
                     }}
+                    className="my-1"
                     fullWidth
                     error={!errorObj.name.isValid}
                     variant="outlined"
@@ -119,7 +145,7 @@ export default function Signup() {
                     helperText={errorObj.name.messageErrors ? errorObj.name.messageErrors[0] : ""}
                     onChange={(evt) => {
                       setName(evt.target.value);
-                      checkValid(evt.target.value, "name", "required|normalText");
+                      checkValid(evt.target.value, "name", "required|normalText|min:6|max:32");
                     }}
                     value={name}
                     type="text"
@@ -139,6 +165,7 @@ export default function Signup() {
                         padding: "0 14px",
                       },
                     }}
+                    className="my-1"
                     fullWidth
                     error={!errorObj.email.isValid}
                     variant="outlined"
@@ -169,6 +196,7 @@ export default function Signup() {
                         padding: "0 14px",
                       },
                     }}
+                    className="my-1"
                     fullWidth
                     error={!errorObj.password.isValid}
                     variant="outlined"
@@ -212,6 +240,7 @@ export default function Signup() {
                         padding: "0 14px",
                       },
                     }}
+                    className="my-1"
                     fullWidth
                     error={!errorObj.confirmPassword.isValid}
                     variant="outlined"

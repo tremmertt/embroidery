@@ -9,6 +9,8 @@ import HomePage from "./pages/client/HomePage";
 import ShowRoomPage from "./pages/client/ShowRoomPage";
 import Login from "./pages/client/Login";
 import LoginSuccess from "./pages/client/LoginSuccess";
+import ConfirmEmail from "./pages/client/ConfirmEmail";
+import OrderForm from "./pages/client/order/OrderForm";
 import ErrorPage from "./pages/client/ErrorPage";
 import Signup from "./pages/client/Signup";
 
@@ -38,6 +40,9 @@ import ClientTemplate from "./templates/ClientTemplate";
 import { useContext, useLayoutEffect, useState } from "react";
 import { ThemeCustomContext } from "./settings/theme-context"; // https://mui.com/material-ui/material-icons/?theme=Sharp&query=user
 import { ToastContainer } from "react-toastify"; //https://www.npmjs.com/package/react-toastify
+import { Backdrop, CircularProgress } from "@mui/material";
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router";
 
 export const history = createBrowserHistory();
 
@@ -54,9 +59,13 @@ const CustomRouter: any = ({ history, ...props }: { history: any }) => {
 
 function App() {
   const { theme } = useContext(ThemeCustomContext);
+  const { isLoading } = useSelector((state: any) => state.LoadingReducer);
 
   return (
     <div style={{ height: "100vh !important", color: theme.color, backgroundColor: theme.backgroundColorMint }}>
+      <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={isLoading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -76,8 +85,11 @@ function App() {
           <Route path="/design" element={<ClientTemplate Component={ShowRoomPage} />} />
           <Route path="/login" element={<ClientTemplate Component={Login} />} />
           <Route path="/login-success" element={<ClientTemplate Component={LoginSuccess} />} />
+          <Route path="/confirm-account" element={<ClientTemplate Component={ConfirmEmail} />} />
           <Route path="/signup" element={<ClientTemplate Component={Signup} />} />
-          <Route path="/123" element={<ClientTemplate Component={ErrorPage} />} />
+          <Route path="/order" element={<ClientTemplate Component={OrderForm} />} />
+          <Route path="*" element={<ClientTemplate Component={ErrorPage} />} />
+
           {/* <Route path="/product" element={<ClientTemplate Component={ProductPage} />} />
           <Route path="/cart" element={<ClientTemplate Component={CartPage} />} />
           <Route path="/history" element={<ClientTemplate Component={HistoryPage} />} />
