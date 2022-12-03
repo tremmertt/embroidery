@@ -4,7 +4,7 @@ const stateDefault = {
   isLoading: false,
 };
 
-export const LoadingReducer = (state = stateDefault, action) => {
+export const LoadingReducer = (state = stateDefault, action: any) => {
   switch (action.type) {
     case DISPLAY_LOADING: {
       state.isLoading = true;

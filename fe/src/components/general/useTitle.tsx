@@ -6,9 +6,9 @@ const useTitle = (title: string): void => {
   const { lang } = useSelector((state: IRootState) => state.LanguageReducer);
 
   useEffect(() => {
-    document.title = `${process.env.REACT_APP_NAME} - ${title}`;
+    document.title = `${title} - ${process.env.REACT_APP_NAME}`;
     return () => {
-      document.title = `${process.env.REACT_APP_NAME} - ${title}`;
+      document.title = `${title} - ${process.env.REACT_APP_NAME}`;
     };
   }, [lang, title]);
 };

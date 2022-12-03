@@ -1,4 +1,4 @@
-import { LOGIN_BY_SOCIAL, LOGOUT } from "../actions/type/LoginType";
+import { LOGIN_BY_SOCIAL, LOGOUT, LOGIN_BY_EMAIL, SIGNUP_BY_EMAIL } from "../actions/type/LoginType";
 import LoginService, { ICustomer } from "../../service/LoginService";
 
 export interface IStateCustomer {
@@ -11,6 +11,7 @@ const stateDefault: IStateCustomer = {
 
 export const LoginReducer = (state = stateDefault, action: any) => {
   switch (action.type) {
+    case LOGIN_BY_EMAIL:
     case LOGIN_BY_SOCIAL: {
       state.customer = action.customer as ICustomer;
       if (state.customer) state.customer.token = action.token as any;

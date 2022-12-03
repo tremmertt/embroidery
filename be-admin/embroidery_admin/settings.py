@@ -17,8 +17,8 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 from pathlib import Path
 
-dotenv_path = join(dirname(__file__), '../.env.local')
-load_dotenv(dotenv_path)
+# dotenv_path = join(dirname(__file__), '../.env')
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -207,3 +207,9 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=os.getenv("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=os.getenv("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
 
 DJANGO_MAILBOX_MAX_MESSAGE_SIZE=10
+
+EMAIL_HOST_USER=os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD=os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_NO_REPLY_USER=os.getenv("EMAIL_NO_REPLY_USER")
+EMAIL_NO_REPLY_PASSWORD=os.getenv("EMAIL_NO_REPLY_PASSWORD")
+CONFIRM_REDIRECT_URI=os.getenv("CONFIRM_REDIRECT_URI")

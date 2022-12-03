@@ -5,6 +5,7 @@ import LoginAction from "../../redux/actions/LoginAction";
 import LoginService from "service/LoginService";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import LoadingAction from "redux/actions/LoadingAction";
 export default function LoginSuccess() {
   const { customer } = useSelector((state: any) => state.LoginReducer);
   const [searchParams] = SearchParams.useCustomSearchParams();
@@ -12,6 +13,7 @@ export default function LoginSuccess() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(LoadingAction.displayLoading());
     const token = LoginService.getToken();
     if (token === "") {
       dispatch(
@@ -25,6 +27,7 @@ export default function LoginSuccess() {
       navigate("/");
       toast(`Login successfully. \n Hi ${customer.name}`, { type: "success" });
     }
+    dispatch(LoadingAction.hideLoading());
   });
 
   return (

@@ -73,12 +73,15 @@ class Customer(models.Model):
     name = models.CharField(max_length=256, default="Customer {}".format(str(datetime.timestamp(datetime.now())).split('.')[0]))
     email = models.EmailField(max_length=70, blank=True, unique=False)
     address = models.CharField(max_length=256, blank=True) 
+    password = models.BinaryField(blank=True)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True) # Validators should be a list
     customer_type = models.CharField(max_length=50, choices=CustomerType.choices, default=CustomerType.INDIVIDUAL)
     login_type = models.CharField(max_length=50, choices=LoginType.choices, default=LoginType.GOOGLE)
     company = models.CharField(max_length=256, blank=True, default="")
     image = models.CharField(max_length=500, blank=True, default="") 
+    code_confirm = models.CharField(max_length=500, blank=True, default="") 
+    is_confirm = models.BooleanField(default=True) 
     meta_data = JSONField(default=dict)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -90,14 +93,14 @@ class Customer(models.Model):
             return "{} - {}".format(self.name, self.email)
         return self.name
 
-    def encode_auth_token(self, user_id=None):
+    def encode_auth_token(self, user_id=None, seconds=600):
         """
         Generates the Auth Token
         :return: string
         """
         try:
             payload = {
-                'exp': datetime.utcnow() + timedelta(days=0, seconds=25),
+                'exp': datetime.utcnow() + timedelta(days=0, seconds=seconds),
                 'iat': datetime.utcnow(),
                 'sub': user_id if user_id else str(self.id)
             }
