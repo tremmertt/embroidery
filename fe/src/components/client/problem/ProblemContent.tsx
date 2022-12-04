@@ -1,13 +1,34 @@
-import React, { useContext } from "react";
-import { ThemeCustomContext } from "../../../settings/theme-context";
+import React, { useContext, useEffect, useState } from "react";
+import { ThemeCustomContext, useWindowSize } from "../../../settings/theme-context";
 import "./TitleBox.css";
 
 export default function ProblemContent(props: any) {
-  const { theme, styleE, isMobile } = useContext(ThemeCustomContext);
+  const { styleE, isMobile } = useContext(ThemeCustomContext);
+  const [width, height] = useWindowSize();
+  useEffect(() => {}, [width, height]);
+
+  const [isShowAlready, setIsShowAlready] = useState(false);
+  const isOnScreen = () => {
+    const element = document.getElementById(`problem-box-detail-${props.no}`);
+    const rect = element?.getBoundingClientRect();
+    if (rect) {
+      if (
+        rect.top >= 0 &&
+        // rect.left >= 0 &&
+        rect.bottom <= (height || document.documentElement.clientHeight) /* or $(window).height() */ &&
+        // rect.right <= (width || document.documentElement.clientWidth) /* or $(window).width() */
+        !isShowAlready
+      ) {
+        setIsShowAlready(true);
+        return true;
+      }
+    }
+    return false;
+  };
 
   const buildText = () => {
     return isMobile ? (
-      <div className="md:col-span-1 col-span-2 md:py-8 md:px-10 px-9 pt-8 pb-4">
+      <div className={`md:col-span-1 col-span-2 md:py-8 md:px-10 px-9 pt-8 pb-4`}>
         <div className="flex flex-col text-left">
           <div style={{}} className="flex">
             <div className="no-box font-black mr-3" style={{ fontSize: styleE.fontSize60, lineHeight: "50px" }}>
@@ -49,7 +70,12 @@ export default function ProblemContent(props: any) {
 
   const buildImage = () => {
     return (
-      <div className="md:col-span-1 col-span-2 md:py-8 py-0 md:px-10 px-9">
+      <div
+        id={`problem-box-detail-${props.no}`}
+        className={`md:col-span-1 col-span-2 md:py-8 py-0 md:px-10 px-9 ${
+          isOnScreen() || isShowAlready ? `slide-${props.direction}-active` : `slide-${props.direction}`
+        }`}
+      >
         <img src={require(`../../../assets/v2/drawer/${props.image}`)} alt={props.question}></img>
       </div>
     );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { store } from "../redux/configStore";
 import { Provider } from "react-redux";
 
@@ -120,6 +120,23 @@ const themes = {
   // },
 };
 
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight, document.body.offsetHeight, document.body.offsetWidth]);
+    }
+    window.addEventListener("resize", updateSize);
+    window.addEventListener("scroll", updateSize);
+    updateSize();
+    return () => {
+      window.removeEventListener("resize", updateSize);
+      window.removeEventListener("scroll", updateSize);
+    };
+  }, []);
+  return size;
+}
+
 const initialState = {
   dark: true,
   device: "pc",
@@ -135,16 +152,22 @@ function ThemeProvider({ children }) {
   const [device, setDevice] = React.useState(
     window.innerWidth < 640 ? "mobile" : window.innerWidth < 1084 ? "tablet" : "pc"
   );
+
   const [isMobile, setIsMobile] = React.useState(false); // Default theme is pc
   const [dark, setDark] = React.useState(false); // Default theme is light
 
-  // On mount, read the preferred theme from the persistence
-  React.useEffect(() => {
+  const handleWindowSizeChange = () => {
     const currentDevice = window.innerWidth < 640 ? "mobile" : window.innerWidth < 1084 ? "tablet" : "pc";
-    const isDark = localStorage.getItem("dark") === "true";
     if (currentDevice !== device) setDevice(device);
     if (device === "mobile") setIsMobile(true);
+  };
+
+  // On mount, read the preferred theme from the persistence
+  React.useEffect(() => {
+    const isDark = localStorage.getItem("dark") === "true";
     setDark(isDark);
+    handleWindowSizeChange();
+    window.addEventListener("resize", handleWindowSizeChange);
   }, [dark, device]);
 
   // To toggle between dark and light modes
@@ -164,4 +187,4 @@ function ThemeProvider({ children }) {
   );
 }
 
-export { ThemeProvider, ThemeCustomContext };
+export { ThemeProvider, ThemeCustomContext, useWindowSize };

@@ -1,8 +1,9 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Avatar, Button } from "@mui/material";
 import { ThemeCustomContext } from "settings/theme-context";
+import "./DefaultButton.css";
 
-const useButton = ({
+const DefaultButton = ({
   type = "medium",
   variant = "outlined",
   width = 216,
@@ -14,6 +15,7 @@ const useButton = ({
   disableRipple = false,
   disableElevation = false,
   disableFocusRipple = false,
+  id = "",
 }: {
   type: "small" | "medium" | "large";
   variant?: "text" | "outlined" | "contained";
@@ -26,8 +28,11 @@ const useButton = ({
   fullWidth?: boolean;
   className?: string;
   fontSize?: string;
+  id?: string;
 }) => {
   const { theme, styleE, device } = useContext(ThemeCustomContext);
+  const [hover, setHover] = useState(false);
+
   switch (type) {
     case "large":
       width = device === "mobile" ? 120 : 216;
@@ -47,27 +52,29 @@ const useButton = ({
       break;
   }
 
+  console.log("hover", hover);
   return (
-    <Button
-      variant={variant}
-      disableRipple={disableRipple}
-      fullWidth={fullWidth}
-      className={className}
-      disableElevation
-      disableFocusRipple
+    <button
+      id={id}
+      // variant={variant}
+      // disableRipple={disableRipple}
+      // fullWidth={fullWidth}
+      // disableElevation
+      // disableFocusRipple
       style={{
         width: width,
         height: height,
-        backgroundColor: variant === "outlined" ? theme.primaryBackgroundColor : theme.primaryTextColor,
-        color: variant === "outlined" ? theme.primaryTextColor : theme.primaryBackgroundColor,
+        // backgroundColor: variant === "outlined" ? theme.primaryBackgroundColor : theme.primaryTextColor,
+        // color: variant === "outlined" ? theme.primaryTextColor : theme.primaryBackgroundColor,
         borderColor: theme.primaryTextColor,
         borderWidth: variant === "outlined" ? 1.5 : 0,
         textTransform: "none",
         fontSize: fontSize,
       }}
+      className={`${className}`}
     >
       {value}
-    </Button>
+    </button>
   );
 };
-export default useButton;
+export default DefaultButton;

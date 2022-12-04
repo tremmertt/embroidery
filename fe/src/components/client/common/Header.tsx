@@ -112,8 +112,8 @@ const Header = () => {
       );
     }
     const navigationButtonItems = [
-      { name: "Inquiry", link: "/#home", id: "home-component" },
-      { name: "Order", link: "/#contact", id: "contact-component" },
+      { name: "Inquiry", link: "/#inquiry", id: "inquiry-component", hoverClass: "box-button-1" },
+      { name: "Order", link: "/#order", id: "order-component", hoverClass: "box-button-2" },
     ];
 
     for (const item of navigationButtonItems) {
@@ -121,7 +121,7 @@ const Header = () => {
       items.push(
         <li key={item.name} className="h-full">
           <DefaultButton
-            className="rounded-3xl"
+            className={`rounded-3xl ${item.hoverClass}`}
             type="small"
             variant={item.name === "Inquiry" ? "outlined" : "contained"}
             value={item.name}

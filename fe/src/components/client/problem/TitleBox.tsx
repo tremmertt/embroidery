@@ -2,19 +2,24 @@ import React, { useContext } from "react";
 import { ThemeCustomContext } from "../../../settings/theme-context";
 import "./TitleBox.css";
 const useTitleBox = (props: any) => {
-  const { theme, styleE, isMobile } = useContext(ThemeCustomContext);
+  const { styleE } = useContext(ThemeCustomContext);
 
   return (
-    <div className="text-center w-full pt-8 pb-4 font-bold">
+    <div className={"text-center w-full pt-8 pb-4 font-bold flex flex-col flex-wrap justify-center items-center"}>
       <div
         style={{
-          fontSize: styleE.fontSize24,
+          fontSize: styleE.fontSize20,
           lineHeight: "24px",
         }}
+        className={props.className}
       >
-        <span className="title-box font-black">{props.title}</span>
+        <span className="title-box font-black" dangerouslySetInnerHTML={{ __html: props.title }}></span>
       </div>
-      <div style={{ fontSize: styleE.fontSize42 }}>{props.subTitle}</div>
+      <div
+        className={props.className}
+        style={{ fontSize: styleE.fontSize36 }}
+        dangerouslySetInnerHTML={{ __html: props.subTitle }}
+      ></div>
     </div>
   );
 };

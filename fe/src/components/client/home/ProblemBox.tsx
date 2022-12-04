@@ -1,12 +1,10 @@
-import React, { useContext, useState } from "react";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Box } from "@mui/material";
+import React, { useContext } from "react";
 import { ThemeCustomContext } from "../../../settings/theme-context";
-import DefaultButton from "../../../custom/DefaultButton";
 import ProblemContent from "../problem/ProblemContent";
 import TitleBox from "../problem/TitleBox";
-export default function Banner() {
-  const { theme, styleE, isMobile } = useContext(ThemeCustomContext);
+
+export default function ProblemBox() {
+  const { isMobile } = useContext(ThemeCustomContext);
 
   const init = () => {
     const items = [
@@ -49,8 +47,12 @@ export default function Banner() {
   };
 
   return (
-    <div className="text-center" style={{ paddingLeft: isMobile ? 0 : 140, paddingRight: isMobile ? 0 : 140 }}>
-      <div id="problem-box-component" className="flex-col flex-wrap justify-center items-center shadow-sm">
+    <div
+      id="problem-box-component"
+      className="text-center"
+      style={{ paddingLeft: isMobile ? 0 : 140, paddingRight: isMobile ? 0 : 140 }}
+    >
+      <div className="flex-col flex-wrap justify-center items-center">
         <TitleBox title={"TROUBLES"} subTitle={"Do you have any problems?"}></TitleBox>
         {init()}
       </div>

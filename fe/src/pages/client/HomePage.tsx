@@ -1,20 +1,18 @@
 import React from "react";
 import BannerV2 from "../../components/client/home/BannerV2";
 import ProblemBox from "../../components/client/home/ProblemBox";
-import Purpose from "../../components/client/home/Purpose";
-import Contact from "../../components/client/home/Contact";
-import FirstUsing from "../../components/client/home/FirstUsing";
-import ShowCase from "../../components/client/home/ShowCase";
+import FlowBox from "../../components/client/home/FlowBox";
+import StartWithUs from "../../components/client/home/StartWithUs";
+import ContactBox from "../../components/client/home/ContactBox";
 
 export default function HomePage() {
   return (
     <div>
       <BannerV2 />
       <ProblemBox />
-      {/* <Purpose />
-      <FirstUsing />
-      <Contact />
-      <ShowCase /> */}
+      <StartWithUs />
+      <FlowBox />
+      <ContactBox />
     </div>
   );
 }

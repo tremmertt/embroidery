@@ -1,0 +1,50 @@
+
+/* .slide-button{  
+  background-image: linear-gradient(to right, red 50%, black 50%);
+  -webkit-transition: background-position 0.5s;
+  -moz-transition: background-position 0.5s;
+  transition: background-position 0.5s;
+}
+
+.slide-button-active{ 
+  margin-top: -8px !important;
+  background-position: 0 -100%;
+
+} */
+
+.box-button-1 { 
+  background-size: 200% 300%;
+  background-image: linear-gradient(to right, white 50%, #E94D30 50%);
+  -webkit-transition: background-position 0.5s;
+  -moz-transition: background-position 0.5s;
+  transition: background-position 0.5s;
+
+  background-color:white !important;
+  color: #E94D30 !important;
+}
+
+.box-button-1:hover {
+  background-position: -100% 0%;
+  background-color:white !important;
+  color: white !important;
+  margin-bottom:12px !important;
+}
+
+.box-button-2 { 
+  background-size: 200% 300%;
+  background-image: linear-gradient(to right, #E94D30 50%, white 50%);
+  -webkit-transition: background-position 0.5s;
+  -moz-transition: background-position 0.5s;
+  transition: background-position 0.5s;
+
+  background-color:#E94D30 !important;
+  color: white !important;
+}
+
+.box-button-2:hover {
+  background-position: -100% 0%;
+  background-color:white !important;
+  color: #E94D30 !important;
+  border: #E94D30 solid 1.5px !important;
+  margin-bottom:12px !important;
+}
