@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import LoginAction from "redux/actions/LoginAction";
 import { ThemeCustomContext } from "../../../settings/theme-context";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -31,6 +31,7 @@ type Anchor = "top" | "left" | "bottom" | "right";
 
 const Header = () => {
   const { theme, styleE } = useContext(ThemeCustomContext);
+  const navigate = useNavigate();
   const [anchor, setAnchor] = useState("right" as Anchor);
   const [state, setState] = useState({
     top: false,
@@ -93,7 +94,7 @@ const Header = () => {
     ];
 
     for (const item of navigationItems) {
-      const link = window.location.pathname === "/" && item.link === "/design" ? "/#showcase" : item.link;
+      const link = item.link;
       items.push(
         <li key={item.name} className="h-full flex items-center justify-center ">
           <Link
@@ -119,7 +120,7 @@ const Header = () => {
     for (const item of navigationButtonItems) {
       const link = window.location.pathname === "/" && item.link === "/design" ? "/#showcase" : item.link;
       items.push(
-        <li key={item.name} className="h-full">
+        <li key={item.name} className="h-full" onClick={() => navigate("/inquiry")}>
           <DefaultButton
             className={`rounded-3xl ${item.hoverClass}`}
             type="small"

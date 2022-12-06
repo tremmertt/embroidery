@@ -1,9 +1,9 @@
 
 /* .slide-button{  
   background-image: linear-gradient(to right, red 50%, black 50%);
-  -webkit-transition: background-position 0.5s;
-  -moz-transition: background-position 0.5s;
-  transition: background-position 0.5s;
+  -webkit-transition: background-position 0.2s;
+  -moz-transition: background-position 0.2s;
+  transition: background-position 0.2s;
 }
 
 .slide-button-active{ 
@@ -15,9 +15,9 @@
 .box-button-1 { 
   background-size: 200% 300%;
   background-image: linear-gradient(to right, white 50%, #E94D30 50%);
-  -webkit-transition: background-position 0.5s;
-  -moz-transition: background-position 0.5s;
-  transition: background-position 0.5s;
+  -webkit-transition: background-position 0.2s;
+  -moz-transition: background-position 0.2s;
+  transition: background-position 0.2s;
 
   background-color:white !important;
   color: #E94D30 !important;
@@ -33,9 +33,9 @@
 .box-button-2 { 
   background-size: 200% 300%;
   background-image: linear-gradient(to right, #E94D30 50%, white 50%);
-  -webkit-transition: background-position 0.5s;
-  -moz-transition: background-position 0.5s;
-  transition: background-position 0.5s;
+  -webkit-transition: background-position 0.2s;
+  -moz-transition: background-position 0.2s;
+  transition: background-position 0.2s;
 
   background-color:#E94D30 !important;
   color: white !important;

@@ -160,6 +160,7 @@ function ThemeProvider({ children }) {
     const currentDevice = window.innerWidth < 640 ? "mobile" : window.innerWidth < 1084 ? "tablet" : "pc";
     if (currentDevice !== device) setDevice(device);
     if (device === "mobile") setIsMobile(true);
+    console.log("device", device, isMobile);
   };
 
   // On mount, read the preferred theme from the persistence

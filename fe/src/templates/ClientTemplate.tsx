@@ -12,7 +12,9 @@ const ClientTemplate = (props: any) => {
   return (
     <Fragment>
       <Header />
-      <Component />
+      <div className="flex  items-center justify-center">
+        <Component />
+      </div>
       {/* <hr className="mt-5" /> */}
       <Footer />
     </Fragment>

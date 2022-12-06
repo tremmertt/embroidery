@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Zoom from "react-medium-image-zoom";
+import { ThemeCustomContext } from "settings/theme-context";
 
 export default function ShowRoom() {
-  const isSP = window.innerWidth < 640 ? true : false;
+  const { theme, styleE, isMobile } = useContext(ThemeCustomContext);
+
   const items = [] as JSX.Element[];
   const images = [
     "/sample_1.jpeg",
@@ -42,7 +44,7 @@ export default function ShowRoom() {
       <div className="shrink-0" key={`${i}-image-showroom`}>
         <Zoom>
           {" "}
-          <img src={image} style={{ height: isSP ? 130 : 260, width: isSP ? 130 : 260 }} alt="" />
+          <img src={image} style={{ height: isMobile ? 130 : 260, width: isMobile ? 130 : 260 }} alt="" />
         </Zoom>
       </div>
     );
@@ -52,9 +54,15 @@ export default function ShowRoom() {
     return <div className="flex flex-wrap py-3 justify-center items-center text-center md:gap-1 gap-0">{items}</div>;
   };
   return (
-    <div id="showcase-component" className="container-fuild mx-auto rounded-xl my-0 pt-0 h-auto pb-5">
+    <div id="showcase-component" className="container-fuild mx-auto rounded-xl my-4 pt-0 h-auto pb-5">
       <div className="flex-col justify-center items-center text-center">
-        <p className="text-xl md:text-3xl font-bold md:py-6 pb-3 pt-5 text-center ">Show Room</p>
+        <p
+          className="text-xl md:text-3xl font-bold md:py-6 pb-3 pt-5 text-center"
+          style={{ color: theme.primaryTextColor, fontSize: styleE.fontSize42 }}
+        >
+          {" "}
+          Show Room
+        </p>
         {loadShowRoom()}
       </div>
     </div>

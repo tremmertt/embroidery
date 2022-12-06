@@ -43,6 +43,7 @@ import { ToastContainer } from "react-toastify"; //https://www.npmjs.com/package
 import { Backdrop, CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router";
+import Inquiry from "components/client/home/Inquiry";
 
 export const history = createBrowserHistory();
 
@@ -83,11 +84,13 @@ function App() {
           {/* client */}
           <Route path="/" element={<ClientTemplate Component={HomePage} />} />
           <Route path="/design" element={<ClientTemplate Component={ShowRoomPage} />} />
+          <Route path="/order" element={<ClientTemplate Component={OrderForm} />} />
+          <Route path="/inquiry" element={<ClientTemplate Component={Inquiry} />} />
+
           <Route path="/login" element={<ClientTemplate Component={Login} />} />
           <Route path="/login-success" element={<ClientTemplate Component={LoginSuccess} />} />
           <Route path="/confirm-account" element={<ClientTemplate Component={ConfirmEmail} />} />
           <Route path="/signup" element={<ClientTemplate Component={Signup} />} />
-          <Route path="/order" element={<ClientTemplate Component={OrderForm} />} />
           <Route path="*" element={<ClientTemplate Component={ErrorPage} />} />
 
           {/* <Route path="/product" element={<ClientTemplate Component={ProductPage} />} />
