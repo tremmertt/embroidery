@@ -5,8 +5,10 @@ import ContactsIcon from "@mui/icons-material/Contacts";
 import DefaultButton from "custom/DefaultButton";
 import { ThemeCustomContext, useWindowSize } from "settings/theme-context";
 import "../problem/TitleBox.css";
+import { useNavigate } from "react-router-dom";
 
 export default function StartWithUs() {
+  const navigate = useNavigate();
   const { theme, styleE, isMobile } = useContext(ThemeCustomContext);
   const [width, height] = useWindowSize();
   const [isShowAlready, setIsShowAlready] = useState(false);
@@ -53,20 +55,24 @@ export default function StartWithUs() {
           Get started with us now
         </div>
         <div className="flex justify-center items-center h-24">
-          <DefaultButton
-            id="start-with-us-inquiry"
-            type="medium"
-            value="Inquiry"
-            variant="outlined"
-            className={`rounded-full shadow-xl box-button-1 `}
-          ></DefaultButton>
-          <DefaultButton
-            id="start-with-us-contact"
-            type="medium"
-            value="Order"
-            variant="contained"
-            className={`ml-4 rounded-full shadow-xl box-button-2`}
-          ></DefaultButton>
+          <span className="wrap-box-button" onClick={() => navigate("/inquiry")}>
+            <DefaultButton
+              id="start-with-us-inquiry"
+              type="medium"
+              value="Inquiry"
+              variant="outlined"
+              className={`rounded-full shadow-xl box-button-1 `}
+            ></DefaultButton>
+          </span>
+          <span className="wrap-box-button" onClick={() => navigate("/order")}>
+            <DefaultButton
+              id="start-with-us-contact"
+              type="medium"
+              value="Order"
+              variant="contained"
+              className={`ml-4 rounded-full shadow-xl box-button-2`}
+            ></DefaultButton>
+          </span>
         </div>
       </div>
     </div>

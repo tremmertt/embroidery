@@ -31,7 +31,6 @@ const DefaultButton = ({
   id?: string;
 }) => {
   const { theme, styleE, device } = useContext(ThemeCustomContext);
-  const [hover, setHover] = useState(false);
 
   switch (type) {
     case "large":
@@ -52,7 +51,6 @@ const DefaultButton = ({
       break;
   }
 
-  console.log("hover", hover);
   return (
     <button
       id={id}

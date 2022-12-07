@@ -3,8 +3,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Box } from "@mui/material";
 import { ThemeCustomContext, useWindowSize } from "../../../settings/theme-context";
 import DefaultButton from "../../../custom/DefaultButton";
+import { useNavigate } from "react-router-dom";
 
 export default function Banner() {
+  const navigate = useNavigate();
   const { theme, styleE, isMobile } = useContext(ThemeCustomContext);
   const [width, height] = useWindowSize();
   const [isShowAlready, setIsShowAlready] = useState(false);
@@ -100,18 +102,22 @@ export default function Banner() {
             </div>
           </div>
           <div className="flex md:justify-end justify-center items-center h-24">
-            <DefaultButton
-              type="medium"
-              value="Inquiry"
-              variant="outlined"
-              className="rounded-full shadow-xl box-button-1 "
-            ></DefaultButton>
-            <DefaultButton
-              type="medium"
-              value="Order"
-              variant="contained"
-              className="ml-4 rounded-full shadow-xl box-button-2 "
-            ></DefaultButton>
+            <span className="wrap-box-button" onClick={() => navigate("/inquiry")}>
+              <DefaultButton
+                type="medium"
+                value="Inquiry"
+                variant="outlined"
+                className="rounded-full shadow-xl box-button-1 "
+              ></DefaultButton>
+            </span>
+            <span className="wrap-box-button" onClick={() => navigate("/order")}>
+              <DefaultButton
+                type="medium"
+                value="Order"
+                variant="contained"
+                className="ml-4 rounded-full shadow-xl box-button-2 "
+              ></DefaultButton>
+            </span>
           </div>
         </div>
       </div>

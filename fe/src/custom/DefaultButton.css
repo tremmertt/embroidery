@@ -12,13 +12,16 @@
 
 } */
 
+.wrap-box-button:hover{
+  padding-bottom:12px !important;
+}
+
 .box-button-1 { 
   background-size: 200% 300%;
   background-image: linear-gradient(to right, white 50%, #E94D30 50%);
   -webkit-transition: background-position 0.2s;
   -moz-transition: background-position 0.2s;
   transition: background-position 0.2s;
-
   background-color:white !important;
   color: #E94D30 !important;
 }
@@ -27,7 +30,6 @@
   background-position: -100% 0%;
   background-color:white !important;
   color: white !important;
-  margin-bottom:12px !important;
 }
 
 .box-button-2 { 
@@ -45,6 +47,5 @@
   background-position: -100% 0%;
   background-color:white !important;
   color: #E94D30 !important;
-  border: #E94D30 solid 1.5px !important;
-  margin-bottom:12px !important;
+  border: #E94D30 solid 1.5px !important; 
 }

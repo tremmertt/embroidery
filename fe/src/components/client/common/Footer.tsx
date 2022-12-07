@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import EuroIcon from "@mui/icons-material/Euro";
@@ -10,6 +10,7 @@ import React, { useContext, useEffect } from "react";
 import "./Common.css";
 
 const Footer = () => {
+  const navigate = useNavigate();
   const { theme, styleE, isMobile } = useContext(ThemeCustomContext);
   const transToComponent = () => {
     const timeout = setTimeout(() => {
@@ -46,8 +47,8 @@ const Footer = () => {
       { name: "TOP", link: "/#home", id: "home-component" },
       { name: "Contact", link: "/#contact", id: "contact-component" },
       { name: "Showroom", link: "/design", id: "showcase-component" },
-      { name: "Inquiry", link: "/#inquiry", id: "inquiry-component" },
-      { name: "Order", link: "/#order", id: "order-component" },
+      { name: "Inquiry", link: "/inquiry", id: "inquiry-component" },
+      { name: "Order", link: "/order", id: "order-component" },
     ];
     const items = [] as JSX.Element[];
     if (isMobile) {
@@ -58,7 +59,7 @@ const Footer = () => {
         console.log("trueIndex", trueIndex);
         const item = navigationItems[index];
         rows.push(
-          <div key={`${item.name}-footer-item`} className="col-span-1 px-8">
+          <div key={`${item.name}-footer-item`} className="col-span-1 px-8" onClick={() => navigate(item.link)}>
             {item.name}
           </div>
         );
@@ -81,7 +82,11 @@ const Footer = () => {
     } else {
       for (const item of navigationItems) {
         items.push(
-          <div key={`${item.name}-footer-item`} className="col-span-1 px-8 text-center">
+          <div
+            key={`${item.name}-footer-item`}
+            className={`col-span-1 px-8 text-center ${item.name === "TOP" ? "font-bold" : ""}`}
+            onClick={() => navigate(item.link)}
+          >
             {item.name}
           </div>
         );

@@ -1,4 +1,4 @@
-import { LOGIN_BY_EMAIL, LOGIN_BY_SOCIAL, LOGOUT } from "./type/LoginType";
+import { LOGIN_BY_EMAIL, LOGIN_BY_SOCIAL, LOGOUT, GET_CUSTOMER } from "./type/LoginType";
 import LoginService from "../../service/LoginService";
 import { Dispatch } from "redux";
 import { toast } from "react-toastify";
@@ -63,6 +63,19 @@ const loginByEmailAction = (config: any) => {
   };
 };
 
+const getCustomer = () => {
+  return async (dispatch: Dispatch) => {
+    const customer = LoginService.getCustomer();
+    if (customer) {
+      toast(`Login successfully. \n Hi ${customer.name}`, { type: "success" });
+      dispatch({
+        type: GET_CUSTOMER,
+        customer: customer,
+      });
+    }
+  };
+};
+
 const logout = () => {
   return async (dispatch: Dispatch) => {
     dispatch({ type: DISPLAY_LOADING });
@@ -79,5 +92,5 @@ const logout = () => {
   };
 };
 
-const LoginAction = { loginBySocialMediaAction, logout, loginByEmailAction };
+const LoginAction = { getCustomer, loginBySocialMediaAction, logout, loginByEmailAction };
 export default LoginAction;

@@ -113,14 +113,14 @@ const Header = () => {
       );
     }
     const navigationButtonItems = [
-      { name: "Inquiry", link: "/#inquiry", id: "inquiry-component", hoverClass: "box-button-1" },
-      { name: "Order", link: "/#order", id: "order-component", hoverClass: "box-button-2" },
+      { name: "Inquiry", link: "/inquiry", id: "inquiry-component", hoverClass: "box-button-1" },
+      { name: "Order", link: "/order", id: "order-component", hoverClass: "box-button-2" },
     ];
 
     for (const item of navigationButtonItems) {
       const link = window.location.pathname === "/" && item.link === "/design" ? "/#showcase" : item.link;
       items.push(
-        <li key={item.name} className="h-full" onClick={() => navigate("/inquiry")}>
+        <li key={item.name} className="h-full wrap-box-button" onClick={() => navigate(item.link)}>
           <DefaultButton
             className={`rounded-3xl ${item.hoverClass}`}
             type="small"

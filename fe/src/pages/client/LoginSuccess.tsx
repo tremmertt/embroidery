@@ -26,6 +26,7 @@ export default function LoginSuccess() {
     if (customer) {
       navigate("/");
       toast(`Login successfully. \n Hi ${customer.name}`, { type: "success" });
+      window.close();
     }
     dispatch(LoadingAction.hideLoading());
   });
