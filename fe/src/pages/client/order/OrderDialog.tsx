@@ -11,12 +11,14 @@ import AddIcon from "@mui/icons-material/Add";
 export interface ItemOrder {
   name: string;
   size: string;
+  image: string;
 }
 
 export default function FormDialog(props: any) {
   const [item, setItem] = useState<ItemOrder>({
     name: "",
     size: "",
+    image: "",
   });
   const [open, setOpen] = React.useState(false);
 
@@ -26,6 +28,26 @@ export default function FormDialog(props: any) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleCapture = ({ target }: any) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(target.files[0]);
+    fileReader.onload = (e) => {
+      if (e.target && e.target.result && typeof e.target.result === "string" && e.target.result.includes("image")) {
+        setItem({
+          name: item.name,
+          size: item.size,
+          image: e.target.result as string,
+        });
+      }
+    };
+  };
+
+  const handleAddItem = (e: any) => {
+    props.addItem(item);
+    handleClose();
+    setItem({ name: "", size: "", image: "" });
   };
 
   return (
@@ -57,11 +79,11 @@ export default function FormDialog(props: any) {
               setItem({
                 name: evt.target.value,
                 size: item.size,
+                image: item.image,
               })
             }
           />
           <TextField
-            autoFocus
             margin="dense"
             className="my-4"
             id="size-item"
@@ -74,6 +96,7 @@ export default function FormDialog(props: any) {
               setItem({
                 name: item.name,
                 size: evt.target.value,
+                image: item.image,
               })
             }
           />
@@ -83,12 +106,12 @@ export default function FormDialog(props: any) {
               {" "}
               <b>Upload image</b>
             </div>
-            <input type="file" className="py-4" />
+            <input accept="image/*" type="file" className="py-4" onChange={handleCapture} />
           </div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={() => props.addItem(item)}>Add</Button>
+          <Button onClick={handleAddItem}>Add</Button>
         </DialogActions>
       </Dialog>
     </div>
