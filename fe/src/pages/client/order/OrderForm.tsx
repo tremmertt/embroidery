@@ -12,6 +12,7 @@ import DefaultButton from "custom/DefaultButton";
 import "../../../components/client/home/Inquiry.css";
 import LoginAction from "redux/actions/LoginAction";
 import { toast } from "react-toastify";
+import OrderTable from "./OrderTable";
 
 export default function OrderForm() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export default function OrderForm() {
   const isStepSkipped = (step: number) => {
     return skipped.has(step);
   };
-  console.log("isFocusedScreen", isFocusedScreen, customer);
+  // console.log("isFocusedScreen", isFocusedScreen, customer);
 
   const onFocus = () => {
     setIsFocusedScreen(true);
@@ -121,7 +122,7 @@ export default function OrderForm() {
   const handleStep2 = () => {
     return (
       <React.Fragment>
-        <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+        <OrderTable />
         <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
           <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
             Back
@@ -162,7 +163,7 @@ export default function OrderForm() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <Box className="py-8" style={{ width: 750 }}>
+      <Box className="py-8" style={{ width: 750, minHeight: 600 }}>
         <div className="text-center pb-8" style={{ fontSize: styleE.fontSize42, color: theme.primaryTextColor }}>
           Order Form
         </div>
