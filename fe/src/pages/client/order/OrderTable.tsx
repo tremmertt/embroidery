@@ -8,27 +8,20 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import OrderDialog from "./OrderDialog";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { ItemOrder } from "./OrderDialog";
 import { IconButton } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import OrderAction from "redux/actions/OrderAction";
+import { IOrder } from "redux/reducers/OrderReducer";
 
-function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
-  return { name, calories, fat, carbs, protein };
-}
+const OrderBasicTable = (props: any) => {
+  const { isViewOnly } = props;
+  const dispatch = useDispatch();
+  const { listOrder } = useSelector((state: any) => state.OrderReducer);
 
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
-const BasicTable = (props: any) => {
-  const { rows } = props;
   const handleDeleteItem = (index: number) => {
-    rows.splice(index, 1);
-    props.updateItems(rows);
+    dispatch(OrderAction.deleteOrderItem((index + 1).toString()));
   };
+
   return (
     <TableContainer component={Paper} className="shadow-none rounded-none">
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -37,13 +30,15 @@ const BasicTable = (props: any) => {
             <TableCell align="center">No.</TableCell>
             <TableCell align="center">Name</TableCell>
             <TableCell align="center">Size&nbsp;</TableCell>
+            <TableCell align="center">Quantity&nbsp;</TableCell>
+            <TableCell align="center">Output Type&nbsp;</TableCell>
             <TableCell align="center">Image&nbsp;</TableCell>
-            <TableCell align="center"></TableCell>
+            {isViewOnly ? <></> : <TableCell align="center"></TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows && rows.length != 0 ? (
-            rows.map((row: any, index: number) => (
+          {listOrder && listOrder.length !== 0 ? (
+            listOrder.map((row: any, index: number) => (
               <TableRow
                 key={`${index}-${row.name}-order-item`}
                 className="break-all"
@@ -52,21 +47,27 @@ const BasicTable = (props: any) => {
                 <TableCell align="center">{index + 1}</TableCell>
                 <TableCell align="center">{row.name}</TableCell>
                 <TableCell align="center">{row.size}</TableCell>
+                <TableCell align="center">{row.quantity}</TableCell>
+                <TableCell align="center">{row.type}</TableCell>
                 <TableCell align="center">
                   <div className="flex flex-row flex-wrap items-center justify-center">
                     <img style={{ maxWidth: 300, maxHeight: 100 }} src={row.image} alt={row.name} />
                   </div>
                 </TableCell>
-                <TableCell align="center">
-                  <IconButton aria-label="delete" size="small" onClick={() => handleDeleteItem(index)}>
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
+                {isViewOnly ? (
+                  <></>
+                ) : (
+                  <TableCell align="center">
+                    <IconButton aria-label="delete" size="small" onClick={() => handleDeleteItem(index)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                )}
               </TableRow>
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={5} align="center" style={{ color: "gray" }}>
+              <TableCell colSpan={isViewOnly ? 6 : 7} align="center" style={{ color: "gray" }}>
                 There'is no item. Please click button Add to add new order item
               </TableCell>
             </TableRow>
@@ -77,24 +78,21 @@ const BasicTable = (props: any) => {
   );
 };
 const OrderTable = (props: any) => {
-  const [rows, setRows] = useState<ItemOrder[]>([]);
-
-  const addItem = (item: ItemOrder) => {
-    setRows([...rows, item]);
+  const dispatch = useDispatch();
+  const { listOrder } = useSelector((state: any) => state.OrderReducer);
+  const addItem = (item: IOrder) => {
+    dispatch(
+      OrderAction.addOrderItem({
+        ...item,
+        id: (listOrder.length + 1).toString(),
+      })
+    );
   };
-
-  const updateItems = (items: ItemOrder[]) => {
-    setRows([...items]);
-  };
-
-  console.log("rows", rows);
-
-  useEffect(() => {}, [rows]);
 
   return (
     <div className="w-full h-full">
       <OrderDialog addItem={addItem} />
-      <BasicTable rows={rows} updateItems={updateItems} />
+      <OrderBasicTable />
     </div>
   );
 };

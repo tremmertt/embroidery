@@ -11,13 +11,17 @@ import AddIcon from "@mui/icons-material/Add";
 export interface ItemOrder {
   name: string;
   size: string;
+  quantity: string;
+  type: string;
   image: string;
 }
 
-export default function FormDialog(props: any) {
+export default function OrderFormDialog(props: any) {
   const [item, setItem] = useState<ItemOrder>({
     name: "",
     size: "",
+    type: "",
+    quantity: "",
     image: "",
   });
   const [open, setOpen] = React.useState(false);
@@ -28,6 +32,7 @@ export default function FormDialog(props: any) {
 
   const handleClose = () => {
     setOpen(false);
+    setItem({ name: "", size: "", quantity: "", type: "", image: "" });
   };
 
   const handleCapture = ({ target }: any) => {
@@ -38,6 +43,8 @@ export default function FormDialog(props: any) {
         setItem({
           name: item.name,
           size: item.size,
+          quantity: item.quantity,
+          type: item.type,
           image: e.target.result as string,
         });
       }
@@ -47,11 +54,10 @@ export default function FormDialog(props: any) {
   const handleAddItem = (e: any) => {
     props.addItem(item);
     handleClose();
-    setItem({ name: "", size: "", image: "" });
   };
 
   return (
-    <div className="flex justify-end py-4">
+    <div className="flex justify-end py-4 mt-8">
       <Button
         variant="outlined"
         style={{ width: 136, height: 43, border: "none" }}
@@ -79,6 +85,8 @@ export default function FormDialog(props: any) {
               setItem({
                 name: evt.target.value,
                 size: item.size,
+                type: item.type,
+                quantity: item.quantity,
                 image: item.image,
               })
             }
@@ -96,6 +104,46 @@ export default function FormDialog(props: any) {
               setItem({
                 name: item.name,
                 size: evt.target.value,
+                type: item.type,
+                quantity: item.quantity,
+                image: item.image,
+              })
+            }
+          />
+          <TextField
+            margin="dense"
+            className="my-4"
+            id="size-item"
+            label="Type"
+            type="text"
+            fullWidth
+            value={item.type}
+            variant="standard"
+            onChange={(evt) =>
+              setItem({
+                name: item.name,
+                size: item.size,
+                type: evt.target.value,
+                quantity: item.quantity,
+                image: item.image,
+              })
+            }
+          />
+          <TextField
+            margin="dense"
+            className="my-4"
+            id="size-item"
+            label="Quantity"
+            type="number"
+            fullWidth
+            value={item.quantity}
+            variant="standard"
+            onChange={(evt) =>
+              setItem({
+                name: item.name,
+                size: item.size,
+                type: item.type,
+                quantity: evt.target.value,
                 image: item.image,
               })
             }

@@ -6,6 +6,7 @@ import { ProductReducer } from "./reducers/ProductReducer";
 import { StaffReducer } from "./reducers/StaffReducer";
 import { LanguageReducer } from "./reducers/LanguageReducer";
 import { LoginReducer } from "./reducers/LoginReducer";
+import { OrderReducer } from "./reducers/OrderReducer";
 
 const rootReducer = combineReducers({
   TemplateReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   StaffReducer,
   LanguageReducer,
   LoginReducer,
+  OrderReducer,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));
