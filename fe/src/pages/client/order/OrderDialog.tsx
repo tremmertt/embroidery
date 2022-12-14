@@ -7,20 +7,18 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from "@mui/icons-material/Add";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { IOrder } from "redux/reducers/OrderReducer";
 
-export interface ItemOrder {
-  name: string;
-  size: string;
-  quantity: string;
-  type: string;
-  image: string;
-}
+export interface ItemOrder extends IOrder {}
 
 export default function OrderFormDialog(props: any) {
+  const typeDefault = ["JPEG", "JPG", "PNG", "PDF", "DST", "EMB", "PES", "CNS", "EXP", "VP3", "JEF", "HUS", "ART"];
   const [item, setItem] = useState<ItemOrder>({
+    id: "",
     name: "",
     size: "",
-    type: "",
+    type: "PDF",
     quantity: "",
     image: "",
   });
@@ -32,7 +30,7 @@ export default function OrderFormDialog(props: any) {
 
   const handleClose = () => {
     setOpen(false);
-    setItem({ name: "", size: "", quantity: "", type: "", image: "" });
+    setItem({ id: "", name: "", size: "", quantity: "", type: "PDF", image: "" });
   };
 
   const handleCapture = ({ target }: any) => {
@@ -41,6 +39,7 @@ export default function OrderFormDialog(props: any) {
     fileReader.onload = (e) => {
       if (e.target && e.target.result && typeof e.target.result === "string" && e.target.result.includes("image")) {
         setItem({
+          id: "",
           name: item.name,
           size: item.size,
           quantity: item.quantity,
@@ -67,14 +66,15 @@ export default function OrderFormDialog(props: any) {
       >
         Add order
       </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add order item</DialogTitle>
+      <Dialog open={open}>
+        <DialogTitle marginTop={2}>Add order item</DialogTitle>
         <DialogContent style={{ width: 500 }} className="flex flex-col justify-center gap-4">
           <DialogContentText>Please fill information of the item on the order</DialogContentText>
+
           <TextField
             autoFocus
             margin="dense"
-            className="my-4"
+            style={{ marginTop: 14 }}
             id="name-item"
             label="Name"
             type="text"
@@ -83,6 +83,7 @@ export default function OrderFormDialog(props: any) {
             variant="standard"
             onChange={(evt) =>
               setItem({
+                id: "",
                 name: evt.target.value,
                 size: item.size,
                 type: item.type,
@@ -93,15 +94,16 @@ export default function OrderFormDialog(props: any) {
           />
           <TextField
             margin="dense"
-            className="my-4"
+            style={{ marginTop: 14 }}
             id="size-item"
-            label="Size"
+            label="Size (height x width)"
             type="text"
             fullWidth
             value={item.size}
             variant="standard"
             onChange={(evt) =>
               setItem({
+                id: "",
                 name: item.name,
                 size: evt.target.value,
                 type: item.type,
@@ -110,28 +112,55 @@ export default function OrderFormDialog(props: any) {
               })
             }
           />
+          <div style={{ marginTop: 14 }}>
+            <FormControl variant="standard" fullWidth>
+              <InputLabel variant="standard" htmlFor="select-type">
+                Type
+              </InputLabel>
+              <Select
+                fullWidth
+                id="select-type"
+                margin="dense"
+                value={item.type}
+                label="Type"
+                labelId="Type"
+                variant="standard"
+                onChange={(evt) =>
+                  setItem({
+                    id: "",
+                    name: item.name,
+                    size: item.size,
+                    type: evt.target.value as
+                      | "JPEG"
+                      | "JPG"
+                      | "PNG"
+                      | "PDF"
+                      | "DST"
+                      | "EMB"
+                      | "PES"
+                      | "CNS"
+                      | "EXP"
+                      | "VP3"
+                      | "JEF"
+                      | "HUS"
+                      | "ART",
+                    quantity: item.quantity,
+                    image: item.image,
+                  })
+                }
+              >
+                {typeDefault.map((option, key) => (
+                  <MenuItem value={option} key={key}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+
           <TextField
             margin="dense"
-            className="my-4"
-            id="size-item"
-            label="Type"
-            type="text"
-            fullWidth
-            value={item.type}
-            variant="standard"
-            onChange={(evt) =>
-              setItem({
-                name: item.name,
-                size: item.size,
-                type: evt.target.value,
-                quantity: item.quantity,
-                image: item.image,
-              })
-            }
-          />
-          <TextField
-            margin="dense"
-            className="my-4"
+            style={{ marginTop: 14 }}
             id="size-item"
             label="Quantity"
             type="number"
@@ -140,6 +169,7 @@ export default function OrderFormDialog(props: any) {
             variant="standard"
             onChange={(evt) =>
               setItem({
+                id: "",
                 name: item.name,
                 size: item.size,
                 type: item.type,
@@ -148,7 +178,7 @@ export default function OrderFormDialog(props: any) {
               })
             }
           />
-          <div className="my-4">
+          <div style={{ marginTop: 14 }}>
             <br />
             <div>
               {" "}

@@ -1,84 +1,97 @@
 .title-box {
-  background: linear-gradient(to right, #CE7EDA 0%, #E45A4F 100%);
+  background: linear-gradient(to right, #ce7eda 0%, #e45a4f 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.no-box{
-  background: linear-gradient(to right, #CE7EDA 0%, #E45A4F 100%);
+.no-box {
+  background: linear-gradient(to right, #ce7eda 0%, #e45a4f 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.flow-content-box{
-  background: linear-gradient(to right, #CE7EDA66 0%, #E25E5C66 100%); 
+.flow-content-box {
+  background: linear-gradient(to right, #ce7eda66 0%, #e25e5c66 100%);
 }
 
-.slide-ltr{
+.slide-ltr {
   position: relative;
   transform: translateX(-150px);
-  opacity: 0; 
+  opacity: 0;
 }
 
-.slide-ltr-active{
+.slide-ltr-active {
   display: block;
   transform: translateX(0px);
   opacity: 1;
   transition: 1s all ease;
 }
 
-
-.slide-rtl{
+.slide-rtl {
   position: relative;
   transform: translateX(150px);
-  opacity: 0; 
+  opacity: 0;
 }
 
-.slide-rtl-active{
+.slide-rtl-active {
   display: block;
   transform: translateX(0px);
   opacity: 1;
   transition: 1s all ease;
-
 }
 
-.slide-ttb{
+.slide-ttb {
   position: relative;
   transform: translateY(-150px);
-  opacity: 0; 
+  opacity: 0;
 }
 
-.slide-ttb-active{
+.slide-ttb-active {
   display: block;
   transform: translateY(0px);
   opacity: 1;
   transition: 1s all ease;
-
 }
 
-.slide-btt{
+.slide-btt {
   position: relative;
   transform: translateY(150px);
-  opacity: 0; 
+  opacity: 0;
 }
 
-.slide-btt-active{
+.slide-btt-active {
   display: block;
   transform: translateY(0px);
   opacity: 1;
   transition: 1s all ease;
 }
 
-
-.show-slow{
+.show-slow {
   position: relative;
-  opacity: 0; 
+  opacity: 0;
 }
 
-.show-slow-active{
-  display: block; 
+.show-slow-active {
+  display: block;
   opacity: 1;
   transition: 1s all ease;
+}
+
+.show-slow-transition {
+  animation: show-slow 1s;
+}
+
+@keyframes show-slow {
+  /* You could think of as "step 1" */
+  0% {
+    position: relative;
+    opacity: 0;
+  }
+  /* You could think of as "step 2" */
+  100% {
+    display: block;
+    opacity: 1;
+  }
 }

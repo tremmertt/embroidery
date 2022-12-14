@@ -1,4 +1,4 @@
-import { makeStyles, Stack, TextareaAutosize, TextField } from "@mui/material";
+import { makeStyles, Stack, TextareaAutosize, TextField, Typography } from "@mui/material";
 import DefaultButton from "custom/DefaultButton";
 import React, { useContext, useState } from "react";
 import { ThemeCustomContext, useWindowSize } from "settings/theme-context";
@@ -9,6 +9,7 @@ import "../problem/TitleBox.css";
 const Inquiry = () => {
   const { theme, styleE, isMobile } = useContext(ThemeCustomContext);
   const [width, height] = useWindowSize();
+  const [isFinishedInquiry, setIsFinishedInquiry] = useState(false);
   const [isShowAlready, setIsShowAlready] = useState(false);
   const isOnScreen = (id: string) => {
     const element = document.getElementById(id);
@@ -27,7 +28,35 @@ const Inquiry = () => {
     }
     return false;
   };
+  const finishedInquiry = () => {
+    return (
+      <React.Fragment>
+        <div className={`show-slow-transition`}>
+          <Typography
+            className="text-center font-normal"
+            sx={{ mt: 4, mb: 2 }}
+            style={{ color: theme.primaryTextColor, fontSize: styleE.fontSize20 }}
+          >
+            Inquiry completed
+          </Typography>
 
+          <div className="text-center" style={{ fontSize: styleE.fontSize18 }}>
+            Thank you for your inquiry. <br />
+            An automatic reply email will be sent to your registered email address for confirmation.
+            <br />
+            <br />
+            <br />
+            Regarding the content of your inquiry, the person in charge will reply to you shortly. <br />
+            Please wait a moment now.
+          </div>
+        </div>
+      </React.Fragment>
+    );
+  };
+
+  const handleSendInquiry = () => {
+    setIsFinishedInquiry(true);
+  };
   return (
     <div
       id="inquiry-component"
@@ -40,7 +69,7 @@ const Inquiry = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="mt-4 mb-12 md:my-4 md:px-4 px-4" style={{ width: 800 }}>
+      <div className="mt-4 mb-12 md:my-4 md:px-4 px-4" style={{ width: 800, minHeight: 650 }}>
         <div className="text-center py-4" style={{ fontSize: styleE.fontSize42, color: theme.primaryTextColor }}>
           <span
             className={`${isOnScreen("title-inquiry-component") || isShowAlready ? "show-slow-active" : "show-slow"}`}
@@ -50,93 +79,103 @@ const Inquiry = () => {
           </span>
         </div>
         <hr />
-        <div className="grid md:grid-cols-4 grid-cols-5 items-start justify-start gap-4 py-4">
-          <div
-            style={{ fontSize: styleE.fontSize16 }}
-            className={`${isShowAlready ? "show-slow-active" : "show-slow"} col-span-1 font-bold`}
-          >
-            Name
-          </div>
-          <TextField
-            className={`${isShowAlready ? "show-slow-active" : "show-slow"} md:col-span-3 col-span-4 inputNoneRounded`}
-            fullWidth
-            required
-            size="medium"
-            variant="outlined"
-            sx={{ input: { color: "gray", backgroundColor: "white" } }}
-            placeholder="Please input name ..."
-          />
-        </div>
-        <hr />
-        <div className="grid md:grid-cols-4 grid-cols-5 items-start justify-start gap-4 py-4">
-          <div
-            className={`${isShowAlready ? "show-slow-active" : "show-slow"} col-span-1 font-bold`}
-            style={{ fontSize: styleE.fontSize16 }}
-          >
-            Email
-          </div>
-          <TextField
-            className={`${isShowAlready ? "show-slow-active" : "show-slow"} md:col-span-3 col-span-4 inputNoneRounded`}
-            fullWidth
-            required
-            size="medium"
-            variant="outlined"
-            sx={{ input: { color: "gray", backgroundColor: "white" } }}
-            placeholder="Please input email ..."
-          />
-        </div>
-        <hr />
-        <div className="grid md:grid-cols-4 grid-cols-5 items-start justify-start gap-4 py-4">
-          <div
-            className={`${isShowAlready ? "show-slow-active" : "show-slow"} col-span-1 font-bold`}
-            style={{ fontSize: styleE.fontSize16 }}
-          >
-            Phone Number
-          </div>
-          <TextField
-            className={`${isShowAlready ? "show-slow-active" : "show-slow"} md:col-span-3 col-span-4 inputNoneRounded`}
-            fullWidth
-            required
-            size="medium"
-            variant="outlined"
-            sx={{ input: { color: "gray", backgroundColor: "white" } }}
-            placeholder="Please input phone number ..."
-          />
-        </div>
-        <hr />
-        <div className="grid md:grid-cols-4 grid-cols-5 items-start justify-start gap-4 py-4" style={{ width: "100%" }}>
-          <div
-            className={`${isShowAlready ? "show-slow-active" : "show-slow"} col-span-1 font-bold`}
-            style={{ fontSize: styleE.fontSize16 }}
-          >
-            Contact Content
-          </div>
-          <div
-            className={`${
-              isShowAlready ? "show-slow-active" : "show-slow"
-            } md:col-span-3 col-span-4 block inputNoneRounded`}
-          >
-            <TextField
-              className="inputNoneRounded"
-              placeholder="Please input what you want to contact ..."
-              multiline
-              fullWidth
-              rows={10}
-              maxRows={100}
-              sx={{
-                input: {
+        {isFinishedInquiry ? (
+          finishedInquiry()
+        ) : (
+          <div>
+            <div className="grid md:grid-cols-4 grid-cols-5 items-start justify-start gap-4 py-4">
+              <div
+                style={{ fontSize: styleE.fontSize16 }}
+                className={`${isShowAlready ? "show-slow-active" : "show-slow"} col-span-1 font-bold`}
+              >
+                Name
+              </div>
+              <TextField
+                className={`${
+                  isShowAlready ? "show-slow-active" : "show-slow"
+                } md:col-span-3 col-span-4 inputNoneRounded`}
+                fullWidth
+                required
+                size="medium"
+                variant="outlined"
+                sx={{ input: { color: "gray", backgroundColor: "white" } }}
+                placeholder="Please input name ..."
+              />
+            </div>
+            <hr />
+            <div className="grid md:grid-cols-4 grid-cols-5 items-start justify-start gap-4 py-4">
+              <div
+                className={`${isShowAlready ? "show-slow-active" : "show-slow"} col-span-1 font-bold`}
+                style={{ fontSize: styleE.fontSize16 }}
+              >
+                Email
+              </div>
+              <TextField
+                className={`${
+                  isShowAlready ? "show-slow-active" : "show-slow"
+                } md:col-span-3 col-span-4 inputNoneRounded`}
+                fullWidth
+                required
+                size="medium"
+                variant="outlined"
+                sx={{ input: { color: "gray", backgroundColor: "white" } }}
+                placeholder="Please input email ..."
+              />
+            </div>
+            <hr />
+            <div className="grid md:grid-cols-4 grid-cols-5 items-start justify-start gap-4 py-4">
+              <div
+                className={`${isShowAlready ? "show-slow-active" : "show-slow"} col-span-1 font-bold`}
+                style={{ fontSize: styleE.fontSize16 }}
+              >
+                Phone Number
+              </div>
+              <TextField
+                className={`${
+                  isShowAlready ? "show-slow-active" : "show-slow"
+                } md:col-span-3 col-span-4 inputNoneRounded`}
+                fullWidth
+                required
+                size="medium"
+                variant="outlined"
+                sx={{ input: { color: "gray", backgroundColor: "white" } }}
+                placeholder="Please input phone number ..."
+              />
+            </div>
+            <hr />
+            <div
+              className="grid md:grid-cols-4 grid-cols-5 items-start justify-start gap-4 py-4"
+              style={{ width: "100%" }}
+            >
+              <div
+                className={`${isShowAlready ? "show-slow-active" : "show-slow"} col-span-1 font-bold`}
+                style={{ fontSize: styleE.fontSize16 }}
+              >
+                Contact Content
+              </div>
+              <div
+                className={`${isShowAlready ? "show-slow-active" : "show-slow"} md:col-span-3 col-span-4 block`}
+                style={{
                   backgroundColor: "white",
-                  color: "gray",
-                  border: "#e5e7eb 1px solid",
-                  borderRadius: "0px",
-                },
-              }}
-            />
+                }}
+              >
+                <TextField
+                  className="inputNoneRounded"
+                  placeholder="Please input what you want to contact ..."
+                  multiline
+                  fullWidth
+                  rows={10}
+                  maxRows={100}
+                  inputProps={{ style: { color: "gray", backgroundColor: "white" } }}
+                />
+              </div>
+            </div>
+            <div className="h-24 py-4 text-center" onClick={handleSendInquiry}>
+              <DefaultButton className="rounded-3xl box-button-2" variant="contained" value="Send" type="small" />
+            </div>
           </div>
-        </div>
-        <div className="h-24 py-4 text-center">
-          <DefaultButton className="rounded-3xl box-button-2" variant="contained" value="Send" type="small" />
-        </div>
+        )}
+
         {isMobile ? (
           <div className="flex">
             <img
