@@ -251,7 +251,7 @@ const Header = () => {
           <div className="container flex flex-wrap justify-between items-center mx-auto">
             <Link className="flex title-font px-2 font-medium items-center text-gray-900 mb-0" to="/">
               <img
-                src={require("../../../assets/v2/img/logo64x64.png")}
+                src={require("../../../assets/v3/img/logo128x128.png")}
                 style={{ height: isSP ? 30 : 50 }}
                 alt="logo"
               ></img>

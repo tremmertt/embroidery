@@ -55,16 +55,7 @@ export default function ContactBox() {
   };
 
   return (
-    <div
-      className="text-center md:pt-3 pt-0 mb-12"
-      style={{
-        backgroundImage: "url(" + require("../../../assets/v2/bg/bg_pc_3" + (isMobile ? "_mobile.png" : ".png")) + ")",
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        height: isMobile ? 1080 : 660,
-      }}
-    >
+    <div className="text-center md:pt-3 pt-0 mb-12">
       <TitleBox title={"SOLUTION"} subTitle={`We are best solution for you <br/> Contact us now`}></TitleBox>
       {init()}
     </div>

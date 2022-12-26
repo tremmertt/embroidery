@@ -28,14 +28,14 @@ export default function ContactContent(props: any) {
   return (
     <div
       id={`contact-content-${props.no}`}
-      className={`bg-white rounded-full text-center md:h-72 md:w-72 w-64 h-64 flex flex-col justify-center items-center ${
+      className={`contact-content-box rounded-full text-center md:h-72 md:w-72 w-64 h-64 flex flex-col justify-center items-center ${
         isOnScreen(`contact-content-${props.no}`) || isShowAlready ? "show-slow-active" : "show-slow"
       } ${props.className}`}
     >
-      <div>{props.icon}</div>
+      <div style={{ color: theme.colorMain }}>{props.icon}</div>
       <div
         className="pt-3"
-        style={{ fontSize: styleE.fontSize20 }}
+        style={{ fontSize: styleE.fontSize20, color: theme.colorMain }}
         dangerouslySetInnerHTML={{ __html: props.text }}
       ></div>
     </div>

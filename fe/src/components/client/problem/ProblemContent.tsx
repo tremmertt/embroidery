@@ -41,7 +41,7 @@ export default function ProblemContent(props: any) {
             ></div>
           </div>
           <div
-            style={{ fontSize: styleE.fontSize16 }}
+            style={{ fontSize: styleE.fontSize20 }}
             className="py-2"
             dangerouslySetInnerHTML={{ __html: props.answer }}
           ></div>
@@ -54,12 +54,12 @@ export default function ProblemContent(props: any) {
             <span className="no-box font-black">{props.no}</span>
           </div>
           <div
-            style={{ fontSize: styleE.fontSize36 }}
+            style={{ fontSize: styleE.fontSize28 }}
             className="font-bold"
             dangerouslySetInnerHTML={{ __html: props.question }}
           ></div>
           <div
-            style={{ fontSize: styleE.fontSize16 }}
+            style={{ fontSize: styleE.fontSize20 }}
             className="py-2"
             dangerouslySetInnerHTML={{ __html: props.answer }}
           ></div>
@@ -76,7 +76,7 @@ export default function ProblemContent(props: any) {
           isOnScreen() || isShowAlready ? `slide-${props.direction}-active` : `slide-${props.direction}`
         }`}
       >
-        <img src={require(`../../../assets/v2/drawer/${props.image}`)} alt={props.question}></img>
+        <img src={require(`../../../assets/v3/drawer/${props.image}`)} alt={props.question}></img>
       </div>
     );
   };

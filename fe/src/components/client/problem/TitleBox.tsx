@@ -9,7 +9,7 @@ const useTitleBox = (props: any) => {
       <div
         style={{
           fontSize: styleE.fontSize20,
-          lineHeight: "24px",
+          lineHeight: "28px",
         }}
         className={props.className}
       >

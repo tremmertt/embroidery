@@ -12,22 +12,22 @@ export default function ProblemBox() {
         no: "01",
         question: "Do you have an idea but can't make it happen?",
         answer: "Embroidery digitizing can help solve your situation with the best designs",
-        direction: "rtl",
-        image: "pic_2.png",
+        direction: "ltr",
+        image: "pic_1.png",
       },
       {
         no: "02",
         question: "Are you worried about the cost of the product?",
         answer: "Don't worry about it. <br/> We offer you the best price in the market.",
-        direction: "ltr",
-        image: "pic_3.png",
+        direction: "rtl",
+        image: "pic_2.png",
       },
       {
         no: "03",
         question: "Designs are in urgent need. Time is limited.",
         answer: "Within 30 minutes to 1 hour, we will send you the results. Also we will support any subsequent edits",
-        direction: "rtl",
-        image: "pic_4.png",
+        direction: "ltr",
+        image: "pic_3.png",
       },
     ];
     const rows = [];
@@ -50,7 +50,7 @@ export default function ProblemBox() {
     <div
       id="problem-box-component"
       className="text-center"
-      style={{ paddingLeft: isMobile ? 0 : 140, paddingRight: isMobile ? 0 : 140 }}
+      style={{ paddingLeft: isMobile ? 0 : 100, paddingRight: isMobile ? 0 : 100 }}
     >
       <div className="flex-col flex-wrap justify-center items-center">
         <TitleBox title={"TROUBLES"} subTitle={"Do you have any problems?"}></TitleBox>

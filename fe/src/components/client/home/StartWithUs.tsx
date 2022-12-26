@@ -32,45 +32,37 @@ export default function StartWithUs() {
 
   return (
     <div
-      className="container-fluid my-8"
+      className="container-fluid pl-80 pr-40 my-8"
       id="start-with-us-component"
       style={{
-        backgroundImage: "url(" + require("../../../assets/v2/bg/bg_pc_2.png") + ")",
+        backgroundImage: "url(" + require("../../../assets/v3/bg/bg_pc_2.png") + ")",
         backgroundPosition: "center",
-        backgroundSize: "cover",
+        backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="flex flex-col flex-wrap justify-center items-center md:h-96 h-72">
+      <div className="grid grid-cols-2 justify-center items-center  md:h-96 h-72 ">
         <div
           style={{
             color: theme.subColor1,
             fontSize: styleE.fontSize42,
             fontWeight: "bold",
           }}
-          className={`text-center pt-0 md:pb-8 pb-4 ${
-            isOnScreen("start-with-us-inquiry") || isShowAlready ? "slide-ttb-active" : "slide-ttb"
-          }`}
+          className={`col-span-1 text-center pt-0 md:pb-4 pb-4 text-center`}
         >
           Get started with us now
+          {/*  */}
+          {/* ${
+            isOnScreen("start-with-us-inquiry") || isShowAlready ? "slide-ltr-active" : "slide-ltr"
+          } */}
         </div>
-        <div className="flex justify-center items-center h-24">
-          <span className="wrap-box-button" onClick={() => navigate("/inquiry")}>
-            <DefaultButton
-              id="start-with-us-inquiry"
-              type="medium"
-              value="Inquiry"
-              variant="outlined"
-              className={`rounded-full shadow-xl box-button-1 `}
-            ></DefaultButton>
-          </span>
+        <div className="col-span-1  flex justify-center items-center h-24">
           <span className="wrap-box-button" onClick={() => navigate("/order")}>
             <DefaultButton
               id="start-with-us-contact"
               type="medium"
               value="Order"
-              variant="contained"
-              className={`ml-4 rounded-full shadow-xl box-button-2`}
+              className={`ml-4 rounded-full shadow-xl box-button-1`}
             ></DefaultButton>
           </span>
         </div>

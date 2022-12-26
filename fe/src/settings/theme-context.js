@@ -17,6 +17,7 @@ const styles = {
     fontSize60: "40px",
     fontSize72: "44px",
     fontSize84: "56px",
+    fontSize96: "64px",
   },
   tablet: {
     fontSize12: "12px",
@@ -30,6 +31,7 @@ const styles = {
     fontSize48: "48px",
     fontSize72: "72px",
     fontSize84: "84px",
+    fontSize96: "96px",
   },
   pc: {
     fontSize12: "12px",
@@ -44,6 +46,7 @@ const styles = {
     fontSize60: "60px",
     fontSize72: "72px",
     fontSize84: "84px",
+    fontSize96: "96px",
   },
 };
 const themes = {
@@ -82,6 +85,28 @@ const themes = {
 
   lightV2: {
     primaryTextColor: "#E94D30",
+    primaryBackgroundColor: "#fff",
+    subColor1: "#fff",
+    subColor2: "#262626",
+
+    backgroundColor: "white",
+    backgroundColorMint: "#f4f7fe",
+    backgroundMainColor: "#7f1d1d",
+    colorMain: "white",
+    color: "#1b254b",
+    colorMint: "#f19c79",
+    dropShadow: "drop-shadow-[0_0px_0px_rgba(0,0,0,0.25)]",
+    textColorActiveWithHoverAdmin: "font-extrabold text-[#1b254b]",
+    textColorInactiveWithoutHoverAdmin: "font-normal hover:font-semibold text-[#6d6f75] hover:text-[#1b254b] ",
+    backgroundColorWithHover: "bg-[#f4f7fe] hover:bg-[#e3e6ef]",
+    buttonWidthPrimary: 144,
+    buttonHeightPrimary: 48,
+    textFieldWidthPrimary: 144,
+    textFieldHeightPrimary: 48,
+  },
+
+  lightV3: {
+    primaryTextColor: "#FF9567",
     primaryBackgroundColor: "#fff",
     subColor1: "#fff",
     subColor2: "#262626",
@@ -142,7 +167,7 @@ const initialState = {
   device: "pc",
   isMobile: false,
   styleE: styles.pc,
-  theme: themes.lightV2,
+  theme: themes.lightV3,
   direction: "rtl",
   toggle: () => {},
 };

@@ -1,21 +1,24 @@
 .title-box {
-  background: linear-gradient(to right, #CE7EDA 0%, #E45A4F 100%);
+  background: linear-gradient(to right, #F16849 0%, #FF9567 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
+} 
 
 .no-box{
-  background: linear-gradient(to right, #CE7EDA 0%, #E45A4F 100%);
+  background: linear-gradient(to right, #F16849 0%, #FF9567 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .flow-content-box{
-  background: linear-gradient(to right, #CE7EDA66 0%, #E25E5C66 100%); 
+  background: linear-gradient(to right, #F16849 0%, #FF9567 100%); 
 }
 
+.contact-content-box {
+  background: linear-gradient(to right, #F16849 -50%, #FF9567 20%); 
+}
 .slide-ltr{
   position: relative;
   transform: translateX(-150px);

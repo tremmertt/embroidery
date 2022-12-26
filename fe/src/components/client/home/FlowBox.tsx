@@ -52,7 +52,7 @@ export default function FlowBox() {
   };
 
   return (
-    <div className="text-center pb-12" style={{ paddingLeft: isMobile ? 0 : 140, paddingRight: isMobile ? 0 : 140 }}>
+    <div className="text-center pb-12" style={{ paddingLeft: isMobile ? 0 : 100, paddingRight: isMobile ? 0 : 100 }}>
       <TitleBox
         title={"FLOW"}
         subTitle={`You only need <b style='color: ${theme.primaryTextColor}'>5 minutes</b> <br/> to sign up for our super easy process`}
