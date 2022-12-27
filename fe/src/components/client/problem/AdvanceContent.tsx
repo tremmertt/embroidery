@@ -29,14 +29,16 @@ export default function AdvanceContent(props: any) {
       id={`advance-content-step-${props.no}`}
       className={`text-center flex flex-col justify-center items-center rounded-xl  ${props.className}`}
     >
-      <img
-        src={require(`../../../assets/v3/drawer/${props.image}`)}
-        style={{
-          width: isMobile ? 200 : 220,
-          height: isMobile ? 180 : 195,
-        }}
-        alt=""
-      />
+      <div className="h-44">
+        <img
+          src={require(`../../../assets/v3/drawer/${props.image}`)}
+          style={{
+            objectFit: "cover",
+            width: isMobile ? 200 : 220,
+          }}
+          alt=""
+        />
+      </div>
       <div
         className="w-52 my-8 font-medium"
         style={{ fontSize: styleE.fontSize20 }}

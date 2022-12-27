@@ -32,7 +32,7 @@ export default function StartWithUs() {
 
   return (
     <div
-      className="container-fluid pl-80 pr-40 my-8"
+      className="container-fluid pl-80 pr-40 my-8 md:h-96 h-72"
       id="start-with-us-component"
       style={{
         backgroundImage: "url(" + require("../../../assets/v3/bg/bg_pc_2.png") + ")",
@@ -41,14 +41,14 @@ export default function StartWithUs() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="grid grid-cols-2 justify-center items-center  md:h-96 h-72 ">
+      <div className="flex flex-col h-full justify-center items-center ">
         <div
           style={{
             color: theme.subColor1,
             fontSize: styleE.fontSize42,
             fontWeight: "bold",
           }}
-          className={`col-span-1 text-center pt-0 md:pb-4 pb-4 text-center`}
+          className={`text-center pt-0 md:pb-4 pb-4 text-center`}
         >
           Get started with us now
           {/*  */}
@@ -56,13 +56,23 @@ export default function StartWithUs() {
             isOnScreen("start-with-us-inquiry") || isShowAlready ? "slide-ltr-active" : "slide-ltr"
           } */}
         </div>
-        <div className="col-span-1  flex justify-center items-center h-24">
+        <div className="flex justify-center items-center h-20">
+          <span className="wrap-box-button" onClick={() => navigate("/inquiry")}>
+            <DefaultButton
+              id="start-with-us-inquiry"
+              type="small"
+              value="Inquiry"
+              variant="outlined"
+              className={`rounded-full shadow-sm box-button-1 `}
+            ></DefaultButton>
+          </span>
           <span className="wrap-box-button" onClick={() => navigate("/order")}>
             <DefaultButton
               id="start-with-us-contact"
-              type="medium"
+              type="small"
               value="Order"
-              className={`ml-4 rounded-full shadow-xl box-button-1`}
+              variant="contained"
+              className={`ml-4 rounded-full shadow-sm box-button-2`}
             ></DefaultButton>
           </span>
         </div>

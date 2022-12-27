@@ -64,7 +64,7 @@ export default function Subscribe() {
       className="text-center pt-0 pb-2"
       style={{ paddingLeft: isMobile ? 0 : 100, paddingRight: isMobile ? 0 : 100 }}
     >
-      <TitleBox title={"Review"} subTitle={`Don't miss these special offers`}></TitleBox>
+      <TitleBox title={"REVIEW"} subTitle={`Don't miss these special offers`}></TitleBox>
       {init()}
       <div className="flex justify-center items-center">
         <img src={require(`../../../assets/v3/drawer/pic_4.png`)} alt={"subscribe"} width="300"></img>
