@@ -45,7 +45,7 @@ export default function SubscribeContent(props: any) {
         dangerouslySetInnerHTML={{ __html: props.name }}
       ></div>
       <div
-        className="w-64 h-60 mb-4 font-medium italic"
+        className="w-64 h-40 mb-0 font-medium italic"
         style={{ fontSize: styleE.fontSize14 }}
         dangerouslySetInnerHTML={{ __html: props.comment }}
       ></div>
