@@ -1,2 +1,3 @@
 export const DISPLAY_LOADING = "DISPLAY_LOADING";
 export const HIDE_LOADING = "HIDE_LOADING";
+export const SET_SETTING = "SET_SETTING";

@@ -1,6 +1,6 @@
 import uuid
 import django
-import jwt
+# import jwt
 
 from django.conf import settings
 from datetime import datetime, timedelta

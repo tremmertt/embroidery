@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Box, TextField } from "@mui/material";
+import React, { useContext } from "react";
+import { TextField } from "@mui/material";
 import { ThemeCustomContext } from "../../../settings/theme-context";
 import TitleBox from "../problem/TitleBox";
 import SubscribeContent from "../problem/SubscribeContent";
@@ -9,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import "./Inquiry.css";
 
 export default function Subscribe() {
-  const { theme, styleE, isMobile } = useContext(ThemeCustomContext);
+  const { theme, isMobile } = useContext(ThemeCustomContext);
   const navigate = useNavigate();
   const init = () => {
     const items = [
@@ -61,17 +60,17 @@ export default function Subscribe() {
 
   return (
     <div
-      className="text-center pt-0 pb-2"
+      id="review-component"
+      className="text-center py-8"
       style={{ paddingLeft: isMobile ? 0 : 100, paddingRight: isMobile ? 0 : 100 }}
     >
       <TitleBox title={"REVIEW"} subTitle={`Don't miss these special offers`}></TitleBox>
       {init()}
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center mt-8">
         <img src={require(`../../../assets/v3/drawer/pic_4.png`)} alt={"subscribe"} width="300"></img>
       </div>
-      <div className="grid grid-cols-3 my-8">
-        <div className="col-span-1"></div>
-        <div className="col-span-1">
+      <div className="flex flex-row justify-center items-center my-8">
+        <div className="md:w-96">
           <TextField
             /* styles the wrapper */
             sx={{
@@ -94,7 +93,7 @@ export default function Subscribe() {
             type="text"
           />
         </div>
-        <div className="col-span-1 py-2 flex items-start px-4">
+        <div className="mx-2">
           <span className="wrap-box-button" onClick={() => navigate("/inquiry")}>
             <DefaultButton
               type="small"
@@ -104,7 +103,6 @@ export default function Subscribe() {
             ></DefaultButton>
           </span>
         </div>
-        {/* </div> */}
       </div>
     </div>
   );

@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path, include, re_path
  
 urlpatterns = [
+    # path("email/", include("modules.contact.urls")),
+    # path("mailbox/", include("modules.django_mailbox.urls")),
+     
     path("embroidery/", include("modules.embroidery.urls")),
-    path("email/", include("modules.contact.urls")),
-    path("mailbox/", include("modules.django_mailbox.urls")),
     path("", admin.site.urls),
+    path('nested_admin/', include('nested_admin.urls')), 
 ]

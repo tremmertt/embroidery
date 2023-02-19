@@ -35,27 +35,31 @@ DEBUG = os.getenv("APP_DEBUG")
 
 ALLOWED_HOSTS = ['localhost','127.0.0.1', 'rcpmw3me3e.execute-api.ap-southeast-1.amazonaws.com',]
 
-S3_BUCKET_NAME = "embroidery-admin-dev"
-STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
-AWS_S3_BUCKET_NAME_STATIC = S3_BUCKET_NAME
-# serve the static files directly from the specified s3 bucket
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % S3_BUCKET_NAME
-STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+if os.getenv("ENV") == 'prod':
 
-# if you have configured a custom domain for your static files use:
-#AWS_S3_PUBLIC_URL_STATIC = "https://static.yourdomain.com/"
+    S3_BUCKET_NAME = "embroidery-admin-dev"
+    STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+    AWS_S3_BUCKET_NAME_STATIC = S3_BUCKET_NAME
+    # serve the static files directly from the specified s3 bucket
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % S3_BUCKET_NAME
+    STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
+    # if you have configured a custom domain for your static files use:
+    #AWS_S3_PUBLIC_URL_STATIC = "https://static.yourdomain.com/"
 
 # Application definition
 
-INSTALLED_APPS = [
-    "django_s3_storage",
-    "modules.simpleui.apps.SimpleApp",
+INSTALLED_APPS = [ 
+    "django_s3_storage", 
+    'modules.jazzmin.apps.JazzminConfig', 
+    # "modules.simpleui.apps.SimpleApp",
     "django.contrib.admin",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "corsheaders",
+    'nested_admin',
     "rest_framework",
     "import_export",
     "django_filters",
@@ -66,7 +70,7 @@ INSTALLED_APPS = [
     "modules.auth_config.apps.CustomAuthConfig",
     # email service
     # "crispy_forms",
-    "modules.contact.apps.ContactConfig",
+    # "modules.contact.apps.ContactConfig",
     
     
     # "modules.django_mailbox.apps.MailBoxConfig",
@@ -89,7 +93,7 @@ ROOT_URLCONF = "embroidery_admin.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["modules/embroidery/templates"], #BASE_DIR / "templates", 
+        "DIRS": [(os.path.join(BASE_DIR, 'templates')),],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

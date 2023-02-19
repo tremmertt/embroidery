@@ -1,10 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Link, useNavigate } from "react-router-dom";
-import PaymentsIcon from "@mui/icons-material/Payments";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import EuroIcon from "@mui/icons-material/Euro";
-import CurrencyYenIcon from "@mui/icons-material/CurrencyYen";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
+import { useNavigate } from "react-router-dom";
 import { ThemeCustomContext } from "settings/theme-context";
 import React, { useContext, useEffect } from "react";
 import "./Common.css";
@@ -44,11 +39,11 @@ const Footer = () => {
 
   const buildNavigation = () => {
     const navigationItems = [
-      { name: "TOP", link: "/#home", id: "home-component" },
+      { name: "Top", link: "/#home", id: "home-component" },
       { name: "Contact", link: "/#contact", id: "contact-component" },
       { name: "Showroom", link: "/design", id: "showcase-component" },
       { name: "Inquiry", link: "/inquiry", id: "inquiry-component" },
-      { name: "Order", link: "/order", id: "order-component" },
+      // { name: "Order", link: "/order", id: "order-component" },
     ];
     const items = [] as JSX.Element[];
     if (isMobile) {
@@ -56,7 +51,6 @@ const Footer = () => {
       let rows = [] as JSX.Element[];
       for (const index in navigationItems) {
         const trueIndex = parseInt(index) % columNum;
-        console.log("trueIndex", trueIndex);
         const item = navigationItems[index];
         rows.push(
           <div key={`${item.name}-footer-item`} className="col-span-1 px-8" onClick={() => navigate(item.link)}>
@@ -91,7 +85,7 @@ const Footer = () => {
           </div>
         );
       }
-      return <div className="grid grid-cols-5 divide-x pb-2 cursor-pointer">{items}</div>;
+      return <div className="grid grid-cols-4 divide-x pb-2 cursor-pointer">{items}</div>;
     }
   };
 

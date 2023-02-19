@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { HIDE_LOADING, DISPLAY_LOADING } from "./type/LoadingType";
+import { HIDE_LOADING, DISPLAY_LOADING, SET_SETTING } from "./type/LoadingType";
 
 export const hideLoading = () => {
   return async (dispatch: Dispatch) => {
@@ -13,5 +13,11 @@ export const displayLoading = () => {
   };
 };
 
-const LoadingAction = { hideLoading, displayLoading };
+export const setSetting = ({ device, isMobile, dark }: { device: string; isMobile: boolean; dark: boolean }) => {
+  return async (dispatch: Dispatch) => {
+    dispatch({ type: SET_SETTING, device, isMobile, dark });
+  };
+};
+
+const LoadingAction = { hideLoading, displayLoading, setSetting };
 export default LoadingAction;

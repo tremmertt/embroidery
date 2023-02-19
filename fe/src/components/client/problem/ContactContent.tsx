@@ -28,7 +28,7 @@ export default function ContactContent(props: any) {
   return (
     <div
       id={`contact-content-${props.no}`}
-      className={`contact-content-box rounded-full text-center md:h-72 md:w-72 w-64 h-64 flex flex-col justify-center items-center ${
+      className={`contact-content-box rounded-full text-center md:h-72 md:w-72 w-52 h-52 flex flex-col justify-center items-center ${
         isOnScreen(`contact-content-${props.no}`) || isShowAlready ? "show-slow-active" : "show-slow"
       } ${props.className}`}
     >

@@ -1,7 +1,10 @@
-import { DISPLAY_LOADING, HIDE_LOADING } from "../actions/type/LoadingType";
+import { DISPLAY_LOADING, HIDE_LOADING, SET_SETTING } from "../actions/type/LoadingType";
 
 const stateDefault = {
   isLoading: false,
+  isMobile: window.innerWidth < 768,
+  device: window.innerWidth < 768 ? "mobile" : window.innerWidth < 1084 ? "tablet" : "pc",
+  dark: localStorage.getItem("dark") === "true",
 };
 
 export const LoadingReducer = (state = stateDefault, action: any) => {
@@ -14,6 +17,8 @@ export const LoadingReducer = (state = stateDefault, action: any) => {
       state.isLoading = false;
       return { ...state };
     }
+    case SET_SETTING:
+      return { ...state };
     default:
       return { ...state };
   }

@@ -8,7 +8,7 @@ class ItemSerializer(serializers.ModelSerializer):
     encode_image = serializers.CharField(default="")
 
     class Meta:
-        model = item.Item
+        model = item.ProductRequest
         fields = [
             "id",
             "name",

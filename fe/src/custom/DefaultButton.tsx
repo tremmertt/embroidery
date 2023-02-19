@@ -17,7 +17,7 @@ const DefaultButton = ({
   disableFocusRipple = false,
   id = "",
 }: {
-  type: "small" | "medium" | "large";
+  type: "small" | "medium" | "large" | "small-special";
   variant?: "text" | "outlined" | "contained";
   width?: number;
   height?: number;
@@ -34,20 +34,25 @@ const DefaultButton = ({
 
   switch (type) {
     case "large":
-      width = device === "mobile" ? 120 : 216;
-      height = device === "mobile" ? 36 : 64;
+      width = device === "mobile" ? 140 : 216;
+      height = device === "mobile" ? 44 : 64;
       fontSize = styleE.fontSize28;
       break;
     case "medium":
-      width = device === "mobile" ? 120 : 216;
-      height = device === "mobile" ? 36 : 64;
+      width = device === "mobile" ? 126 : 216;
+      height = device === "mobile" ? 40 : 64;
       fontSize = styleE.fontSize20;
+      break;
+    case "small-special":
+      width = device === "mobile" ? 100 : 180;
+      height = device === "mobile" ? 30 : 44;
+      fontSize = device === "mobile" ? styleE.fontSize14 : styleE.fontSize16;
       break;
     case "small":
     default:
       width = device === "mobile" ? 120 : 136;
       height = device === "mobile" ? 36 : 43;
-      fontSize = styleE.fontSize16;
+      fontSize = device === "mobile" ? styleE.fontSize14 : styleE.fontSize16;
       break;
   }
 

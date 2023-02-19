@@ -7,7 +7,7 @@ import BusinessIcon from "@mui/icons-material/Business";
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 
 export default function ContactBox() {
-  const { theme, styleE, isMobile } = useContext(ThemeCustomContext);
+  const { styleE, isMobile } = useContext(ThemeCustomContext);
 
   const init = () => {
     const items = [
@@ -45,7 +45,6 @@ export default function ContactBox() {
     }
     return (
       <div
-        id="contact-component"
         style={{ paddingLeft: isMobile ? 0 : 180, paddingRight: isMobile ? 0 : 180 }}
         className="md:py-4 grid grid-cols-3 place-items-center md:gap-0 gap-4"
       >
@@ -55,7 +54,7 @@ export default function ContactBox() {
   };
 
   return (
-    <div className="text-center md:pt-3 pt-0 mb-12">
+    <div className="text-center md:pt-3 pt-0 mb-12" id="contact-component">
       <TitleBox title={"SOLUTION"} subTitle={`We are best solution for you <br/> Contact us now`}></TitleBox>
       {init()}
     </div>

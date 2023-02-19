@@ -7,33 +7,12 @@ import "react-toastify/dist/ReactToastify.css";
 import "./translations/i18n";
 import HomePage from "./pages/client/HomePage";
 import ShowRoomPage from "./pages/client/ShowRoomPage";
-import Login from "./pages/client/Login";
-import LoginSuccess from "./pages/client/LoginSuccess";
-import ConfirmEmail from "./pages/client/ConfirmEmail";
+// import Login from "./pages/client/Login";
+// import LoginSuccess from "./pages/client/LoginSuccess";
+// import ConfirmEmail from "./pages/client/ConfirmEmail";
 import OrderForm from "./pages/client/order/OrderForm";
 import ErrorPage from "./pages/client/ErrorPage";
 import Signup from "./pages/client/Signup";
-
-// import CartPage from "./pages/client/CartPage";
-// import HistoryPage from "./pages/client/HistoryPage";
-// import ContactPage from "./pages/client/ContactPage";
-
-// import DashBoardPage from "./pages/admin/dashboard/DashBoardPage";
-// import SettingPage from "./pages/admin/setting/SettingPage";
-// import ProfilePage from "./pages/admin/profile/ProfilePage";
-// import SigninPage from "./pages/admin/auth/SigninPage";
-// import OrderListPage from "./pages/admin/order/OrderListPage";
-
-// import StaffListPage from "./pages/admin/staff/StaffListPage";
-// import CreateStaffPage from "./pages/admin/staff/CreateStaffPage";
-// import EditStaffPage from "./pages/admin/staff/EditStaffPage";
-
-// import ProductListPage from "./pages/admin/product/ProductListPage";
-// import CreateProductPage from "./pages/admin/product/CreateProductPage";
-// import EditProductPage from "./pages/admin/product/EditProductPage";
-
-// import AgencyListPage from "./pages/admin/agency/AgencyListPage";
-// import CustomerListPage from "./pages/admin/customer/CustomerListPage";
 
 import ClientTemplate from "./templates/ClientTemplate";
 // import AdminTemplate from "./templates/AdminTemplate";
@@ -42,7 +21,6 @@ import { ThemeCustomContext } from "./settings/theme-context"; // https://mui.co
 import { ToastContainer } from "react-toastify"; //https://www.npmjs.com/package/react-toastify
 import { Backdrop, CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
-import { Redirect } from "react-router";
 import Inquiry from "components/client/home/Inquiry";
 
 export const history = createBrowserHistory();
@@ -67,7 +45,7 @@ function App() {
       <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={isLoading}>
         <CircularProgress color="inherit" />
       </Backdrop>
-      <ToastContainer
+      {/* <ToastContainer
         position="top-right"
         autoClose={2000}
         hideProgressBar={false}
@@ -78,7 +56,7 @@ function App() {
         draggable
         pauseOnHover
         theme="light"
-      />
+      /> */}
       <CustomRouter history={history}>
         <Routes>
           {/* client */}
@@ -87,9 +65,9 @@ function App() {
           <Route path="/order" element={<ClientTemplate Component={OrderForm} />} />
           <Route path="/inquiry" element={<ClientTemplate Component={Inquiry} />} />
 
-          <Route path="/login" element={<ClientTemplate Component={Login} />} />
+          {/* <Route path="/login" element={<ClientTemplate Component={Login} />} />
           <Route path="/login-success" element={<ClientTemplate Component={LoginSuccess} />} />
-          <Route path="/confirm-account" element={<ClientTemplate Component={ConfirmEmail} />} />
+          <Route path="/confirm-account" element={<ClientTemplate Component={ConfirmEmail} />} /> */}
           <Route path="/signup" element={<ClientTemplate Component={Signup} />} />
           <Route path="*" element={<ClientTemplate Component={ErrorPage} />} />
 

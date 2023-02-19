@@ -3,57 +3,136 @@ from datetime import datetime
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 from modules.embroidery.models.order import Order
+from django_mysql.models import ListCharField
+from PIL import Image
 
-
-class ItemStatus(models.TextChoices):
-    OPEN = "open", _("OPEN")
-    IN_PROGRESS = "in_progress", _("IN_PROGRESS")
-    RESOLVED = "resolve", _("RESOLVE")
-
+class UnitFormat(models.TextChoices):
+    inches = "inches", _("inches")
+    mm = "mm", _("mm") 
 
 class OutputFormat(models.TextChoices):
     JPEG = "JPEG", _("JPEG")
     JPG = "JPG", _("JPG")
     PNG = "PNG", _("PNG")
-    PDF = "PDF", _("PDF")
+    PDF = "PDF", _("PDF") 
+    XXX = "XXX", _("XXX") 
+
+    ART = "ART", _("ART")
+    CND = "CND", _("CND")
+    CSD = "CSD", _("CSD")
     DST = "DST", _("DST")
     EMB = "EMB", _("EMB")
-    PES = "PES", _("PES")
-    CND = "CND", _("CND")
     EXP = "EXP", _("EXP")
-    VP3 = "VP3", _("VP3")
-    JEF = "JEF", _("JEF")
     HUS = "HUS", _("HUS")
-    ART = "ART", _("ART")
+    JEF = "JEF", _("JEF")
+    PCS = "PCS", _("PCS")
+    PEC = "PEC", _("PEC")
+    PES = "PES", _("PES")
+    SEW = "SEW", _("SEW")
+    VP3 = "VP3", _("VP3")
+    VIP = "VIP", _("VIP") 
 
-class Item(models.Model):
+
+class ProductRequest(models.Model):
 
     class Meta:
-        verbose_name_plural = 'Product'
+        verbose_name_plural = 'Sản phẩm'
 
-    id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False, unique=True
+    id = models.AutoField(primary_key=True)
+    height = models.FloatField("Dài", default=0, blank=True)
+    width = models.FloatField("Rộng", default=0, blank=True) 
+    unit = models.CharField("Đơn vị đo",
+        max_length=6, choices=UnitFormat.choices, default=UnitFormat.inches
     )
-    name = models.CharField(max_length=256, blank=True)
-    image = models.ImageField(upload_to="static/item/", blank=True,null=True)
-    height = models.FloatField("Height", default=0, blank=True)
-    width = models.FloatField("Width", default=0, blank=True)
-    length = models.FloatField("Length", default=0, blank=True)
-    output_format = models.CharField(
-        max_length=50, choices=OutputFormat.choices, default=OutputFormat.PDF
-    )
-    status = models.CharField(
-        max_length=50, choices=ItemStatus.choices, default=ItemStatus.OPEN
-    )
-    quantity = models.IntegerField(default=1, blank=True,)
-    unit_price = models.DecimalField(max_digits=10, decimal_places=2, default=0,blank=True,)  
-    order = models.ForeignKey(Order, blank=True, null=True, on_delete=models.CASCADE)
+    quantity = models.IntegerField("Số lượng",default=1,blank=True)
+    unit_price = models.DecimalField("Đơn vị giá",max_digits=10, decimal_places=2, default=0,blank=True,help_text="GIá trên 1 sản phẩm")  
+
+    messages = models.CharField("Thông tin",max_length=2048, default="", blank=True, help_text="Hãy nhập các thông tin yêu cầu")
+    # colors = models.CharField("Màu sắc",max_length=1024, default="Màu như hình mẫu", blank=True)
+    # files = models.FileField("Hình ảnh",upload_to="static/item/", blank=True,null=True)
+
+    order = models.ForeignKey(Order, blank=True, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def images_tag(self):
+        html_images = ""
+        for image in self.images.path:
+            print(len(image))
+            html_images += '<img src="%s" width="150" height="150" />' % image
+        return mark_safe(html_images)
+
+    images_tag.short_description = 'Danh sách hình ảnh'
 
     def __str__(self):
-        return "{}".format(self.name)
+        return "#PR{}".format(self.id)
 
-    @property
-    def sub_total(self):
-        if self.quantity and self.unit_price:
-            return self.quantity * self.unit_price
-        return 0
+    def price(self):
+        return self.quantity * self.unit_price
+
+class FileProductRequest(models.Model):
+    class Meta:
+        verbose_name = 'Hình ảnh yêu cầu'
+        verbose_name_plural = 'Hình ảnh yêu cầu'
+
+    id = models.AutoField(primary_key=True)
+    order = models.ForeignKey(Order, blank=True, on_delete=models.CASCADE)
+    image = models.ImageField("Hình ảnh",upload_to="static/product_request/{}".format(order), blank=True,null=True) 
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "#IMG{}".format(self.id)
+
+    def save(self, *args, **kwargs):
+        super(FileProductRequest, self).save(*args, **kwargs)
+        img = Image.open(self.image.path)
+        if img.height > 1125 or img.width > 1125:
+            img.thumbnail((1125,1125))
+        img.save(self.image.path,quality=70,optimize=True)
+
+
+class FileProductResponse(models.Model):
+    class Meta:
+        verbose_name = 'Hình ảnh'
+        verbose_name_plural = 'Hình ảnh'
+
+    id = models.AutoField(primary_key=True)
+    order = models.ForeignKey(Order, blank=True, on_delete=models.CASCADE)
+    efile = models.ImageField("Hình ảnh",upload_to="static/product_response/{}".format(order), blank=True,null=True) 
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "#IMG{}".format(self.id)
+
+    # def save(self, *args, **kwargs):
+    #     super(FileProductRequest, self).save(*args, **kwargs)
+    #     img = Image.open(self.image.path)
+    #     if img.height > 1125 or img.width > 1125:
+    #         img.thumbnail((1125,1125))
+    #     img.save(self.image.path,quality=70,optimize=True)
+
+
+class OutputFormat(models.Model):
+    class Meta:
+        verbose_name = 'Đầu ra'
+        verbose_name_plural = 'Đầu ra'
+    
+    id = models.AutoField(primary_key=True)
+    output_format = models.CharField("Đầu ra",
+        max_length=50, choices=OutputFormat.choices, default=OutputFormat.PDF
+    )
+    product_request = models.ForeignKey(ProductRequest, on_delete=models.CASCADE)
+    def __str__(self):
+        return "{}".format(self.output_format)
+ 
+class MessageRequest(models.Model):
+    
+    class Meta:
+        verbose_name = 'Danh sách yêu cầu'
+        verbose_name_plural = 'Danh sách yêu cầu'
+
+    id = models.AutoField(primary_key=True)
+    message = models.CharField(max_length=256, blank=True)
+    product_request = models.ForeignKey(ProductRequest, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "{}".format(self.message)

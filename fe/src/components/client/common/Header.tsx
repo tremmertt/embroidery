@@ -10,29 +10,25 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Menu,
-  MenuItem,
 } from "@mui/material";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import LoginAction from "redux/actions/LoginAction";
+import { Link } from "react-router-dom";
+// import LoginAction from "redux/actions/LoginAction";
 import { ThemeCustomContext } from "../../../settings/theme-context";
 import MenuIcon from "@mui/icons-material/Menu";
-import LoginIcon from "@mui/icons-material/Login";
-import LogoutIcon from "@mui/icons-material/Logout";
-import WorkspacesIcon from "@mui/icons-material/Workspaces";
 import HomeIcon from "@mui/icons-material/Home";
 import CallIcon from "@mui/icons-material/Call";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
-import DefaultButton from "../../../custom/DefaultButton";
+import ContactSupportSharpIcon from "@mui/icons-material/ContactSupportSharp";
 
 type Anchor = "top" | "left" | "bottom" | "right";
 
 const Header = () => {
+  const [isScrollFinished, setIsScrollFinished] = useState(false);
   const { theme, styleE } = useContext(ThemeCustomContext);
-  const navigate = useNavigate();
   const [anchor, setAnchor] = useState("right" as Anchor);
+  const [hover, setIsHover] = useState({ isHover: false, tag: "" as string });
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -41,22 +37,23 @@ const Header = () => {
   });
 
   const { customer } = useSelector((state: any) => state.LoginReducer);
-  const dispatch = useDispatch();
   const transToComponent = () => {
     const timeout = setTimeout(() => {
       handleTransitionToPurposeComponent(`${window.location.hash.split("#").join("")}-component`);
       clearTimeout(timeout);
-    }, 300);
+      setIsScrollFinished(true);
+    }, 100);
   };
 
   const isSP = window.innerWidth < 640 ? true : false;
-  if (window.location.hash) transToComponent();
+  // if (window.location.hash) transToComponent();
   useEffect(() => {
-    if (window.location.hash) transToComponent();
+    if (window.location.hash && !isScrollFinished) transToComponent();
   });
 
   const handleTransitionToPurposeComponent = (id: string) => {
     if (id === "home-component") window.scrollTo({ left: 0, top: -20, behavior: "smooth" });
+    if (id === "contact-component") window.scrollTo({ left: 0, top: -60, behavior: "smooth" });
     else {
       try {
         const ele = document.getElementById(id);
@@ -74,23 +71,25 @@ const Header = () => {
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
-  const handleLogout = () => {
-    dispatch(LoginAction.logout());
-  };
+  // const handleLogout = () => {
+  //   dispatch(LoginAction.logout());
+  // };
 
   const navigationItemsMap = () => {
     const items = [];
     const navigationItems = [
-      { name: "TOP", link: "/#home", id: "home-component" },
+      { name: "Top", link: "/#home", id: "home-component" },
+      { name: "Order", link: "/order", id: "order-component" },
       { name: "Contact", link: "/#contact", id: "contact-component" },
       { name: "Showroom", link: "/design", id: "showcase-component" },
+      { name: "Inquiry", link: "/inquiry", id: "inquiry-component" },
     ];
 
     for (const item of navigationItems) {
@@ -99,12 +98,22 @@ const Header = () => {
         <li key={item.name} className="h-full flex items-center justify-center ">
           <Link
             to={link}
-            className=" block m-0  py-5 text-center hover:font-normal text-md text-gray-700 hover:text-red-800"
-            aria-current="page"
+            onMouseOver={() => setIsHover({ isHover: true, tag: item.id })}
+            onMouseLeave={() => setIsHover({ isHover: false, tag: "" })}
             style={{
-              color: item.name === "TOP" ? theme.primaryTextColor : theme.subColor2,
+              color:
+                item.name === "TOP"
+                  ? theme.primaryTextColor
+                  : item.name === "Order"
+                  ? theme.subColor1
+                  : hover.isHover && hover.tag === item.id
+                  ? theme.primaryTextColor
+                  : theme.subColor2,
               fontSize: styleE.fontSize16,
+              backgroundColor: item.name === "Order" ? theme.primaryTextColor : "transparent",
             }}
+            className=" block m-0 w-24 px-0 py-5 text-center font-semibold text-md text-gray-700"
+            aria-current="page"
             onClick={() => handleTransitionToPurposeComponent(item.id)}
           >
             {item.name}
@@ -112,24 +121,24 @@ const Header = () => {
         </li>
       );
     }
-    const navigationButtonItems = [
-      { name: "Inquiry", link: "/inquiry", id: "inquiry-component", hoverClass: "box-button-1" },
-      { name: "Order", link: "/order", id: "order-component", hoverClass: "box-button-2" },
-    ];
+    // const navigationButtonItems = [
+    //   { name: "Inquiry", link: "/inquiry", id: "inquiry-component", hoverClass: "box-button-1" },
+    //   { name: "Order", link: "/order", id: "order-component", hoverClass: "box-button-2" },
+    // ];
 
-    for (const item of navigationButtonItems) {
-      const link = window.location.pathname === "/" && item.link === "/design" ? "/#showcase" : item.link;
-      items.push(
-        <li key={item.name} className="h-full wrap-box-button" onClick={() => navigate(item.link)}>
-          <DefaultButton
-            className={`rounded-3xl ${item.hoverClass}`}
-            type="small"
-            variant={item.name === "Inquiry" ? "outlined" : "contained"}
-            value={item.name}
-          ></DefaultButton>
-        </li>
-      );
-    }
+    // for (const item of navigationButtonItems) {
+    //   const link = window.location.pathname === "/" && item.link === "/design" ? "/#showcase" : item.link;
+    //   items.push(
+    //     <li key={item.name} className="h-full wrap-box-button" onClick={() => navigate(item.link)}>
+    //       <DefaultButton
+    //         className={`rounded-3xl ${item.hoverClass}`}
+    //         type="small"
+    //         variant={item.name === "Inquiry" ? "outlined" : "contained"}
+    //         value={item.name}
+    //       ></DefaultButton>
+    //     </li>
+    //   );
+    // }
 
     return (
       <ul
@@ -154,21 +163,21 @@ const Header = () => {
 
   const list = (anchor: Anchor) => {
     const navigationItems = [
-      { name: "Home", link: "/#home", id: "home-component", icon: <HomeIcon></HomeIcon> },
-      {
-        name: "Our Purpose",
-        link: "/#our-purpose",
-        id: "our-purpose-component",
-        icon: <WorkspacesIcon></WorkspacesIcon>,
-      },
+      { name: "Top", link: "/#home", id: "home-component", icon: <HomeIcon></HomeIcon> },
       { name: "Contact", link: "/#contact", id: "contact-component", icon: <CallIcon></CallIcon> },
-      { name: "Design", link: "/design", id: "showcase-component", icon: <DesignServicesIcon></DesignServicesIcon> },
+      { name: "Showroom", link: "/design", id: "showcase-component", icon: <DesignServicesIcon></DesignServicesIcon> },
+      {
+        name: "Inquiry",
+        link: "/inquiry",
+        id: "inquiry-component",
+        icon: <ContactSupportSharpIcon></ContactSupportSharpIcon>,
+      },
     ];
 
-    const navigationAuthenItems =
-      customer && customer.id
-        ? [{ name: "Logout", link: "#", id: "logout-component", icon: <LogoutIcon></LogoutIcon> }]
-        : [{ name: "Login", link: "/login", id: "login-component", icon: <LoginIcon></LoginIcon> }];
+    // const navigationAuthenItems =
+    //   customer && customer.id
+    //     ? [{ name: "Logout", link: "#", id: "logout-component", icon: <LogoutIcon></LogoutIcon> }]
+    //     : [{ name: "Login", link: "/login", id: "login-component", icon: <LoginIcon></LoginIcon> }];
 
     return (
       <Box
@@ -201,7 +210,7 @@ const Header = () => {
         )}
         <List>
           {navigationItems.map((item, index) => {
-            const link = window.location.pathname === "/" && item.link === "/design" ? "/#showcase" : item.link;
+            const link = item.link;
             return (
               <Link to={link} key={`${item.name}-${index}-mobile`}>
                 <ListItem disablePadding>
@@ -215,7 +224,7 @@ const Header = () => {
           })}
         </List>
         <Divider />
-        <List>
+        {/* <List>
           {navigationAuthenItems.map((item, index) => {
             const link = item.link;
             return item.name === "Login" ? (
@@ -236,7 +245,7 @@ const Header = () => {
               </ListItem>
             );
           })}
-        </List>
+        </List> */}
       </Box>
     );
   };
@@ -248,21 +257,13 @@ const Header = () => {
     >
       <Fragment>
         <div className="mx-auto py-0 overflow-hidden">
-          <div className="container flex flex-wrap justify-between items-center mx-auto">
+          <div className="container flex flex-wrap justify-between items-center mx-auto xl:px-16 md:px-0 px-0">
             <Link className="flex title-font px-2 font-medium items-center text-gray-900 mb-0" to="/">
               <img
-                src={require("../../../assets/v3/img/logo128x128.png")}
-                style={{ height: isSP ? 30 : 50 }}
+                src={require("../../../assets/v3/img/logo256x256.png")}
+                style={{ height: isSP ? 30 : 64 }}
                 alt="logo"
               ></img>
-              <span
-                className="ml-3 md:text-xl text-lg font-bold"
-                style={{
-                  color: theme.colorMain,
-                }}
-              >
-                Embroidery
-              </span>
             </Link>
             <Button
               variant="text"
@@ -276,7 +277,7 @@ const Header = () => {
               aria-expanded={open ? "true" : undefined}
               onClick={toggleDrawer(anchor, true)}
               style={{
-                color: theme.colorMain,
+                color: theme.primaryTextColor,
               }}
             >
               <MenuIcon fontSize="medium" color="inherit"></MenuIcon>

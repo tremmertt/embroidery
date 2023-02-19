@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework.generics import get_object_or_404  
 
 from modules.embroidery.models.order import Order
-from modules.embroidery.models.item import Item
+from modules.embroidery.models.item import ProductRequest
 from modules.embroidery.serializers.order import OrderSerializer, ItemSerializer
 from django.core.files.base import ContentFile
 
@@ -17,7 +17,7 @@ class OrderView(APIView):
     def get(self, request, pk=None):
         if pk:
             order = get_object_or_404(Order.objects.all(), pk=pk)
-            order.items = Item.objects.filter(order=order)
+            order.items = ProductRequest.objects.filter(order=order)
             serializer = OrderSerializer(order)
             return Response({"order": serializer.data})
             

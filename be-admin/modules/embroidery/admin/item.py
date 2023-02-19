@@ -63,7 +63,7 @@ class ItemAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
     def state(self, obj):
         icon = '<i class="fa-solid fa-circle-check" style="color: #518bff; font-size: 18px; text-algin:center;"></i>'
-        if obj.status == "resolve":
+        if obj.status == done:
             icon = '<i class="fa-solid fa-circle-check" style="color: green; font-size: 18px; text-algin:center;"></i>'
         if obj.status == "cancel":
             icon = '<i class="fa-solid fa-circle-xmark" style="color: #494949; font-size: 18px; text-algin:center;"></i>'

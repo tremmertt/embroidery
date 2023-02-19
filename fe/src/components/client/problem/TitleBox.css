@@ -1,87 +1,87 @@
 .title-box {
-  background: linear-gradient(to right, #F16849 0%, #FF9567 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-} 
-
-.no-box{
-  background: linear-gradient(to right, #F16849 0%, #FF9567 100%);
+  background: linear-gradient(to right, #f16849 0%, #ff9567 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.flow-content-box{
-  background: linear-gradient(to right, #F16849 0%, #FF9567 100%); 
+.no-box {
+  background: linear-gradient(to right, #f16849 0%, #ff9567 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.flow-content-box {
+  background: linear-gradient(to right, #f16849 0%, #ff9567 100%);
 }
 
 .contact-content-box {
-  background: linear-gradient(to right, #F16849 -50%, #ff9567cc 20%); 
+  background: linear-gradient(to right, #f16849 -50%, #ff9567cc 20%);
 }
-.slide-ltr{
-  position: relative;
-  transform: translateX(-150px);
-  opacity: 0; 
+.slide-ltr {
+  position: static;
+  transform: translateX(-25px);
+  opacity: 0;
+  display: hidden;
 }
 
-.slide-ltr-active{
+.slide-ltr-active {
   display: block;
   transform: translateX(0px);
   opacity: 1;
   transition: 1s all ease;
 }
 
-
-.slide-rtl{
+.slide-rtl {
   position: relative;
-  transform: translateX(150px);
-  opacity: 0; 
+  transform: translateX(25px);
+  opacity: 0;
+  display: hidden;
 }
 
-.slide-rtl-active{
+.slide-rtl-active {
   display: block;
   transform: translateX(0px);
   opacity: 1;
   transition: 1s all ease;
-
 }
 
-.slide-ttb{
+.slide-ttb {
   position: relative;
-  transform: translateY(-150px);
-  opacity: 0; 
+  transform: translateY(-25px);
+  opacity: 0;
+  display: hidden;
 }
 
-.slide-ttb-active{
-  display: block;
-  transform: translateY(0px);
-  opacity: 1;
-  transition: 1s all ease;
-
-}
-
-.slide-btt{
-  position: relative;
-  transform: translateY(150px);
-  opacity: 0; 
-}
-
-.slide-btt-active{
+.slide-ttb-active {
   display: block;
   transform: translateY(0px);
   opacity: 1;
   transition: 1s all ease;
 }
 
-
-.show-slow{
+.slide-btt {
   position: relative;
-  opacity: 0; 
+  transform: translateY(25px);
+  opacity: 0;
+  display: hidden;
 }
 
-.show-slow-active{
-  display: block; 
+.slide-btt-active {
+  display: block;
+  transform: translateY(0px);
+  opacity: 1;
+  transition: 1s all ease;
+}
+
+.show-slow {
+  position: relative;
+  opacity: 0;
+}
+
+.show-slow-active {
+  display: block;
   opacity: 1;
   transition: 1s all ease;
 }

@@ -4,7 +4,7 @@ import ProblemContent from "../problem/ProblemContent";
 import TitleBox from "../problem/TitleBox";
 
 export default function ProblemBox() {
-  const { isMobile } = useContext(ThemeCustomContext);
+  const { isMobile, device } = useContext(ThemeCustomContext);
 
   const init = () => {
     const items = [
@@ -46,11 +46,13 @@ export default function ProblemBox() {
     return <div>{rows}</div>;
   };
 
+  const padding = device === "mobile" ? 20 : device === "tablet" ? 40 : 100;
+
   return (
     <div
       id="problem-box-component"
-      className="text-center"
-      style={{ paddingLeft: isMobile ? 0 : 100, paddingRight: isMobile ? 0 : 100 }}
+      className="text-center w-screen"
+      style={{ paddingLeft: padding, paddingRight: padding }}
     >
       <div className="flex-col flex-wrap justify-center items-center">
         <TitleBox title={"TROUBLES"} subTitle={"Do you have any problems?"}></TitleBox>

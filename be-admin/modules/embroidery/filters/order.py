@@ -9,10 +9,9 @@ class FilterByStatus(admin.SimpleListFilter):
     def lookups(self, request, model_admin):
         return [
             ("open", "OPEN"),
-            ("in_progress", "IN_PROGRESS"),
-            ("pending", "PENDING"),
-            ("resolve", "RESOLVE"),
-            ("cancel", "CANCEL"),
+            ("in_progress", "IN_PROGRESS"), 
+            ("done", "DONE"), 
+            ("cancel", "CANCEL"), 
         ]
 
     def queryset(self, request, queryset):

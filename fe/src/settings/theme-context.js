@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { store } from "../redux/configStore";
 import { Provider } from "react-redux";
 
@@ -16,22 +16,22 @@ const styles = {
     fontSize48: "30px",
     fontSize60: "40px",
     fontSize72: "44px",
-    fontSize84: "56px",
-    fontSize96: "64px",
+    fontSize84: "60px",
+    fontSize96: "72px",
   },
   tablet: {
-    fontSize12: "12px",
-    fontSize14: "14px",
-    fontSize16: "16px",
-    fontSize20: "20px",
+    fontSize12: "10px",
+    fontSize14: "12px",
+    fontSize16: "14px",
+    fontSize20: "18px",
     fontSize24: "24px",
     fontSize28: "28px",
     fontSize36: "36px",
-    fontSize42: "42px",
-    fontSize48: "48px",
-    fontSize72: "72px",
-    fontSize84: "84px",
-    fontSize96: "96px",
+    fontSize42: "40px",
+    fontSize48: "44px",
+    fontSize72: "52px",
+    fontSize84: "60px",
+    fontSize96: "72px",
   },
   pc: {
     fontSize12: "12px",
@@ -174,27 +174,28 @@ const initialState = {
 const ThemeCustomContext = React.createContext(initialState);
 
 function ThemeProvider({ children }) {
-  const [device, setDevice] = React.useState(
-    window.innerWidth < 640 ? "mobile" : window.innerWidth < 1084 ? "tablet" : "pc"
-  );
+  const [device, setDevice] = useState(window.innerWidth < 768 ? "mobile" : window.innerWidth < 1084 ? "tablet" : "pc");
 
-  const [isMobile, setIsMobile] = React.useState(false); // Default theme is pc
-  const [dark, setDark] = React.useState(false); // Default theme is light
-
-  const handleWindowSizeChange = () => {
-    const currentDevice = window.innerWidth < 640 ? "mobile" : window.innerWidth < 1084 ? "tablet" : "pc";
-    if (currentDevice !== device) setDevice(device);
-    if (device === "mobile") setIsMobile(true);
-    console.log("device", device, isMobile);
-  };
+  const [isMobile, setIsMobile] = useState(false); // Default theme is pc
+  const [dark, setDark] = useState(false); // Default theme is light
 
   // On mount, read the preferred theme from the persistence
-  React.useEffect(() => {
+  useEffect(() => {
+    const handleWindowSizeChange = () => {
+      const currentDevice = window.innerWidth < 768 ? "mobile" : window.innerWidth < 1084 ? "tablet" : "pc";
+      if (currentDevice !== device) setDevice(device);
+      if (device === "mobile") setIsMobile(true);
+    };
     const isDark = localStorage.getItem("dark") === "true";
     setDark(isDark);
     handleWindowSizeChange();
     window.addEventListener("resize", handleWindowSizeChange);
-  }, [dark, device]);
+    window.addEventListener("scroll", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+      window.removeEventListener("scroll", handleWindowSizeChange);
+    };
+  }, [dark, device, isMobile, setDark]);
 
   // To toggle between dark and light modes
   const toggle = () => {

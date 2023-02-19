@@ -1,13 +1,12 @@
 import React, { useContext, useState } from "react";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Box } from "@mui/material";
 import { ThemeCustomContext, useWindowSize } from "../../../settings/theme-context";
 import DefaultButton from "../../../custom/DefaultButton";
 import { useNavigate } from "react-router-dom";
 
 export default function Banner() {
   const navigate = useNavigate();
-  const { theme, styleE, isMobile } = useContext(ThemeCustomContext);
+  const { theme, styleE, isMobile, device } = useContext(ThemeCustomContext);
+
   const [width, height] = useWindowSize();
   const [isShowAlready, setIsShowAlready] = useState(false);
   const isOnScreen = (id: string) => {
@@ -31,20 +30,23 @@ export default function Banner() {
   return (
     <div
       id="home-component"
-      className="py-8 flex-col flex-wrap justify-center items-center shadow-sm"
+      className="py-8 px-2 flex-col flex-wrap justify-center items-center shadow-sm"
       style={{
-        backgroundImage: "url(" + require("../../../assets/v3/bg/bg_pc_1" + (isMobile ? "_mobile.png" : ".png")) + ")",
+        backgroundImage:
+          "url(" + require("../../../assets/v3/bg/bg_pc_1" + (device === "pc" ? ".png" : "_mobile.png")) + ")",
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
+        height: isMobile ? height * 0.75 : height - 70,
+        minHeight: 550,
       }}
     >
-      <div className="px-52 md:py-8  sm:py-0 grid grid-cols-2">
+      <div className="xl:px-40 md:px-10 xl:py-8 md:py-0 grid grid-cols-2 px-10">
         <div
           className="md:col-span-1 col-span-2 md:text-left text-center"
-          style={{ paddingTop: 74, paddingBottom: 93 }}
+          style={{ paddingTop: isMobile ? 30 : 64, paddingBottom: isMobile ? 20 : 93 }}
         >
-          <div>
+          <div className="w-full">
             <span
               id="project-name-1"
               className={`font-bold ${
@@ -53,7 +55,7 @@ export default function Banner() {
               style={{ fontSize: styleE.fontSize96, lineHeight: "28px" }}
             >
               E
-              <span className="font-medium" style={{ fontSize: styleE.fontSize72 }}>
+              <span className="font-medium" style={{ fontSize: styleE.fontSize60 }}>
                 mbroidery
               </span>
             </span>
@@ -65,13 +67,13 @@ export default function Banner() {
               style={{ fontSize: styleE.fontSize96 }}
             >
               D
-              <span className="font-medium" style={{ fontSize: styleE.fontSize72 }}>
+              <span className="font-medium" style={{ fontSize: styleE.fontSize60 }}>
                 igitizing
               </span>
             </span>
             <div
               id="introduction-1"
-              className={`md:mt-7 md:mb-3 my-4 ${
+              className={`md:mt-4 md:mb-3 my-4 ${
                 isOnScreen("introduction-1") || isShowAlready ? "slide-rtl-active" : "slide-rtl"
               }`}
             >
@@ -93,15 +95,19 @@ export default function Banner() {
               <span style={{ fontSize: styleE.fontSize20, fontWeight: "normal", lineHeight: "36px" }}>
                 with a <span style={{ color: theme.primaryTextColor }}>great price</span>{" "}
               </span>
+              <br />
+              <span style={{ fontSize: styleE.fontSize20, fontWeight: "normal", lineHeight: "36px" }}>
+                Let contact us now.
+              </span>
             </div>
           </div>
           <div className="flex md:justify-start justify-center items-center h-24">
-            <span className="wrap-box-button" onClick={() => navigate("/order")}>
+            <span className="wrap-box-button" onClick={() => navigate("#contact")}>
               <DefaultButton
                 type="small"
-                value="Order"
+                value="Contact"
                 variant="contained"
-                className="rounded-full shadow-xl box-button-2 "
+                className="rounded-full shadow-sm box-button-2 "
               ></DefaultButton>
             </span>
           </div>

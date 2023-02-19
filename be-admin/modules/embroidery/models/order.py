@@ -12,53 +12,55 @@ from django.contrib.auth.models import User
 from modules.embroidery.models.customer import Customer 
 
 class OrderStatus(models.TextChoices):
-    OPEN = "open", _("OPEN")
-    IN_PROGRESS = "in_progress", _("IN_PROGRESS")
-    PENDING = "pending", _("PEDNING")
-    RESOLVED = "resolve", _("RESOLVE")
-    CANCEL = "cancel", _("CANCEL")
+    OPEN = "open", _("Mở")
+    IN_PROGRESS = "in_progress", _("Đang thực hiện")
+    # PENDING = "pending", _("PEDNING")
+    DONE = "done", _("Hoàn tất")
+    CANCEL = "cancel", _("Hủy bỏ")
 
 class InvoiceStatus(models.TextChoices):
-    INIT = "init", _("INIT")
-    PAID = "paid", _("PAID")
-    DEBT = "debt", _("DEBT")
+    INIT = "init", _("Thiết lập")
+    PAID = "paid", _("Đã trả")
+    DEBT = "debt", _("Nợ")
 
 class PaymentMethod(models.TextChoices):
-    MOMO = "momo", _("MOMO")
-    CARD = "card", _("CARD")
-    TRANSFER = "transfer", _("TRANSFER")
-    MANUAL = "manual", _("MANUAL")
+    CARD = "card", _("Card")
+    TRANSFER = "transfer", _("Chuyển khoản")
+    MANUAL = "manual", _("Thủ công")
+
+class OutputType(models.TextChoices):
+    VECTOR = "vector", _("Vector")
+    EMBROIDERY = "embroidery", _("Embroidery") 
+
+class RequestType(models.TextChoices):
+    quote = "quote", _("Báo giá")
+    order = "order", _("Đặt hàng") 
 
 class Order(models.Model):
 
     class Meta:
         verbose_name_plural = 'Order'
 
-    id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False, unique=True
-    )
-    name = models.CharField(max_length=256, default="Order {}".format(str(datetime.timestamp(datetime.now())).split('.')[0]))
-    status = models.CharField(
+    id = models.AutoField("Ref",primary_key=True)
+    name = models.CharField("Tên",max_length=256, default="Order {}".format(str(datetime.timestamp(datetime.now())).split('.')[0]))
+    status = models.CharField("Trạng thái",
         max_length=50, choices=OrderStatus.choices, default=OrderStatus.OPEN
+    )  
+    output_type = models.CharField("Loại đầu ra",
+        max_length=10, choices=OutputType.choices, default=OutputType.VECTOR
     )
-    start_time = models.DateTimeField("Start", blank=True, null=True)
-    end_time = models.DateTimeField("End", blank=True, null=True)
-    customer = models.ForeignKey(
-        Customer, blank=True, null=True, on_delete=models.CASCADE
-    )
-    assignee = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE) 
-    invoice_status = models.CharField(
-        max_length=50, choices=InvoiceStatus.choices, default=InvoiceStatus.INIT
-    )
-    payment_method = models.CharField(
+    payment_method = models.CharField("Phương thức",
         max_length=50, choices=PaymentMethod.choices, default=PaymentMethod.CARD
     )
-    receipt_pdf = models.FileField(null=True,blank=True,upload_to="static/receipt/pdf/")
-    meta_data = models.TextField("Note",default="", blank=True) 
-    created_at = models.DateTimeField(auto_now_add=True)
+    request_type = models.CharField("Loại yêu cầu",
+        max_length=5, choices=RequestType.choices, default=RequestType.order
+    )
+    receipt_pdf = models.FileField(editable=False,null=True,blank=True,upload_to="static/receipt/pdf/")
+    created_at = models.DateTimeField("Ngày",auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        if self.customer: 
-            return "{} - {}".format(self.name, self.customer.name)
-        return "{}".format(self.name)
+    def __str__(self): 
+        return "#{:05d}".format(self.id)
+
+    
+    

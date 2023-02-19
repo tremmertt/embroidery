@@ -1,0 +1,30 @@
+.image-1 {
+  animation: show-image;
+  animation-duration: 1s;
+}
+
+.image-2 {
+  animation: show-image;
+  animation-duration: 1s;
+}
+
+.image-3 {
+  animation: show-image;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+}
+
+@keyframes show-image {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.zoom:hover {
+  transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transition: transform 0.3s ease-in-out;
+  object-fit: cover;
+}

@@ -1,67 +1,105 @@
+import re
+
 from django.contrib import admin, messages
 from django.utils.html import mark_safe
+from django import forms
+from django.db import models 
+from modules.embroidery.models.item import MessageRequest, ProductRequest, FileProductRequest
+from modules.embroidery.forms.item import ItemInlineForm , ImageInlineForm
+from nested_admin import NestedModelAdmin, NestedStackedInline, NestedTabularInline
 
-from modules.embroidery.models.item import Item
-from modules.embroidery.forms.item import ItemInlineForm 
+class MessageForm(forms.ModelForm): 
     
-class ItemTabularInline(admin.TabularInline):
-    model = Item
-    form = ItemInlineForm
+    class Meta:  
+        widgets = {
+            "message": forms.TextInput(attrs={"size": "100%"}), 
+        }
+
+class MessageTabularInline(NestedTabularInline):
+    model = MessageRequest
+    extra = 2
+    form = MessageForm
+
+from django.contrib.admin.widgets import AdminFileWidget
+from django.forms import widgets
+
+class AdminImageWidget(AdminFileWidget):
+    def render(self, name, value, attrs=None, renderer=None):
+        print('name', name)
+        print('value', value)
+        output = []
+        if value and getattr(value, "url", None):
+            image_url = value.url
+            file_name = str(value)
+            output.append(u' <a href="%s" target="_blank"><img src="%s" alt="%s" width="150" height="150"  style="object-fit: cover;"/></a> %s ' % \
+                (image_url, image_url, file_name, _('')))
+        output.append(super(AdminFileWidget, self).render(name, value, attrs))
+        return mark_safe(u''.join(output))
+
+class ImageProductRequestInline(admin.TabularInline):
+    model = FileProductRequest
+    form = ImageInlineForm
     extra = 1
-    fields = (
-        "name",
-        "image",
-        "output_format",
-        "height",
-        "width",
-        "length",
-        "status",
-        "quantity",
-        "unit_price",
-        "image_preview",
-    )
+ 
+    list_display_fields = ['preview', ]
+    readonly_fields = ["preview", ]
 
-    list_display = [
-        "name",
-        "image_preview",
-        "time",
-        "state",
-    ]
-
-    readonly_fields = ("image_preview", "time")
-
-    def image_preview(self, obj):
-        if obj.image:
-            return mark_safe(
-                '<img src="/{}" style="width:80px; height:80px;margin: auto !important;padding: auto;" />'.format(
-                    obj.image
-                )
-            )
+    def preview(self, obj):  
+        if obj.image.name: 
+            html_images = '<img src="/%s" width="150" height="150" />' % obj.image.name
+            return mark_safe(html_images)
         return ""
 
-    image_preview.short_description = "Preview"
-    image_preview.allow_tags = True
+    # max_num = 5
+    # formfield_overrides = {models.ImageField: {'widget': AdminImageWidget}}
 
-    def time(self, obj):
-        if obj.start_time.date() == obj.start_time.date():
-            return "{} ~ {} ◉ {}".format(
-                obj.start_time.time(), obj.end_time.time(), obj.start_time.date()
-            )
-        return "{} ~ {}".format(obj.start_time.time(), obj.end_time.time())
+class ItemTabularInline(admin.StackedInline):
+    model = ProductRequest
+    form = ItemInlineForm
+    # inlines = [ColorTabularInline, MessageTabularInline]
+    extra = 0
+    max_num = 1 
 
-    def state(self, obj):
-        icon = '<i class="fa-solid fa-circle-check" style="color: #518bff; font-size: 18px; text-algin:center;"></i>'
-        if obj.status == "resolve":
-            icon = '<i class="fa-solid fa-circle-check" style="color: green; font-size: 18px; text-algin:center;"></i>'
-        if obj.status == "cancel":
-            icon = '<i class="fa-solid fa-circle-xmark" style="color: #494949; font-size: 18px; text-algin:center;"></i>'
-        if obj.status == "pending":
-            icon = '<i class="fa-solid fa-circle-minus" style="color: red; font-size: 18px; text-algin:center;"></i>'
-        if obj.status == "in_progress":
-            icon = '<i class="fa-regular fa-circle" style="color: orange; font-size: 18px; text-algin:center;"></i>'
-        if obj.status == "open":
-            icon = '<i class="fa-solid fa-circle" style="color: #518bff; font-size: 18px; text-algin:center;"></i>'
-        return mark_safe(icon)
+    # fields = [
+    #     "images_tag",
+    #     # "image",
+    #     # "output_format",
+    #     "height",
+    #     "width",
+    #     "unit",
+    #     # "list_color",
+    #     # "list_comment",
+    #     # "status",
+    #     "quantity",
+    #     "unit_price",
+    #     # "image_preview",
+    # ]
 
-    state.short_description = "Status"
-    state.allow_tags = True
+    # list_display = [
+    #     "images_tag",
+        # "list_comment",
+        # "image_preview",
+        # "time",
+        # "state",
+    # ] 
+    readonly_fields = ["images_tag", ]
+
+    def images_tag(self, obj):
+        html_images = ""
+        print('sa', (obj.images.path))
+        # for image in obj.images:
+        #     print(len(image))
+            # html_images += '<img src="/statis/item/%s" width="150" height="150" />' % image
+        return mark_safe(html_images)
+
+    # image_preview.short_description = "Preview"
+    # image_preview.allow_tags = True
+
+    # def time(self, obj):
+    #     if obj.start_time.date() == obj.start_time.date():
+    #         return "{} ~ {} ◉ {}".format(
+    #             obj.start_time.time(), obj.end_time.time(), obj.start_time.date()
+    #         )
+    #     return "{} ~ {}".format(obj.start_time.time(), obj.end_time.time())
+ 
+     
