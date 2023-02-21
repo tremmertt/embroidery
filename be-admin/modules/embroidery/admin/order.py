@@ -1,7 +1,7 @@
 import datetime
 from modules.embroidery.filters.order import FilterByStatus
 from modules.embroidery.models.item import MessageRequest, ProductRequest, FileProductRequest
-from modules.embroidery.tabulars.item import ItemTabularInline, MessageTabularInline, ImageProductRequestInline
+from modules.embroidery.tabulars.item import ItemTabularInline, MessageTabularInline, ImageProductRequestInline, FileProductResponseInline
 
 from django.forms import TextInput, Textarea
 from gettext import ngettext 
@@ -58,6 +58,7 @@ class OrderAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     inlines = (
         ItemTabularInline,
         ImageProductRequestInline,
+        FileProductResponseInline,
     )
     # # search_fields = ("name", "status")
     list_filter = (FilterByStatus,)
@@ -90,18 +91,18 @@ class OrderAdmin(ImportExportModelAdmin, admin.ModelAdmin):
         ) 
         ref.short_description = "Ref"
  
-    def state(self, obj):
-        icon = '<i class="fa-solid fa-circle-check" style="color: #518bff; font-size: 18px; text-algin:center;"></i>'
+    def state(self, obj):  
+        icon = '<i class="fas fa-check-circle" style="color: #518bff; font-size: 18px; text-algin:center;"></i>'
         if obj.status == "done":
-            icon = '<i class="fa-solid fa-circle-check" style="color: #52947c; font-size: 18px; text-algin:center;"></i>'
+            icon = '<i class="fas fa-check-circle" style="color: #52947c; font-size: 18px; text-algin:center;"></i>'
         if obj.status == "cancel":
-            icon = '<i class="fa-solid fa-circle-xmark" style="color: #84920b; font-size: 18px; text-algin:center;"></i>'
+            icon = '<i class="fas fa-times-circle" style="color: #84920b; font-size: 18px; text-algin:center;"></i>'
         if obj.status == "pending":
-            icon = '<i class="fa-solid fa-circle-minus" style="color: red; font-size: 18px; text-algin:center;"></i>'
+            icon = '<i class="fas fa-minus-circle" style="color: red; font-size: 18px; text-algin:center;"></i>'
         if obj.status == "open":
-            icon = '<i class="fa-solid fa-circle" style="color: #c5634d; font-size: 18px; text-algin:center;"></i>'
+            icon = '<i class="fas fa-circle" style="color: #c5634d; font-size: 18px; text-algin:center;"></i>'
         if obj.status == "in_progress":
-            icon = '<i class="fa-solid fa-circle" style="color: #4472da; font-size: 18px; text-algin:center;"></i>'
+            icon = '<i class="fas fa-circle" style="color: #4472da; font-size: 18px; text-algin:center;"></i>'
         return mark_safe(icon)
 
     def date(self, obj): 

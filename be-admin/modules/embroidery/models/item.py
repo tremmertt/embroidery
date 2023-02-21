@@ -69,6 +69,10 @@ class ProductRequest(models.Model):
     def price(self):
         return self.quantity * self.unit_price
 
+def get_file_path(instance, filename):
+    ext = filename.split('.')[-1]
+    return "static/product_response/{}/{}.{}".format(instance.order.id, str(datetime.timestamp(datetime.now())).split('.')[0], ext)
+
 class FileProductRequest(models.Model):
     class Meta:
         verbose_name = 'Hình ảnh yêu cầu'
@@ -76,11 +80,11 @@ class FileProductRequest(models.Model):
 
     id = models.AutoField(primary_key=True)
     order = models.ForeignKey(Order, blank=True, on_delete=models.CASCADE)
-    image = models.ImageField("Hình ảnh",upload_to="static/product_request/{}".format(order), blank=True,null=True) 
+    image = models.FileField("Hình ảnh",upload_to=get_file_path, blank=True,null=True) 
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "#IMG{}".format(self.id)
+        return "FILE_INPUT#{}".format(self.id)
 
     def save(self, *args, **kwargs):
         super(FileProductRequest, self).save(*args, **kwargs)
@@ -89,19 +93,18 @@ class FileProductRequest(models.Model):
             img.thumbnail((1125,1125))
         img.save(self.image.path,quality=70,optimize=True)
 
-
 class FileProductResponse(models.Model):
     class Meta:
-        verbose_name = 'Hình ảnh'
-        verbose_name_plural = 'Hình ảnh'
+        verbose_name = 'File output'
+        verbose_name_plural = 'File output'
 
     id = models.AutoField(primary_key=True)
     order = models.ForeignKey(Order, blank=True, on_delete=models.CASCADE)
-    efile = models.ImageField("Hình ảnh",upload_to="static/product_response/{}".format(order), blank=True,null=True) 
+    efile = models.FileField("File output",upload_to=get_file_path, blank=True,null=True) 
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "#IMG{}".format(self.id)
+        return "FILE_OUTPUT#{}".format(self.id)
 
     # def save(self, *args, **kwargs):
     #     super(FileProductRequest, self).save(*args, **kwargs)

@@ -4,8 +4,8 @@ from django.contrib import admin, messages
 from django.utils.html import mark_safe
 from django import forms
 from django.db import models 
-from modules.embroidery.models.item import MessageRequest, ProductRequest, FileProductRequest
-from modules.embroidery.forms.item import ItemInlineForm , ImageInlineForm
+from modules.embroidery.models.item import MessageRequest, ProductRequest, FileProductRequest, FileProductResponse
+from modules.embroidery.forms.item import ItemInlineForm , ImageInlineForm, FileProductResponseInlineForm
 from nested_admin import NestedModelAdmin, NestedStackedInline, NestedTabularInline
 
 class MessageForm(forms.ModelForm): 
@@ -50,8 +50,10 @@ class ImageProductRequestInline(admin.TabularInline):
             return mark_safe(html_images)
         return ""
 
-    # max_num = 5
-    # formfield_overrides = {models.ImageField: {'widget': AdminImageWidget}}
+class FileProductResponseInline(admin.TabularInline):
+    model = FileProductResponse
+    form = FileProductResponseInlineForm
+    extra = 1 
 
 class ItemTabularInline(admin.StackedInline):
     model = ProductRequest

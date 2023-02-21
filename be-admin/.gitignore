@@ -7,6 +7,7 @@ static/mailbox_attachments
 static/orders
 static/receipt
 static/item
+static/product*
 
 # C extensions
 *.so

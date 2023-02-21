@@ -197,8 +197,7 @@ class ReceiptPDF(object):
         import io
         from reportlab.pdfgen import canvas
         buffer = io.BytesIO()
-        try:
-            print('order_obj',order_obj)
+        try: 
             document = []
             self.add_title(document, order_obj)
             self.add_info_common_order(document, order_obj)

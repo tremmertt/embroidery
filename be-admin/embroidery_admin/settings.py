@@ -51,6 +51,7 @@ if os.getenv("ENV") == 'prod':
 
 INSTALLED_APPS = [ 
     "django_s3_storage", 
+    "fontawesomefree",
     'modules.jazzmin.apps.JazzminConfig', 
     # "modules.simpleui.apps.SimpleApp",
     "django.contrib.admin",
