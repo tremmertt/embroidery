@@ -5,6 +5,7 @@ from rest_framework import generics, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db.models import JSONField
+from django.http import JsonResponse
 
 from modules.embroidery.models.customer import Customer, CustomerType, LoginType
 from modules.embroidery.serializers.login import LoginSerializer
@@ -28,6 +29,7 @@ class LoginView(APIView):
             }
 
             user = Customer.login_by_google(config)
+            print('user',user)
             if user and user.get('id'): 
                 customer = {
                     "name": user['name'],
@@ -41,20 +43,24 @@ class LoginView(APIView):
                 print('customer', customer)
                 try:
                     customer_db = Customer.objects.get(email=customer['email'])
-                except:
+                except Exception as e:
+                    print('e',e)
                     customer_db = None
                 if customer_db == None:
                     customer_db = Customer.objects.create(**customer)
+                    print('customer_db',customer_db)
                     serializer = CustomerSerializer(customer_db,many=False) 
-                    print('serializer.data',serializer.data)
-                    return Response({
+                    print('serializer.data',customer_db.encode_auth_token())
+                    return JsonResponse({
                         "message":"created customer successfully",
                         "customer": serializer.data,
                         "token": customer_db.encode_auth_token()
                     }) 
                 else:
+                    print('customer_db',customer_db)
                     serializer = CustomerSerializer(customer_db,many=False) 
-                    return Response({
+                    print('serializer.data',customer_db.encode_auth_token())
+                    return JsonResponse({
                         "message":"login successfully", 
                         "customer": serializer.data,
                         "token": customer_db.encode_auth_token()
@@ -68,13 +74,13 @@ class LoginView(APIView):
                     customer_db = Customer.objects.get(email=email)
                 except:
                     customer_db = None
-                
+                print('customer_db',customer_db)
                 if customer_db and customer_db.password:
                     hashed_pass = customer_db.password
                     hashed_input_pass = password.encode('utf-8')
                     if customer_db.is_confirm and bcrypt.checkpw(hashed_input_pass, bytes(hashed_pass)):
                         serializer = CustomerSerializer(customer_db,many=False) 
-                        return Response({
+                        return JsonResponse({
                             "message":"login successfully", 
                             "customer": serializer.data,
                             "token": customer_db.encode_auth_token()

@@ -97,4 +97,5 @@ const OrderTable = (props: any) => {
   );
 };
 
-export default OrderTable;
+const Order = { OrderTable, OrderBasicTable };
+export default Order;

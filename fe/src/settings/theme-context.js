@@ -8,6 +8,7 @@ const styles = {
     fontSize12: "10px",
     fontSize14: "12px",
     fontSize16: "14px",
+    fontSize18: "15px",
     fontSize20: "16px",
     fontSize24: "20px",
     fontSize28: "22px",
@@ -37,6 +38,7 @@ const styles = {
     fontSize12: "12px",
     fontSize14: "14px",
     fontSize16: "16px",
+    fontSize18: "18px",
     fontSize20: "20px",
     fontSize24: "24px",
     fontSize28: "28px",
@@ -88,6 +90,7 @@ const themes = {
     primaryBackgroundColor: "#fff",
     subColor1: "#fff",
     subColor2: "#262626",
+    colorSuccess: "#1976d2",
 
     backgroundColor: "white",
     backgroundColorMint: "#f4f7fe",
@@ -110,6 +113,7 @@ const themes = {
     primaryBackgroundColor: "#fff",
     subColor1: "#fff",
     subColor2: "#262626",
+    colorSuccess: "#1976d2",
 
     backgroundColor: "white",
     backgroundColorMint: "#f4f7fe",

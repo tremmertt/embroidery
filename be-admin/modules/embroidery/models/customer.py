@@ -1,6 +1,6 @@
 import uuid
 import django
-# import jwt
+import jwt
 
 from django.conf import settings
 from datetime import datetime, timedelta
@@ -147,6 +147,7 @@ class Customer(models.Model):
                     ])
                 )
                 user_info = AccountGoogleService.get_user_info(credentials)
+                print('user_info',user_info)
                 return user_info
             except Exception as err:
                 print(err)

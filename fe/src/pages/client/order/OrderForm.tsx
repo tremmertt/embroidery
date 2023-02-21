@@ -12,7 +12,8 @@ import DefaultButton from "custom/DefaultButton";
 import "../../../components/client/home/Inquiry.css";
 import LoginAction from "redux/actions/LoginAction";
 import { toast } from "react-toastify";
-import OrderTable from "./OrderTable";
+import Order from "./OrderTable";
+import OrderAction from "redux/actions/OrderAction";
 
 export default function OrderForm() {
   const dispatch = useDispatch();
@@ -63,6 +64,9 @@ export default function OrderForm() {
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
+    }
+    if (activeStep + 1 === steps.length) {
+      dispatch(OrderAction.refreshOrderItem());
     }
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -119,10 +123,11 @@ export default function OrderForm() {
       </React.Fragment>
     );
   };
+
   const handleStep2 = () => {
     return (
       <React.Fragment>
-        <OrderTable />
+        <Order.OrderTable />
         <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
           <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
             Back
@@ -136,7 +141,24 @@ export default function OrderForm() {
   const handleStep3 = () => {
     return (
       <React.Fragment>
-        <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+        <Typography
+          className="text-center font-medium"
+          sx={{ mt: 4, mb: 2 }}
+          style={{ color: theme.primaryTextColor, fontSize: styleE.fontSize24 }}
+        >
+          Your order
+        </Typography>
+        <div
+          className="my-2"
+          style={{
+            fontSize: styleE.fontSize14,
+            color: theme.primaryTextColor,
+          }}
+        >
+          (*) Please confirm your order before sending to us
+        </div>
+
+        <Order.OrderBasicTable isViewOnly />
         <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
           <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
             Back
@@ -150,6 +172,30 @@ export default function OrderForm() {
 
   const handleReset = () => {
     setActiveStep(0);
+  };
+
+  const handleFinishStep = () => {
+    return (
+      <React.Fragment>
+        <Typography
+          className="text-center font-normal "
+          sx={{ mt: 4, mb: 2 }}
+          style={{ fontSize: styleE.fontSize24, color: theme.colorSuccess }}
+        >
+          Yay - All steps completed !!!
+        </Typography>
+
+        <div className="text-center" style={{ fontSize: styleE.fontSize18 }}>
+          Thank you for your ordering. <br />
+          An automatic reply email will be sent to your registered email address for confirmation.
+          <br />
+          <br />
+          <br />
+          Regarding the content of your inquiry, the person in charge will reply to you shortly. <br />
+          Please wait a moment now.
+        </div>
+      </React.Fragment>
+    );
   };
 
   return (
@@ -183,21 +229,13 @@ export default function OrderForm() {
             );
           })}
         </Stepper>
-        {activeStep === steps.length ? (
-          <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you&apos;re finished</Typography>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Box sx={{ flex: "1 1 auto" }} />
-              <Button onClick={handleReset}>Reset</Button>
-            </Box>
-          </React.Fragment>
-        ) : activeStep === 0 ? (
-          handleStep1()
-        ) : activeStep === 1 ? (
-          handleStep2()
-        ) : (
-          handleStep3()
-        )}
+        {activeStep === steps.length
+          ? handleFinishStep()
+          : activeStep === 0
+          ? handleStep1()
+          : activeStep === 1
+          ? handleStep2()
+          : handleStep3()}
       </Box>
     </Box>
   );

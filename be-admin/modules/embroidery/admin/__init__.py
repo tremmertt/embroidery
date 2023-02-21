@@ -1,6 +1,6 @@
 from modules.embroidery.admin import order
 # from modules.embroidery.admin import customer, item, order, sample
-from modules.embroidery.admin import auth_custom
+from modules.embroidery.admin import auth_custom, customer
 from django.contrib import admin
 
 admin.site.site_header = "EMBROIDERY DIGITIZING"

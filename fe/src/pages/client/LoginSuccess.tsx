@@ -1,11 +1,12 @@
 import { useEffect } from "react";
+import React from "react";
 import SearchParams from "../../custom/SearchParams";
 import { useDispatch, useSelector } from "react-redux";
 import LoginAction from "../../redux/actions/LoginAction";
-import LoginService from "service/LoginService";
+import LoginService from "../../service/LoginService";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import LoadingAction from "redux/actions/LoadingAction";
+import LoadingAction from "../../redux/actions/LoadingAction";
 export default function LoginSuccess() {
   const { customer } = useSelector((state: any) => state.LoginReducer);
   const [searchParams] = SearchParams.useCustomSearchParams();

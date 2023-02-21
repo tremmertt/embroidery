@@ -6,9 +6,9 @@ import { useTranslation } from "react-i18next";
 import useTitle from "../../components/general/useTitle";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import { ThemeCustomContext } from "settings/theme-context";
-import RuleTextField from "custom/RuleTextField";
-import LoginAction from "redux/actions/LoginAction";
+import { ThemeCustomContext } from "../../settings/theme-context";
+import RuleTextField from "../../custom/RuleTextField";
+import LoginAction from "../../redux/actions/LoginAction";
 
 export default function Login() {
   const { theme } = useContext(ThemeCustomContext);

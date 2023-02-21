@@ -1,11 +1,11 @@
-import { ADD_ORDER_ITEM, UPDATE_ORDER_ITEM, DELETE_ORDER_ITEM } from "../actions/type/OrderType";
+import { ADD_ORDER_ITEM, UPDATE_ORDER_ITEM, DELETE_ORDER_ITEM, REFRESH_ORDER_ITEM } from "../actions/type/OrderType";
 
 export interface IOrder {
   id: string;
   name: string;
   size: string;
   quantity: string;
-  type: string;
+  type: "JPEG" | "JPG" | "PNG" | "PDF" | "DST" | "EMB" | "PES" | "CNS" | "EXP" | "VP3" | "JEF" | "HUS" | "ART";
   image: string;
 }
 
@@ -20,6 +20,9 @@ const stateDefault: IStateOrder = {
 export const OrderReducer = (state = stateDefault, action: any) => {
   let index = -1;
   switch (action.type) {
+    case REFRESH_ORDER_ITEM:
+      state.listOrder = [];
+      return { ...state };
     case ADD_ORDER_ITEM:
       state.listOrder = state.listOrder.concat(action.order);
       return { ...state };
