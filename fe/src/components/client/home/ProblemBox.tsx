@@ -30,7 +30,7 @@ export default function ProblemBox() {
         image: "pic_3.png",
       },
     ];
-    const rows = [];
+    const rows = [] as any[];
     for (const item of items) {
       rows.push(
         <ProblemContent

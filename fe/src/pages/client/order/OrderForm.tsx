@@ -12,7 +12,7 @@ import DefaultButton from "custom/DefaultButton";
 import "../../../components/client/home/Inquiry.css";
 import LoginAction from "redux/actions/LoginAction";
 import { toast } from "react-toastify";
-import Order from "./OrderTable";
+import RequestForm from "./RequestForm";
 import OrderAction from "redux/actions/OrderAction";
 
 export default function OrderForm() {
@@ -127,7 +127,7 @@ export default function OrderForm() {
   const handleStep2 = () => {
     return (
       <React.Fragment>
-        <Order.OrderTable />
+        <RequestForm />
         <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
           <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
             Back
@@ -158,7 +158,7 @@ export default function OrderForm() {
           (*) Please confirm your order before sending to us
         </div>
 
-        <Order.OrderBasicTable isViewOnly />
+        {/* <Order.OrderBasicTable isViewOnly /> */}
         <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
           <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
             Back

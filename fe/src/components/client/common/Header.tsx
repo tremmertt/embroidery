@@ -83,7 +83,7 @@ const Header = () => {
   // };
 
   const navigationItemsMap = () => {
-    const items = [];
+    const items = [] as any[];
     const navigationItems = [
       { name: "Top", link: "/#home", id: "home-component" },
       { name: "Order", link: "/order", id: "order-component" },

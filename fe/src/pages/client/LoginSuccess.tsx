@@ -14,7 +14,7 @@ export default function LoginSuccess() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(LoadingAction.displayLoading());
+    // dispatch(LoadingAction.displayLoading());
     const token = LoginService.getToken();
     if (token === "") {
       dispatch(
@@ -25,12 +25,13 @@ export default function LoginSuccess() {
       );
     }
     if (customer) {
-      navigate("/");
+      console.log("customer", customer);
       toast(`Login successfully. \n Hi ${customer.name}`, { type: "success" });
+      navigate("/order");
       window.close();
     }
-    dispatch(LoadingAction.hideLoading());
-  });
+    // dispatch(LoadingAction.hideLoading());
+  }, [customer]);
 
   return (
     <div role="status" className="flex w-full h-96 items-center justify-center">

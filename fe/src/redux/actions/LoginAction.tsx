@@ -25,6 +25,7 @@ const loginBySocialMediaAction = (media: string, config: any) => {
       }
     } catch (errors) {
       console.error("errors", errors);
+      window.close();
     }
     dispatch({ type: HIDE_LOADING });
   };

@@ -1,9 +1,15 @@
 import { ADD_ORDER_ITEM, UPDATE_ORDER_ITEM, DELETE_ORDER_ITEM, REFRESH_ORDER_ITEM } from "../actions/type/OrderType";
 
+export interface ISize {
+  width: string;
+  height: string;
+  unit: string;
+}
+
 export interface IOrder {
   id: string;
   name: string;
-  size: string;
+  size: ISize;
   quantity: string;
   type: "JPEG" | "JPG" | "PNG" | "PDF" | "DST" | "EMB" | "PES" | "CNS" | "EXP" | "VP3" | "JEF" | "HUS" | "ART";
   image: string;
